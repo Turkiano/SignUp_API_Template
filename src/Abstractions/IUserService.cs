@@ -8,6 +8,7 @@ namespace Coffee_Shop_App.src.Abstractions
 
 
         public List<User> FindAll();
+        public List<User> CreateOne();
         // public UserReadDto SignUp(UserCreateDto user);
         // public string SignIn(UserSignInDto user);
         // public UserReadDto? FindOneByEmail(string email);

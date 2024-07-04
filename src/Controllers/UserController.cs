@@ -4,17 +4,29 @@ using Coffee_Shop_App.src.Entities;
 namespace Coffee_Shop_App.src.Controller;
 
 
-public class UserController : BaseController {
+public class UserController : BaseController
+{
 
- private IUserService _userService; //private field using interface
+    private IUserService _userService; //private field using interface
 
- public UserController(IUserService userService){
+    public UserController(IUserService userService)
+    {
 
-    _userService = userService;
- }
+        _userService = userService;
+    }
 
-    public List<User> FindAll(){
+    public List<User> FindAll()
+    {
 
         return _userService.FindAll();
+    }
+
+
+    public List<User> CreateOne()
+    {
+
+        return _userService.CreateOne();
+
+
     }
 }

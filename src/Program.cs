@@ -1,5 +1,6 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Services;
+using Coffee_Shop_App.src.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddScoped<IUserService, UserService>(); //this is the built-in DI container for the Service
+builder.Services.AddScoped<IUserRepository, UserRepository>(); //this is the built-in DI container for the Repository
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

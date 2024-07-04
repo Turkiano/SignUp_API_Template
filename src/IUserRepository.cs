@@ -7,5 +7,7 @@ namespace Coffee_Shop_App.src
     public interface IUserRepository
     {
         public List<User> FindAll();
+        public List<User> CreateOne(User user);
+
     }
 }
