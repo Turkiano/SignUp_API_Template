@@ -1,11 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-
 using Coffee_Shop_App.src.Enums;
-
 namespace Coffee_Shop_App.src.Entities;
-
-
-
 // [Index(nameof(Email), IsUnique = true)]
 
 public class User {
@@ -28,14 +23,14 @@ public string password{get; set;}
 
 private int _salt;
 
-public int Salt{
+public int Salt{ // getter & setter propertiy
     get { return _salt;}
     set { _salt = value;}
 }
 
-private Random _random = new Random(); //generate salt
+private Random _random = new Random(); //this object to generate salt
 
-public User(){
+public User(){ //this is the salt method
     _salt =_random.Next(10, 100);
 }
 
