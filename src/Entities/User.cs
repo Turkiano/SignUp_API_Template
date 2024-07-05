@@ -45,7 +45,12 @@ public User(){ //this is the salt method
     }
 
     public Role Role {get; set;} = Role.Customer; //to create role using enum class
-// public IEnumerable<Order>? Order {get; set;}
+
+    public static implicit operator List<object>(User v)
+    {
+        throw new NotImplementedException();
+    }
+    // public IEnumerable<Order>? Order {get; set;}
 
 
 }

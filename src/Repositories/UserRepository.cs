@@ -8,7 +8,7 @@ namespace Coffee_Shop_App.src.Repositories
         // private DatabaseContext _database;
         // private List<> _databaseContext;
         private List<User> _users;
-        public UserRepository()
+        public UserRepository(User users)
         {
             // _users = users;
             
@@ -17,7 +17,7 @@ namespace Coffee_Shop_App.src.Repositories
 
         }
 
-        public List<User> CreateOne(User user)
+        public List<User> CreateOne(User users)
         {
             return _users;
         }
