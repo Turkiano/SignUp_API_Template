@@ -10,25 +10,22 @@ namespace Coffee_Shop_App.src.Repositories
         private List<User> _users;
         public UserRepository()
         {
-            _users = user;
+            // _users = users;
+            
+
             // _databaseContext = databaseContext;
 
         }
 
+        public List<User> CreateOne(User user)
+        {
+            return _users;
+        }
+
         public List<User> FindAll()
         {
-            return user;
+            return _users;
         }
-
-
-            public User CreateOne(User user)
-        {
-            _users.Add(user);
-            // _databaseContext.SaveChanges();
-            return user;
-        }
-
-
     }
 
 

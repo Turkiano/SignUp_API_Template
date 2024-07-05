@@ -13,21 +13,19 @@ public class UserService : IUserService
     private IUserRepository _userRepository; //private field using interface class
 
     public UserService(IUserRepository userRepository) //constructor
-    { 
+    {
 
         _userRepository = userRepository;
     }
+
+    public List<User> CreateOne(User user)
+    {
+        return _userRepository.CreateOne(user);
+    }
+
     public List<User> FindAll()
     {
-        var users = _userRepository.FindAll();
-        return users;
-
+        return _userRepository.FindAll();
     }
-
-
-    public List<User> CreateOne(){
-        var users = _userRepository.CreateOne();
-        return users;
-        
-    }
+   
 }

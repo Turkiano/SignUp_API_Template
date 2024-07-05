@@ -5,7 +5,7 @@ namespace Coffee_Shop_App.src.Entities;
 
 public class User {
 
-public Guid Id {get; set;}
+public string Id {get; set;}
 
 [Required]
 public string FirstName {get; set;}
@@ -13,13 +13,13 @@ public string FirstName {get; set;}
 public string LastName {get; set;}
 
 [Required]
-public string phone {get; set;}
+public string Phone {get; set;}
 
 [Required]
 public string Email{get; set;}
 
 [Required]
-public string password{get; set;}
+public string Password{get; set;}
 
 private int _salt;
 
@@ -33,9 +33,18 @@ private Random _random = new Random(); //this object to generate salt
 public User(){ //this is the salt method
     _salt =_random.Next(10, 100);
 }
+    //this is the constructor
+    public User(string id, string firstName, string lastName, string phone, string email, string password)
+    {
+        Id = id;
+        FirstName = firstName;
+        LastName = lastName;
+        Phone = phone;
+        Email = email;
+        Password = password;
+    }
 
-
-public Role Role {get; set;} = Role.Customer; //to create role using enum class
+    public Role Role {get; set;} = Role.Customer; //to create role using enum class
 // public IEnumerable<Order>? Order {get; set;}
 
 

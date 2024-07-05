@@ -7,8 +7,10 @@ namespace Coffee_Shop_Appe.src.Abstractions
     public interface IUserRepository
     {
 
-                public List<User> FindAll();
+        public List<User> FindAll();
+        public List<User> CreateOne(User user);
 
-        
+
+
     }
 }
