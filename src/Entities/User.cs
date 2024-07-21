@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Coffee_Shop_App.src.Enums;
 namespace Coffee_Shop_App.src.Entities;
+
 // [Index(nameof(Email), IsUnique = true)]
 
 public class User {

@@ -8,7 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-User account = new("01", "Turki", "Saeed", "0594930211", "turkiano@gmail.com", "12341234");
+User account1 = new();
+account1.FirstName = "Turki";
+account1.LastName = "Saeed";
+account1.Email = "turki.saeed@gamil.com";
+account1.Phone = "0594930211";
+account1.Password = "12345";
+
+
 // Console.WriteLine(account);
 
 
@@ -33,3 +40,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.Run();
+
+
+//  class Program {
+
+// }

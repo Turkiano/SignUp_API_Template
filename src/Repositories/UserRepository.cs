@@ -28,6 +28,4 @@ namespace Coffee_Shop_App.src.Repositories
         }
     }
 
-
-
 }
