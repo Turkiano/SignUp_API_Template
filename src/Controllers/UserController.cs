@@ -1,36 +1,24 @@
-using Coffee_Shop_App.src.Abstractions;
-using Coffee_Shop_App.src.Entities;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coffee_Shop_App.src.Controller;
 
 
 
-
+[ApiController]
+[Route("api/v1/[controller]")]
 
 public class UserController : BaseController
 {
-    private IUserService _userService; //private field using interface
-
-
-    public UserController(IUserService userService)//constructor
+    [HttpGet]
+    public string Hello()
     {
-
-        _userService = userService;
+        return "Hello world!";
     }
 
-    public List<User> FindAll()
+    [HttpPost]
+    public string Greeting()
     {
-
-        return _userService.FindAll();
-    }
-
-
-    public List<User> CreateOne([FromBody] User user)
-    {
-
-        return _userService.CreateOne(user);
-
-
+        return "good morning";
     }
 }
