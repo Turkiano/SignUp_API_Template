@@ -13,12 +13,7 @@ public class UserController
 {
 
 
-    [HttpGet]
-    public string SayHi()
-    {
-        UserService helloService = new ();
-        return helloService.SayHi();
-    }
+   
 
     
 }
