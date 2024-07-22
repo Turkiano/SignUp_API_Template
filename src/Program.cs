@@ -1,8 +1,4 @@
-using Coffee_Shop_App.src.Abstractions;
-using Coffee_Shop_App.src.Services;
-using Coffee_Shop_App.src.Repositories;
-using Coffee_Shop_App.src.Entities;
-using Coffee_Shop_App.src;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
