@@ -1,4 +1,3 @@
-using Coffee_Shop_App.src.Entities;
 
 namespace Coffee_Shop_App.src.Repositories
 {
@@ -7,7 +6,7 @@ namespace Coffee_Shop_App.src.Repositories
     {
        public string SayHi(){
 
-        return "testing";
+        return "Hi there !!";
        }
     }
 

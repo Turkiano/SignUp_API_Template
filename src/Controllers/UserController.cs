@@ -1,5 +1,4 @@
 
-using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +14,7 @@ public class UserController
 
 
     [HttpGet]
-    public string Hello()
+    public string SayHi()
     {
         UserService helloService = new ();
         return helloService.SayHi();
