@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Coffee_Shop_App.src.Entities;
-using Coffee_Shop_App.src.Enums;
 
 
 namespace Coffee_Shop_App.src.Databases{
