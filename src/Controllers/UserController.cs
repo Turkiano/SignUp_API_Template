@@ -14,10 +14,10 @@ public class UserController
 
 
     [HttpGet]
-    public string SayHi()
+    public string SayHi() //action method
     {
-        UserService helloService = new ();
-        return helloService.SayHi();
+        UserService helloService = new (); //obj to talk to service class
+        return helloService.SayHi(); //passing request to the service
     }
 
     
