@@ -28,6 +28,15 @@ public class UserController : BaseController //the inheritance to get the routin
         return _users; //access to users's data
     }
 
+
+    [HttpPost] //POST, PUT, or PATCH use fromBody
+    public User CreateOne([FromBody] User user) 
+    {
+        Console.WriteLine($"This is the new data {user.FirstName}"); //this is to test the method
+        
+        return user; //to send data to User list
+    }
+
 }
 
 
