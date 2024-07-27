@@ -1,5 +1,9 @@
 
 
+using Coffee_Shop_App;
+using Coffee_Shop_App.src.Abstractions;
+using Npgsql.Replication;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //Should be added (1)
@@ -12,6 +16,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IUserService, UserService>(); //built-in DI Container
 
 var app = builder.Build();
 
