@@ -30,8 +30,8 @@ public class UserController : BaseController //the inheritance to get the routin
     // public List<User> CreateOne([FromBody] User user)
     // {
     //     Console.WriteLine($"This is the new data {user.FirstName}"); //this is to test the method
-    //     _users?.Add(user); //to save data in temporary
-    //     return _users; //to send data to User list
+    //     _userService?.Add(user); //to save data in temporary
+    //     return _userService.CreateOne(user); //to send data to User list
     // }
 
 

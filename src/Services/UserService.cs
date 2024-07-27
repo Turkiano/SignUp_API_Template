@@ -1,24 +1,25 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
 using Coffee_Shop_App.src.Entities;
+using Coffee_Shop_Appe.src.Abstractions;
 
 namespace Coffee_Shop_App;
 
 public class UserService : IUserService
 {
 
-    private List<User>? _users; //this to get users info as a list
-    public UserService() //constructor to get users data from DB
+  private IUserRepository? _userRepository; //to talk to the Repo
+
+    public UserService(IUserRepository? userRepository) //constructor DI 
     {
-
-        _users = new DatabaseContext().users; // new obj database to get users' list
-
+        _userRepository = userRepository;
     }
+
 
 
 
     public List<User> FindAll()
     {
-        return _users;
+        return _userRepository.FindAll(); //to talk to the Repo
     }
 }

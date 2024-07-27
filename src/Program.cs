@@ -2,6 +2,7 @@
 
 using Coffee_Shop_App;
 using Coffee_Shop_App.src.Abstractions;
+using Coffee_Shop_Appe.src.Abstractions;
 using Npgsql.Replication;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +18,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IUserService, UserService>(); //built-in DI Container
+builder.Services.AddScoped<IUserRepository, UserRepository>(); //built-in DI Container for UserRepository
+builder.Services.AddScoped<IUserService, UserService>(); //built-in DI Container for UserService
+
 
 var app = builder.Build();
 
