@@ -10,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 //Should be added (1)
 builder.Services.AddControllers();
 
+//Should be added (3) to lowercase the Route
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
