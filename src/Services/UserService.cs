@@ -15,11 +15,18 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-
-
+    public List<User> CreateOne(User user)
+    {
+        return _userRepository.CreateOne(user);
+    }
 
     public List<User> FindAll()
     {
         return _userRepository.FindAll(); //to talk to the Repo
+    }
+
+    public User? findOne(string userId)
+    {
+        return _userRepository.findOne(userId);
     }
 }

@@ -21,4 +21,17 @@ public class UserRepository : IUserRepository
         return _users;
 
     }
+    public List<User> CreateOne(User user)
+    {
+        _users?.Add(user); //to save data in temporary
+        return _users; //to send data to User list
+    }
+
+
+    public User? findOne(string userId)
+    {
+        User? user = _users?.FirstOrDefault( user => user.Id == userId);
+        
+        return user; 
+    }
 }
