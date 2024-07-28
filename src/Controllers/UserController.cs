@@ -11,13 +11,11 @@ public class UserController : BaseController //the inheritance to get the routin
 {
 
     private IUserService? _userService;
-
     public UserController(IUserService userService){
         _userService = userService;
     }
 
    
-
 
     [HttpGet] //import the ASP.NetCore package
     public List<User>? findAll()
@@ -31,7 +29,6 @@ public class UserController : BaseController //the inheritance to get the routin
     {
         return _userService.CreateOne(user); //to send data to User list
     }
-
 
     [HttpGet("{userId}")] 
     public User? findOne(string userId)

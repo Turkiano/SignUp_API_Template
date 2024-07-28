@@ -28,10 +28,10 @@ public class UserRepository : IUserRepository
     }
 
 
-    public User? findOne(string userId)
+    public User? findOne(string userId) //targeting ids in params
     {
-        User? user = _users?.FirstOrDefault( user => user.Id == userId);
+        User? user = _users?.FirstOrDefault( user => user.Id == userId); //lambda expression to compare Ids
         
-        return user; 
+        return user; //to get the desired user
     }
 }

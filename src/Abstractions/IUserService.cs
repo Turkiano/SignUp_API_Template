@@ -9,6 +9,7 @@ namespace Coffee_Shop_App.src.Abstractions
 
 
         public List<User> FindAll();
+        
         public List<User> CreateOne(User user);
 
         public User? findOne(string userId);
