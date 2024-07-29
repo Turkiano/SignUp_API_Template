@@ -46,6 +46,6 @@ public class UserService : IUserService
     public User? findOneByEmail(string userEmail)
     {
 
-        return _userRepository.findOne(userEmail);
+        return _userRepository.findOneByEmail(userEmail);
     }
 }

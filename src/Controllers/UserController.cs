@@ -52,7 +52,7 @@ public class UserController : BaseController //the inheritance to get the routin
     public User? findOneByEmail(string userEmail)
     {
 
-        return _userService.findOne(userEmail);
+        return _userService.findOneByEmail(userEmail);
     }
 
 }

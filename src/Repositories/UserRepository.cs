@@ -35,9 +35,9 @@ public class UserRepository : IUserRepository
         return user; //to get the desired user
     }
 
-    public User? findOneByEmail(User userEmail)
+    public User? findOneByEmail(string userEmail)
     {
-        User? foundUser = _users?.FirstOrDefault( user => user.Email == userEmail.Email); //lambda expression to compare Emails
+        User? foundUser = _users?.FirstOrDefault( user => user.Email == userEmail); //lambda expression to compare Emails
         
         return foundUser;
     }
