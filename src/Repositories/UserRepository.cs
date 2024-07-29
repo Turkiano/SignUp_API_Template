@@ -21,10 +21,10 @@ public class UserRepository : IUserRepository
         return _users;
 
     }
-    public List<User> CreateOne(User user)
+    public User CreateOne(User user)
     {
-        _users?.Add(user); //to save data in temporary
-        return _users; //to send data to User list
+        _users?.Add(user); // temporary saving data
+        return user; //to show new user only
     }
 
 
@@ -33,5 +33,12 @@ public class UserRepository : IUserRepository
         User? user = _users?.FirstOrDefault( user => user.Id == userId); //lambda expression to compare Ids
         
         return user; //to get the desired user
+    }
+
+    public User? findOneByEmail(User userEmail)
+    {
+        User? foundUser = _users?.FirstOrDefault( user => user.Email == userEmail.Email); //lambda expression to compare Emails
+        
+        return foundUser;
     }
 }

@@ -12,6 +12,9 @@ namespace Coffee_Shop_Appe.src.Abstractions
 
         public User? findOne(string userId);
 
+            public User? findOneByEmail(User userEmail);
+
+
 
 
 
