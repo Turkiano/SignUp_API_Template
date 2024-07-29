@@ -24,7 +24,7 @@ public class UserService : IUserService
 
 
 
-    public List<User> CreateOne(User user)
+    public User CreateOne(User user)
     {
         return _userRepository.CreateOne(user);
     }
