@@ -10,11 +10,12 @@ public class UserController : BaseController //the inheritance to get the routin
 {
 
     private IUserService? _userService;
-    public UserController(IUserService userService){
+    public UserController(IUserService userService)
+    {
         _userService = userService;
     }
 
-   
+
 
     [HttpGet] //import the ASP.NetCore package
     public List<User>? findAll()
@@ -24,16 +25,24 @@ public class UserController : BaseController //the inheritance to get the routin
 
 
     [HttpPost] //POST, PUT, or PATCH use fromBody
-    public List<User> CreateOne([FromBody] User user)
+    public ActionResult<List<User>> CreateOne([FromBody] User user)
     {
-        return _userService.CreateOne(user); //to send data to User list
+        if (user is not null)
+        {
+
+            _userService.CreateOne(user); //sendin request to service
+            return CreatedAtAction(nameof(CreateOne), user); //return value in ActionResult
+
+        }
+        return BadRequest(); //built-in method for validation
     }
 
-    [HttpGet("{userId}")] 
+
+    [HttpGet("{userId}")]
     public User? findOne(string userId)
     {
-        
-        return _userService.findOne(userId); 
+
+        return _userService.findOne(userId);
     }
 
 }
