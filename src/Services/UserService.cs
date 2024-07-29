@@ -26,7 +26,7 @@ public class UserService : IUserService
 
     public User CreateOne(User user)
     {
-        // User? foundUser = _userRepository.findOne(userId);
+        // User? foundUser = _userRepository.findOne(user.Id); //to avoid duplicated emails
 
         // if (foundUser is not null)
         // {
@@ -46,6 +46,7 @@ public class UserService : IUserService
     public User? findOneByEmail(string userEmail)
     {
 
-        return _userRepository.findOneByEmail(userEmail);
+        return _userRepository.findOneByEmail(userEmail);//call the method in the Repo
+
     }
 }

@@ -48,11 +48,11 @@ public class UserController : BaseController //the inheritance to get the routin
     }
 
 
-     [HttpGet("userEmail")]
+     [HttpGet("userEmail")] //rename the route since we have duplicated endpoints
     public User? findOneByEmail(string userEmail)
     {
 
-        return _userService.findOneByEmail(userEmail);
+        return _userService.findOneByEmail(userEmail); //call the method in the service
     }
 
 }

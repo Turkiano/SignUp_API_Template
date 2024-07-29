@@ -37,8 +37,8 @@ public class UserRepository : IUserRepository
 
     public User? findOneByEmail(string userEmail)
     {
-        User? foundUser = _users?.FirstOrDefault( user => user.Email == userEmail); //lambda expression to compare Emails
+        User? foundEmail = _users?.FirstOrDefault( user => user.Email == userEmail); //lambda expression to compare Emails
         
-        return foundUser;
+        return foundEmail;
     }
 }
