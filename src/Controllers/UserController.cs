@@ -12,10 +12,14 @@ public class UserController : BaseController //the inheritance to get the routin
     {
         _userService = userService;
     }
+    [HttpPatch]
+    public User UpdateOne([FromBody] string Email)
+    {
+        throw new NotImplementedException();
+    }
 
 
-
-    [HttpGet] //import the ASP.NetCore package
+    [HttpGet("{Email}")] //import the ASP.NetCore package
     public List<User>? findAll()
     {
         return _userService.FindAll(); //access to users's data
@@ -30,7 +34,7 @@ public class UserController : BaseController //the inheritance to get the routin
         if (user is not null)
         {
 
-           var newUser = _userService.CreateOne(user); //sendin request to service
+            var newUser = _userService.CreateOne(user); //sendin request to service
             return CreatedAtAction(nameof(CreateOne), newUser); //return value in ActionResult
 
         }
@@ -46,7 +50,7 @@ public class UserController : BaseController //the inheritance to get the routin
     }
 
 
-     [HttpGet("userEmail")] //rename the route since we have duplicated endpoints
+    [HttpGet("userEmail")] //rename the route since we have duplicated endpoints
     public User? findOneByEmail(string userEmail)
     {
 

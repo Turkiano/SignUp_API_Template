@@ -1,6 +1,7 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 using Coffee_Shop_Appe.src.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Coffee_Shop_App;
 
@@ -13,7 +14,6 @@ public class UserService : IUserService
     {
         _userRepository = userRepository;
     }
-
 
 
 
@@ -48,5 +48,10 @@ public class UserService : IUserService
 
         return _userRepository.findOneByEmail(userEmail);//call the method in the Repo
 
+    }
+
+    public User UpdateOne(string Email)
+    {
+        throw new NotImplementedException();
     }
 }

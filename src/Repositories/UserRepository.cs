@@ -41,4 +41,15 @@ public class UserRepository : IUserRepository
         
         return foundEmail;
     }
+
+    public User UpdateOne(User updatedUser)
+    {
+        var users = _users?.Select(user => {
+            if(user.Email == updatedUser.Email){
+                return updatedUser;
+            }
+            return user;
+        });
+        throw new NotImplementedException();
+    }
 }
