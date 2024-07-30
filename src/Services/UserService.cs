@@ -26,17 +26,17 @@ public class UserService : IUserService
 
     public User CreateOne(User user)
     {
-        // User? foundUser = _userRepository.findOne(user.Id); //to avoid duplicated emails
+        User? foundUser = _userRepository.findOneByEmail(user.Email); //to avoid duplicated emails
 
-        // if (foundUser is not null)
-        // {
-        //     return null;
-        // }
+        if (foundUser is not null)
+        {
+            return null;
+        }
 
         return _userRepository.CreateOne(user);
     }
 
-
+  
     public User? findOne(string userId)
     {
 

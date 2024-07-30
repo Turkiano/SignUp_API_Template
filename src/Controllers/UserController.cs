@@ -1,4 +1,3 @@
-
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +7,6 @@ namespace Coffee_Shop_App.src.Controller;
 
 public class UserController : BaseController //the inheritance to get the routing
 {
-
     private IUserService? _userService;
     public UserController(IUserService userService)
     {
@@ -32,8 +30,8 @@ public class UserController : BaseController //the inheritance to get the routin
         if (user is not null)
         {
 
-            _userService.CreateOne(user); //sendin request to service
-            return CreatedAtAction(nameof(CreateOne), user); //return value in ActionResult
+           var newUser = _userService.CreateOne(user); //sendin request to service
+            return CreatedAtAction(nameof(CreateOne), newUser); //return value in ActionResult
 
         }
         return BadRequest(); //built-in method for validation
