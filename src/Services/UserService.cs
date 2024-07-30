@@ -52,6 +52,6 @@ public class UserService : IUserService
 
     public User UpdateOne(string Email)
     {
-        throw new NotImplementedException();
+       User? user = _userRepository.findOneByEmail(Email);
     }
 }
