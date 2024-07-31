@@ -48,7 +48,6 @@ public class UserRepository : IUserRepository
         {
             if (user.Email == updatedUser.Email)
             {
-                user.FirstName = updatedUser.FirstName;
                 return updatedUser;
             }
             return user;

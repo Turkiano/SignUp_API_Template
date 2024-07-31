@@ -36,7 +36,7 @@ public class UserService : IUserService
         return _userRepository.CreateOne(user);
     }
 
-  
+
     public User? findOne(string userId)
     {
 
@@ -50,8 +50,14 @@ public class UserService : IUserService
 
     }
 
-    public User UpdateOne(string Email)
+    public User UpdateOne(string Email, User newValue)
     {
-       User? user = _userRepository.findOneByEmail(Email);
+            User? user = _userRepository.findOneByEmail(Email);
+
+        if (user is not null){
+            user.FirstName = newValue.FirstName;
+            return _userRepository.UpdateOne(user);
+        }
+        return null;
     }
 }

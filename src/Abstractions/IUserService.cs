@@ -16,7 +16,7 @@ namespace Coffee_Shop_App.src.Abstractions
 
         public User? findOneByEmail(string userEmail);
 
-        public User UpdateOne( string Email);
+        public User UpdateOne(string Email, User user)
 
 
 
