@@ -12,10 +12,11 @@ public class UserController : BaseController //the inheritance to get the routin
     {
         _userService = userService;
     }
+    
     [HttpPatch]
-    public User UpdateOne([FromBody] string Email)
+    public User? UpdateOne([FromBody] string Email, User user)
     {
-        throw new NotImplementedException();
+        return _userService.UpdateOne(Email, user);
     }
 
 
