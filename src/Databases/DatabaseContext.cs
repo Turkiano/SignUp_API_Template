@@ -9,6 +9,7 @@ namespace Coffee_Shop_App.src.Databases;
 public class DatabaseContext {
 
 public List<User> users; // to stroe User data as a list
+public List<Product> products;
 
     public DatabaseContext() // constructor to add users values
     {
@@ -17,5 +18,8 @@ public List<User> users; // to stroe User data as a list
             new User ("02", "John", "Guns", "056939830122", "J.Guns@gmail.com", "3452345"),
             new User ("03", "Sumaiyah", "Abduallah", "0594930211", "S.A@gmail.com", "463456")
         ];
+
+
+        products = [];
     }
 }

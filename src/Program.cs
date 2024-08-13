@@ -1,5 +1,7 @@
 
 
+using Coffee_Shop_API_Server;
+using Coffee_Shop_API_Server.src.Abstractions;
 using Coffee_Shop_App;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_Appe.src.Abstractions;
@@ -23,6 +25,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>(); //built-in DI Container for UserRepository
 builder.Services.AddScoped<IUserService, UserService>(); //built-in DI Container for UserService
+builder.Services.AddScoped<IProductRepository, ProductRepository>(); //built-in DI Container for UserRepository
+builder.Services.AddScoped<IProductService, ProductSerice>(); //built-in DI Container for ProductService
+
 
 
 var app = builder.Build();

@@ -12,15 +12,15 @@ public class UserController : BaseController //the inheritance to get the routin
     {
         _userService = userService;
     }
-    
-    [HttpPatch]
-    public User? UpdateOne([FromBody] string Email, User user)
+
+    [HttpPatch("{Email}")]
+    public User? UpdateOne(string Email, [FromBody] User user)
     {
         return _userService.UpdateOne(Email, user);
     }
 
 
-    [HttpGet("{Email}")] //import the ASP.NetCore package
+    [HttpGet] //import the ASP.NetCore package
     public List<User>? findAll()
     {
         return _userService.FindAll(); //access to users's data
