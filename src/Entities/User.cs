@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 namespace Coffee_Shop_App.src.Entities;
 
-// [Index(nameof(Email), IsUnique = true)]
 
 public class User
 {

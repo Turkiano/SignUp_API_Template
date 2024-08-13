@@ -19,7 +19,7 @@ public class ProductController : BaseController
 
 
 
-[HttpGet("{ProductId}")]
+    [HttpGet("{ProductId}")]
     public Product? findOne(string productId)
     {
 

@@ -16,10 +16,16 @@ public List<Product> products;
         users = [ 
             new User ("01", "Khalid", "Hassan", "0594930211", "K.Hassan@gmail.com", "1234456"),
             new User ("02", "John", "Guns", "056939830122", "J.Guns@gmail.com", "3452345"),
-            new User ("03", "Sumaiyah", "Abduallah", "0594930211", "S.A@gmail.com", "463456")
+            new User ("03", "Rafah", "Abduallah", "0594930211", "S.A@gmail.com", "463456")
         ];
 
 
-        products = [];
+        products = [
+
+            new Product ("01", "Watch", "10", "SAR 200"),
+            new Product ("02", "Pen", "16", "SAR 150"),
+            new Product ("03", "Phone", "23", "SAR 1,500")
+
+        ];
     }
 }
