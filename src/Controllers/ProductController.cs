@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Coffee_Shop_API_Server.src.Controllers;
 
-[Route("[controller]")]
+
 public class ProductController : BaseController
 {
 
@@ -20,11 +20,19 @@ public class ProductController : BaseController
 
 
     [HttpGet("{ProductId}")]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
     public Product? findOne(string productId)
     {
 
         return _productService.findOne(productId);
     }
 
+
+    [HttpGet]
+    public List<Product> findAll(){
+
+        return _productService.findAll();
+    }
 
 }

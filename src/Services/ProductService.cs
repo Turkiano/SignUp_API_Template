@@ -5,13 +5,16 @@ namespace Coffee_Shop_App;
 
 class ProductSerice : IProductService
 {
-
-
-    private IProductRepository _ProductRepository;
+    private IProductRepository _ProductRepository; //to talk to the Repo
 
     public ProductSerice(IProductRepository productRepository)
     {
         _ProductRepository = productRepository;
+    }
+
+    public List<Product> findAll()
+    {
+        return _ProductRepository.findAll();
     }
 
     public Product findOne(string productId)

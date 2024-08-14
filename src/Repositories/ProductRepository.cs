@@ -13,13 +13,19 @@ class ProductRepository : IProductRepository
         _products = new DatabaseContext().products;
     }
 
+    public List<Product> findAll()
+    {
+        return _products;
+    }
 
     public Product findOne(string productId)
     {
 
         Product? product = _products?.FirstOrDefault(p => p.Product_Id == productId); //lambda expression to compare Ids
 
-        return product;
+        return product!;
 
     }
+
+
 }
