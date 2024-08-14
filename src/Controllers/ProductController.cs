@@ -19,13 +19,12 @@ public class ProductController : BaseController
 
 
 
-    [HttpGet("{ProductId}")]
+    [HttpGet("{productId}")]
     // [ProducesResponseType(StatusCodes.Status400BadRequest)]
     // [ProducesResponseType(StatusCodes.Status200OK)]
     public Product? FindOne(string productId)
     {
 
-        Console.WriteLine($"testing = {productId}");
         
         return _productService.FindOne(productId);
     }
@@ -39,11 +38,11 @@ public class ProductController : BaseController
     }
 
 
-    [HttpPost]
-    public List<Product> CreateOne([FromBody] Product product)
-    {
+    // [HttpPost]
+    // public List<Product> CreateOne([FromBody] Product product)
+    // {
 
-        throw new NotImplementedException();
-    }
+    //     throw new NotImplementedException();
+    // }
 
 }

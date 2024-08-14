@@ -3,11 +3,11 @@ using Coffee_Shop_App.src.Entities;
 
 namespace Coffee_Shop_App;
 
-class ProductSerice : IProductService
+class ProductService : IProductService
 {
     private IProductRepository _ProductRepository; //to talk to the Repo
 
-    public ProductSerice(IProductRepository productRepository)
+    public ProductService(IProductRepository productRepository)
     {
         _ProductRepository = productRepository;
     }

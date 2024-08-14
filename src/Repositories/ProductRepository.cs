@@ -25,6 +25,8 @@ class ProductRepository : IProductRepository
 
     public Product FindOne(string productId)
     {
+        Console.WriteLine($"testing = {productId}");
+
 
         Product? product = _products?.FirstOrDefault(p => p.Product_Id == productId); //lambda expression to compare Ids
 
