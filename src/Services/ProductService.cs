@@ -12,13 +12,18 @@ class ProductSerice : IProductService
         _ProductRepository = productRepository;
     }
 
-    public List<Product> findAll()
+    public Product CreateOne(Product product)
     {
-        return _ProductRepository.findAll();
+        throw new NotImplementedException();
     }
 
-    public Product findOne(string productId)
+    public List<Product> FindAll()
     {
-        return _ProductRepository.findOne(productId);
+        return _ProductRepository.FindAll();
+    }
+
+    public Product FindOne(string productId)
+    {
+        return _ProductRepository.FindOne(productId);
     }
 }

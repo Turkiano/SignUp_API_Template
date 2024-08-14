@@ -8,13 +8,13 @@ namespace Coffee_Shop_API_Server.src.Abstractions
 {
     public interface IProductService
     {
-        public Product findOne(string productId);
+        public Product FindOne(string productId);
 
-        public List<Product> findAll();
+        public List<Product> FindAll();
 
-        
-        
+        public Product CreateOne(Product product);
 
 
-        }
+
     }
+}

@@ -13,17 +13,22 @@ class ProductRepository : IProductRepository
         _products = new DatabaseContext().products;
     }
 
-    public List<Product> findAll()
+    public Product CreateOne(Product product)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Product> FindAll()
     {
         return _products;
     }
 
-    public Product findOne(string productId)
+    public Product FindOne(string productId)
     {
 
         Product? product = _products?.FirstOrDefault(p => p.Product_Id == productId); //lambda expression to compare Ids
 
-        return product!;
+        return product;
 
     }
 
