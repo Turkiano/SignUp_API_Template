@@ -14,7 +14,7 @@ class ProductService : IProductService
 
     public Product CreateOne(Product product)
     {
-        throw new NotImplementedException();
+        return _ProductRepository.CreateOne(product);
     }
 
     public List<Product> FindAll()

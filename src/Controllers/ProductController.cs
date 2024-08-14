@@ -38,11 +38,20 @@ public class ProductController : BaseController
     }
 
 
-    // [HttpPost]
-    // public List<Product> CreateOne([FromBody] Product product)
-    // {
 
-    //     throw new NotImplementedException();
-    // }
+    [HttpPost] //POST, PUT, or PATCH use fromBody
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public ActionResult<Product> CreateOne([FromBody] Product product)
+    {
+         if (product is not null)
+        {
+
+            var newProduct = _productService.CreateOne(product); //sendin request to service
+            return CreatedAtAction(nameof(CreateOne), newProduct); //return value in ActionResult
+
+        }
+        return BadRequest(); //built-in method for validation
+    }
 
 }

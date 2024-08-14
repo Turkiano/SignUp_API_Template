@@ -15,7 +15,9 @@ class ProductRepository : IProductRepository
 
     public Product CreateOne(Product product)
     {
-        throw new NotImplementedException();
+        _products.Add(product);
+        return(product);
+        
     }
 
     public List<Product> FindAll()
