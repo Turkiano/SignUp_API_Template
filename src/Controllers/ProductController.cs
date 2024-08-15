@@ -10,9 +10,9 @@ namespace Coffee_Shop_API_Server.src.Controllers;
 public class ProductController : BaseController
 {
 
-    private IProductService? _productService;
+    private IProductService? _productService; //to talk to the service
 
-    public ProductController(IProductService? productService)
+    public ProductController(IProductService? productService) //this is the constructor
     {
         _productService = productService;
     }

@@ -25,8 +25,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>(); //built-in DI Container for UserRepository
 builder.Services.AddScoped<IUserService, UserService>(); //built-in DI Container for UserService
-builder.Services.AddScoped<IProductRepository, ProductRepository>(); //built-in DI Container for UserRepository
+builder.Services.AddScoped<IProductRepository, ProductRepository>(); //built-in DI Container for ProductRepository
 builder.Services.AddScoped<IProductService, ProductService>(); //built-in DI Container for ProductService
+builder.Services.AddScoped<ICategoryService, CategoryService>(); //built-in DI Container for CategoryService
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //built-in DI Container for ProductService
 
 
 
