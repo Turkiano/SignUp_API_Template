@@ -23,6 +23,8 @@ builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//Dependency Injection Containers for Abstraction classes
 builder.Services.AddScoped<IUserRepository, UserRepository>(); //built-in DI Container for UserRepository
 builder.Services.AddScoped<IUserService, UserService>(); //built-in DI Container for UserService
 builder.Services.AddScoped<IProductRepository, ProductRepository>(); //built-in DI Container for ProductRepository

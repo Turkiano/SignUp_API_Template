@@ -1,19 +1,20 @@
 using Coffee_Shop_API_Server.src.Abstractions;
+using Coffee_Shop_App.src.Databases;
 
-namespace Coffee_Shop_API_Server;
-
-
-public class CategoryRepository : ICategoryRepository
+namespace Coffee_Shop_API_Server
 {
-private List<Cateogry> _category; //this to get users info as a list
-
-    public CategoryRepository(List<Cateogry> category)
+    public class CategoryRepository : ICategoryRepository
     {
-        _category = category;
-    }
+        private List<Category> _categories;
 
-    public List<Cateogry> FindAll()
-    {
-        return _category;
+        public CategoryRepository(List<Category> categories)
+        {
+            _categories = new DatabaseContext().categories;
+        }
+
+        public List<Category> FindAll()
+        {
+            return _categories;
+        }
     }
 }

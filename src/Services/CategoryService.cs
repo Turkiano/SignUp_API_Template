@@ -5,10 +5,10 @@ namespace Coffee_Shop_API_Server;
 public class CategoryService : ICategoryService {
 
 
-public ICategoryService _categoryService;
+public ICategoryRepository _categoryRepository;
 
-    public List<Cateogry> FindAll()
+    public List<Category> FindAll()
     {
-        return _categoryService.FindAll();
+        return _categoryRepository.FindAll();
     }
 }

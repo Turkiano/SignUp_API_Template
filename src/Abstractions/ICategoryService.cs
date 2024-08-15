@@ -7,7 +7,7 @@ namespace Coffee_Shop_API_Server.src.Abstractions
 {
     public interface ICategoryService
     {
-            public List<Cateogry> FindAll();
+            public List<Category> FindAll();
 
     }
 }
