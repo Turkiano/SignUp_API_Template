@@ -1,8 +1,8 @@
 using Coffee_Shop_App.src.Entities;
 
 
-namespace Coffee_Shop_Appe.src.Abstractions
-{
+namespace Coffee_Shop_App.src.Abstractions;
+
     public interface IUserRepository
     {
 
@@ -22,4 +22,3 @@ namespace Coffee_Shop_Appe.src.Abstractions
 
 
     }
-}

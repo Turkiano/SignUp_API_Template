@@ -1,15 +1,16 @@
-using Coffee_Shop_API_Server.src.Abstractions;
-using Coffee_Shop_App.src.Controller;
+using Coffee_Shop_App.src.Abstractions;
+using Coffee_Shop_App.src.Controllers;
+using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Coffee_Shop_API_Server;
+namespace Coffee_Shop_App.Controllers;
 
-public class Category : BaseController
+public class CategoryController : BaseController
 {
 
     private ICategoryService? _categoryService; //to talk to the service
 
-    public Category(ICategoryService? categoryService) //The constructor
+    public CategoryController(ICategoryService? categoryService) //The constructor
     {
         _categoryService = categoryService;
     }

@@ -1,13 +1,16 @@
-using Coffee_Shop_API_Server.src.Abstractions;
+using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
+using Coffee_Shop_App.src.Entities;
 
-namespace Coffee_Shop_API_Server
-{
+
+namespace Coffee_Shop_App.Repositories;
+
+
     public class CategoryRepository : ICategoryRepository
     {
         private List<Category> _categories;
 
-        public CategoryRepository(List<Category> categories)
+        public CategoryRepository()
         {
             _categories = new DatabaseContext().categories;
         }
@@ -17,4 +20,4 @@ namespace Coffee_Shop_API_Server
             return _categories;
         }
     }
-}
+

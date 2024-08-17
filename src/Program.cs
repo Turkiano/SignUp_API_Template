@@ -1,11 +1,8 @@
 
-
-using Coffee_Shop_API_Server;
-using Coffee_Shop_API_Server.src.Abstractions;
-using Coffee_Shop_App;
+using Coffee_Shop_App.Repositories;
+using Coffee_Shop_App.Services;
 using Coffee_Shop_App.src.Abstractions;
-using Coffee_Shop_Appe.src.Abstractions;
-using Npgsql.Replication;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

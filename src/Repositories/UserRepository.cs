@@ -1,8 +1,8 @@
 using Coffee_Shop_App.src.Databases;
 using Coffee_Shop_App.src.Entities;
-using Coffee_Shop_Appe.src.Abstractions;
+using Coffee_Shop_App.src.Abstractions;
 
-namespace Coffee_Shop_App;
+namespace Coffee_Shop_App.Repositories;
 
 public class UserRepository : IUserRepository
 {

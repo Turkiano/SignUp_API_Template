@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Coffee_Shop_API_Server.src.Abstractions
-{
+
+using Coffee_Shop_App.src.Entities;
+
+namespace Coffee_Shop_App.src.Abstractions;
+
     public interface ICategoryService
     {
             public List<Category> FindAll();
 
     }
-}

@@ -1,9 +1,7 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
-using Coffee_Shop_Appe.src.Abstractions;
-using Microsoft.AspNetCore.Mvc;
 
-namespace Coffee_Shop_App;
+namespace Coffee_Shop_App.Services;
 
 public class UserService : IUserService
 {

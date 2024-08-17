@@ -1,10 +1,10 @@
 
-using Coffee_Shop_API_Server.src.Abstractions;
-using Coffee_Shop_App.src.Controller;
+using Coffee_Shop_App.src.Abstractions;
+using Coffee_Shop_App.src.Controllers;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Coffee_Shop_API_Server.src.Controllers;
+namespace Coffee_Shop_App.src.Controllers;
 
 
 public class ProductController : BaseController

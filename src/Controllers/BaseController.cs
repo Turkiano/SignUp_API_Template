@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Coffee_Shop_App.src.Controller;
+namespace Coffee_Shop_App.src.Controllers;
 
 
 [ApiController]

@@ -1,7 +1,7 @@
-using Coffee_Shop_API_Server.src.Abstractions;
+using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 
-namespace Coffee_Shop_App;
+namespace Coffee_Shop_App.Services;
 
 class ProductService : IProductService
 {

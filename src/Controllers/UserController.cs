@@ -2,7 +2,7 @@ using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Coffee_Shop_App.src.Controller;
+namespace Coffee_Shop_App.src.Controllers;
 
 
 public class UserController : BaseController //the inheritance to get the routing

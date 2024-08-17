@@ -1,9 +1,8 @@
 using Coffee_Shop_App.src.Entities;
-using System;
-using System.Collections.Generic;
 
-namespace Coffee_Shop_App.src.Databases
-{
+
+namespace Coffee_Shop_App.src.Databases;
+
     public class DatabaseContext
     {
         public List<User> users; // to store User data as a list
@@ -34,4 +33,4 @@ namespace Coffee_Shop_App.src.Databases
             };
         }
     }
-}
+
