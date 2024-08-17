@@ -11,7 +11,7 @@ namespace Coffee_Shop_App.Repositories;
         private List<Category> _categories;
 
         public CategoryRepository()
-        {
+        { 
             _categories = new DatabaseContext().categories;
         }
 
