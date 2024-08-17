@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Coffee_Shop_API_Server.src.Utilities;
+namespace Coffee_Shop_App.src.Utilities;
 
 public class PasswordUtils
 {

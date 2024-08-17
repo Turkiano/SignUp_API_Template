@@ -1,3 +1,4 @@
+using Coffee_Shop_App.src.Utilities;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,6 @@ public class UserController : BaseController //the inheritance to get the routin
     {
         if (user is not null)
         {
-
             var newUser = _userService.CreateOne(user); //sendin request to service
             return CreatedAtAction(nameof(CreateOne), newUser); //return value in ActionResult
 

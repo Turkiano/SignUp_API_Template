@@ -1,3 +1,5 @@
+using System.Text;
+using Coffee_Shop_App.src.Utilities;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 
@@ -7,10 +9,12 @@ public class UserService : IUserService
 {
 
     private IUserRepository? _userRepository; //to talk to the Repo
+    private IConfiguration _config;
 
-    public UserService(IUserRepository? userRepository) //constructor DI 
+    public UserService(IUserRepository? userRepository, IConfiguration config) //constructor DI 
     {
         _userRepository = userRepository;
+        _config = config;
     }
 
 
@@ -31,6 +35,11 @@ public class UserService : IUserService
             return null;
         }
 
+        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);
+        PasswordUtils.HashPasswrod(user.Password, out string hashedPassword, pepper);
+
+        user.Password = hashedPassword;
+
         return _userRepository.CreateOne(user);
     }
 
@@ -50,9 +59,10 @@ public class UserService : IUserService
 
     public User UpdateOne(string Email, User newValue)
     {
-            User? user = _userRepository.findOneByEmail(Email);
+        User? user = _userRepository.findOneByEmail(Email);
 
-        if (user is not null){
+        if (user is not null)
+        {
             user.FirstName = newValue.FirstName;
             return _userRepository.UpdateOne(user);
         }
