@@ -37,7 +37,9 @@ namespace Coffee_Shop_App.src.Databases;
 
             orders = new List<Order> 
             {
-
+                    new Order("01", "03", "Rafah", "On Progress", 01 ),
+                    new Order("02", "01", "Khalid", "On Progress", 02 ),
+                    new Order("03", "02", "John", "On Progress", 03 )
             };
         }
     }

@@ -16,14 +16,14 @@ public class UserController : BaseController //the inheritance to get the routin
     [HttpPatch("{Email}")]
     public User? UpdateOne(string Email, [FromBody] User user)
     {
-        return _userService.UpdateOne(Email, user);
+        return _userService!.UpdateOne(Email, user);
     }
 
 
     [HttpGet] //import the ASP.NetCore package
     public List<User>? findAll()
     {
-        return _userService.FindAll(); //access to users's data
+        return _userService!.FindAll(); //access to users's data
     }
 
 
@@ -46,7 +46,7 @@ public class UserController : BaseController //the inheritance to get the routin
     public User? findOne(string userId)
     {
 
-        return _userService.findOne(userId);
+        return _userService!.findOne(userId);
     }
 
 
@@ -54,7 +54,7 @@ public class UserController : BaseController //the inheritance to get the routin
     public User? findOneByEmail(string userEmail)
     {
 
-        return _userService.findOneByEmail(userEmail); //call the method in the service
+        return _userService!.findOneByEmail(userEmail); //call the method in the service
     }
 
 }
