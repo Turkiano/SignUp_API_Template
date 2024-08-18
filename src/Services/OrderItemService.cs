@@ -12,6 +12,18 @@ public class OrderItemService : IOrderItemService
         _OrderItemRepository = orderItemRepository;
     }
 
+    public OrderItem CreateOne(OrderItem orderItem)
+    {
+        OrderItem? foundOrderItem = _OrderItemRepository!.findOne(orderItem.Order_Id!); //to avoid duplicated emails
+
+        if (foundOrderItem is not null)
+        {
+            return null;
+        }
+
+        return _OrderItemRepository.CreateOne(orderItem);
+    }
+
     public List<OrderItem> FindAll()
     {
         return _OrderItemRepository.FindAll(); //to talk to the Repo

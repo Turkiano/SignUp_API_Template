@@ -10,6 +10,9 @@ namespace Coffee_Shop_App.src.Abstractions
 
         public OrderItem? findOne(string orderItemId);
 
+        public OrderItem CreateOne(OrderItem orderItem);
+
+
 
 
 

@@ -14,6 +14,12 @@ public class OrderItemRepository : IOrderItemRepository
         _orderItems = new DatabaseContext().orderItems;
     }
 
+    public OrderItem CreateOne(OrderItem orderItem)
+    {
+        _orderItems.Add(orderItem);
+        return orderItem;
+    }
+
     public List<OrderItem> FindAll()
     {
         return _orderItems;

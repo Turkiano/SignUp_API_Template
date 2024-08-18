@@ -10,6 +10,7 @@ namespace Coffee_Shop_App.src.Abstractions
 
         public OrderItem? findOne(string orderItemId); //targeting ids in params
 
+        public OrderItem CreateOne(OrderItem orderItem);
 
 
     }

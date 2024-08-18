@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Coffee_Shop_App.Controllers;
 
-public class OrderItemController : BaseController {
+public class OrderItemController : BaseController
+{
 
     private IOrderItemService _orderItemService;
 
@@ -23,11 +24,27 @@ public class OrderItemController : BaseController {
     }
 
 
-     [HttpGet("{orderItemId}")]
+    [HttpGet("{orderItemId}")]
     public OrderItem? findOne(string orderItemId)
     {
 
         return _orderItemService!.findOne(orderItemId);
+    }
+
+
+
+    [HttpPost] //POST, PUT, or PATCH use fromBody
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public ActionResult<OrderItem> CreateOne([FromBody] OrderItem orderItem)
+    {
+        if (orderItem is not null)
+        {
+            var newOrderItem = _orderItemService!.CreateOne(orderItem); //sendin request to service
+            return CreatedAtAction(nameof(CreateOne), newOrderItem); //return value in ActionResult
+
+        }
+        return BadRequest(); //built-in method for validation
     }
 
 
