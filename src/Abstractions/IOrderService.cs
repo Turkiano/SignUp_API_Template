@@ -8,5 +8,12 @@ namespace Coffee_Shop_App.src.Abstractions
     {
         public List<Order> FindAll();
 
+
+        public Order? findOne(string orderId);
+
+        public Order CreateOne(Order order);
+
+
+
     }
 }

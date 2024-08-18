@@ -12,8 +12,25 @@ public class OrderService : IOrderService
         _orderRepository = orderRepository;
     }
 
+    public Order CreateOne(Order order)
+    {
+        Order? foundOrder = _orderRepository!.findOne(order.Order_Id); //to avoid duplicated orders
+        
+        if (foundOrder is not null)
+        {
+            return null;
+        }
+
+        return _orderRepository.CreateOne(order);
+    }
+
     public List<Order> FindAll()
     {
-        return _orderRepository.FindAll();
+        return _orderRepository!.FindAll();
+    }
+
+    public Order? findOne(string orderId)
+    {
+        return _orderRepository!.findOne(orderId);
     }
 }

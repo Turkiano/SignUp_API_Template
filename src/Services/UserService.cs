@@ -22,14 +22,14 @@ public class UserService : IUserService
 
     public List<User> FindAll()
     {
-        return _userRepository.FindAll(); //to talk to the Repo
+        return _userRepository!.FindAll(); //to talk to the Repo
     }
 
 
 
     public User CreateOne(User user)
     {
-        User? foundUser = _userRepository.findOneByEmail(user.Email); //to avoid duplicated emails
+        User? foundUser = _userRepository!.findOneByEmail(user.Email); //to avoid duplicated emails
 
         if (foundUser is not null)
         {
@@ -48,19 +48,19 @@ public class UserService : IUserService
     public User? findOne(string userId)
     {
 
-        return _userRepository.findOne(userId);
+        return _userRepository!.findOne(userId);
     }
 
     public User? findOneByEmail(string userEmail)
     {
 
-        return _userRepository.findOneByEmail(userEmail);//call the method in the Repo
+        return _userRepository!.findOneByEmail(userEmail);//call the method in the Repo
 
     }
 
     public User UpdateOne(string Email, User newValue)
     {
-        User? user = _userRepository.findOneByEmail(Email);
+        User? user = _userRepository!.findOneByEmail(Email);
 
         if (user is not null)
         {

@@ -6,7 +6,11 @@ namespace Coffee_Shop_App.src.Abstractions
 {
     public interface IOrderRepository
     {
-            public List<Order> FindAll();
+        public List<Order> FindAll();
+
+        public Order? findOne(string orderId);
+
+        public Order CreateOne(Order order);
 
     }
 }
