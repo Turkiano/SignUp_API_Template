@@ -7,7 +7,7 @@ namespace Coffee_Shop_App.src.Controllers;
 
 public class UserController : BaseController //the inheritance to get the routing
 {
-    private IUserService? _userService;
+    private IUserService? _userService; //to talk to the service
     public UserController(IUserService userService)
     {
         _userService = userService;

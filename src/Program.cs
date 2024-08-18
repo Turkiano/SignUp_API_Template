@@ -1,4 +1,5 @@
 
+using Coffee_Shop_App.Controllers;
 using Coffee_Shop_App.Repositories;
 using Coffee_Shop_App.Services;
 using Coffee_Shop_App.src.Abstractions;
@@ -27,8 +28,9 @@ builder.Services.AddScoped<IUserService, UserService>(); //built-in DI Container
 builder.Services.AddScoped<IProductRepository, ProductRepository>(); //built-in DI Container for ProductRepository
 builder.Services.AddScoped<IProductService, ProductService>(); //built-in DI Container for ProductService
 builder.Services.AddScoped<ICategoryService, CategoryService>(); //built-in DI Container for CategoryService
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //built-in DI Container for ProductService
-
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //built-in DI Container for CategoryRepository
+builder.Services.AddScoped<IOrderService, OrderService>(); //built-in DI Container for OrderService
+builder.Services.AddScoped<IOrderRepository, OrderRepository>(); //built-in DI Container for OrderRepository
 
 
 var app = builder.Build();
