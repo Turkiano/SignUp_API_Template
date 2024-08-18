@@ -22,4 +22,11 @@ public class CategoryController : BaseController
         return _categoryService.FindAll();
     }
 
+[HttpGet("{categoryId}")]
+        public Category? findOne(string categoryId)
+    {
+
+        return _categoryService.findOne(categoryId);
+    }
+
 }

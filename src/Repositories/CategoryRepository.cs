@@ -19,5 +19,15 @@ namespace Coffee_Shop_App.Repositories;
         {
             return _categories;
         }
+
+              
+
+    public Category findOne(string categoryId)
+    {
+        Category? category = _categories?.FirstOrDefault(category => category.CategoryId == categoryId); //lambda expression to compare Ids
+
+        return category; //to get the desired user
+        throw new NotImplementedException();
     }
+}
 

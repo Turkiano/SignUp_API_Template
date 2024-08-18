@@ -17,4 +17,9 @@ public ICategoryRepository _categoryRepository;
     {
         return _categoryRepository.FindAll();
     }
+
+    public Category? findOne(string categoryId)
+    {
+        return _categoryRepository.findOne(categoryId);
+    }
 }

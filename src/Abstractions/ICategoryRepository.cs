@@ -8,4 +8,6 @@ public interface ICategoryRepository
 {
     public List<Category> FindAll();
 
+    public Category? findOne(string categoryId);
+
 }
