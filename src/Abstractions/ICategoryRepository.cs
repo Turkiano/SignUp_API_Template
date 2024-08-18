@@ -10,4 +10,7 @@ public interface ICategoryRepository
 
     public Category? findOne(string categoryId);
 
+    public Category CreateOne(Category category);
+
+
 }

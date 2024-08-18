@@ -6,21 +6,27 @@ using Coffee_Shop_App.src.Entities;
 namespace Coffee_Shop_App.Repositories;
 
 
-    public class CategoryRepository : ICategoryRepository
+public class CategoryRepository : ICategoryRepository
+{
+    private List<Category> _categories;
+
+    public CategoryRepository()
     {
-        private List<Category> _categories;
+        _categories = new DatabaseContext().categories;
+    }
 
-        public CategoryRepository()
-        { 
-            _categories = new DatabaseContext().categories;
-        }
+    public Category CreateOne(Category category)
+    {
+        _categories.Add(category);
+        return category;
+    }
 
-        public List<Category> FindAll()
-        {
-            return _categories;
-        }
+    public List<Category> FindAll()
+    {
+        return _categories;
+    }
 
-              
+
 
     public Category findOne(string categoryId)
     {

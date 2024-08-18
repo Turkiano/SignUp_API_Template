@@ -3,14 +3,27 @@ using Coffee_Shop_App.src.Entities;
 
 namespace Coffee_Shop_App.Services;
 
-public class CategoryService : ICategoryService {
+public class CategoryService : ICategoryService
+{
 
 
-public ICategoryRepository _categoryRepository;
+    public ICategoryRepository _categoryRepository;
 
     public CategoryService(ICategoryRepository categoryRepository)
     {
         _categoryRepository = categoryRepository;
+    }
+
+    public Category CreateOne(Category category)
+    {
+        Category? foundCategory = _categoryRepository.findOne(category.CategoryId);//to avoid duplicated emails
+        if (foundCategory is not null)
+        {
+            return null;
+        }
+        return _categoryRepository.CreateOne(category);
+
+
     }
 
     public List<Category> FindAll()

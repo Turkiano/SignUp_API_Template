@@ -9,5 +9,8 @@ public interface ICategoryService
         public List<Category> FindAll();
         public Category? findOne(string categoryId);
 
+        public Category CreateOne(Category category);
+
+
 
 }

@@ -22,11 +22,26 @@ public class CategoryController : BaseController
         return _categoryService.FindAll();
     }
 
-[HttpGet("{categoryId}")]
-        public Category? findOne(string categoryId)
+    [HttpGet("{categoryId}")]
+    public Category? findOne(string categoryId)
     {
 
         return _categoryService.findOne(categoryId);
     }
 
+
+    [HttpPost] //POST, PUT, or PATCH use fromBody
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public ActionResult<Category> CreateOne([FromBody] Category category)
+    {
+         if (category is not null)
+        {
+            var newCategory = _categoryService!.CreateOne(category); //sendin request to service
+            return CreatedAtAction(nameof(CreateOne), newCategory); //return value in ActionResult
+
+        }
+        return BadRequest(); //built-in method for validation
+
+    }
 }
