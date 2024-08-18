@@ -21,6 +21,7 @@ public class UserRepository : IUserRepository
         return _users;
 
     }
+    
     public User CreateOne(User user)
     {
         _users?.Add(user); // temporary saving data

@@ -1,3 +1,4 @@
+using Coffee_Shop_App.Controllers;
 using Coffee_Shop_App.src.Entities;
 
 
@@ -8,6 +9,7 @@ namespace Coffee_Shop_App.src.Databases;
         public List<User> users; // to store User data as a list
         public List<Product> products;
         public List<Category> categories;
+        public List<Order> orders;
 
         public DatabaseContext() // constructor to add users values
         {
@@ -30,6 +32,12 @@ namespace Coffee_Shop_App.src.Databases;
             {
                 new Category("01", "Electronic", DateTime.Now),
                 new Category("02", "Watches", DateTime.Now)
+            };
+
+
+            orders = new List<Order> 
+            {
+
             };
         }
     }
