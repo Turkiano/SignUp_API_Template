@@ -18,7 +18,7 @@ public class UserRepository : IUserRepository
     public List<User> FindAll()
     {
 
-        return _users;
+        return _users!;
 
     }
     
@@ -53,7 +53,7 @@ public class UserRepository : IUserRepository
             }
             return user;
         });
-        _users = users.ToList();
+        _users = users!.ToList();
         return updatedUser;
     }
 }

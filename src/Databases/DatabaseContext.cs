@@ -9,7 +9,7 @@ public class DatabaseContext
     public List<Product> products;
     public List<Category> categories;
     public List<Order> orders;
-    public List<Order_item> orderItems;
+    public List<OrderItem> orderItems;
 
     public DatabaseContext() // constructor to add users values
     {
@@ -43,10 +43,10 @@ public class DatabaseContext
             };
 
 
-        orderItems = new List<Order_item>
+        orderItems = new List<OrderItem>
         {
-            new Order_item("01", "03", 20, DateTime.Now),
-            new Order_item("02", "01", 33, DateTime.Now )
+            new OrderItem("01", "03", 20, DateTime.Now),
+            new OrderItem("02", "01", 33, DateTime.Now )
         };
     }
 }

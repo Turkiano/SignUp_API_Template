@@ -31,6 +31,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>(); //built-in DI C
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //built-in DI Container for CategoryRepository
 builder.Services.AddScoped<IOrderService, OrderService>(); //built-in DI Container for OrderService
 builder.Services.AddScoped<IOrderRepository, OrderRepository>(); //built-in DI Container for OrderRepository
+builder.Services.AddScoped<IOrderItemService, OrderItemService>(); //built-in DI Container for OrderService
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>(); //built-in DI Container for OrderRepository
 
 
 var app = builder.Build();

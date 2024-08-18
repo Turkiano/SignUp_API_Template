@@ -3,7 +3,7 @@
 
 namespace Coffee_Shop_App.src.Entities;
 
-public class Order_item {
+public class OrderItem {
 
     public string? Order_Id {get; set;}
 
@@ -14,7 +14,7 @@ public class Order_item {
     public DateTime CreatedAt {get; set;}
 
     
-    public Order_item(string? order_Id, string? product_Id, int quantity, DateTime createdAt)
+    public OrderItem(string? order_Id, string? product_Id, int quantity, DateTime createdAt)
     {
         Order_Id = order_Id;
         Product_Id = product_Id;
