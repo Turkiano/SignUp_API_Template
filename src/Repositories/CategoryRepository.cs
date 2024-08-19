@@ -35,5 +35,19 @@ public class CategoryRepository : ICategoryRepository
         return category; //to get the desired user
         throw new NotImplementedException();
     }
+
+    public Category UpdateOne(Category updateCategory)
+    {
+        var category = _categories.Select(category =>
+        {
+            if (category.CategoryId == updateCategory.CategoryId)
+            {
+                return updateCategory;
+            }
+            return category;
+        });
+        _categories = category.ToList();
+        return updateCategory;
+    }
 }
 

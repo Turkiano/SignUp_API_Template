@@ -12,5 +12,8 @@ public interface ICategoryRepository
 
     public Category CreateOne(Category category);
 
+    public Category UpdateOne(Product updateCategory);
+
+
 
 }

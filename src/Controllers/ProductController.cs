@@ -31,7 +31,7 @@ public class ProductController : BaseController
     {
 
         
-        return _productService.FindOne(productId);
+        return _productService!.FindOne(productId);
     }
 
 
