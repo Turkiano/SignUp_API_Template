@@ -17,6 +17,11 @@ public class ProductController : BaseController
         _productService = productService;
     }
 
+    [HttpPatch("{Product_Id}")]
+    public Product? UpdateOne(string Product_Id, [FromBody] Product product)
+    {
+        return _productService!.UpdateOne(Product_Id, product);
+    }
 
 
     [HttpGet("{productId}")]

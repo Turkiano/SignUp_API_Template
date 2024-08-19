@@ -16,8 +16,8 @@ class ProductRepository : IProductRepository
     public Product CreateOne(Product product)
     {
         _products.Add(product);
-        return(product);
-        
+        return (product);
+
     }
 
     public List<Product> FindAll()
@@ -36,5 +36,17 @@ class ProductRepository : IProductRepository
 
     }
 
+    public Product UpdateOne(Product updatedProduct)
+    {
+        var products = _products.Select(product =>
+        {
+            if (product.Product_Id == updatedProduct.Product_Id){
+                return updatedProduct;
+            }
 
+            return product;
+        });
+        _products = products.ToList();
+        return updatedProduct;
+    }
 }
