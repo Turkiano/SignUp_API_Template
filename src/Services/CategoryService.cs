@@ -35,4 +35,15 @@ public class CategoryService : ICategoryService
     {
         return _categoryRepository.findOne(categoryId);
     }
+
+    public Category UpdateOne(string CategoryId, Category updatedCategory)
+    {
+        Category? category = _categoryRepository.findOne(CategoryId);
+        if(category is not null)
+        {
+            category.Name = updatedCategory.Name;
+            return _categoryRepository.UpdateOne(category);
+        }
+        return null;
+    }
 }

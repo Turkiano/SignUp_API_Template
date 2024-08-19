@@ -44,4 +44,10 @@ public class CategoryController : BaseController
         return BadRequest(); //built-in method for validation
 
     }
+
+    [HttpPatch("{CategoryId}")]
+    public Category? UpdateOne(string CategoryId, [FromBody] Category updatedCategory)
+    {
+        return _categoryService!.UpdateOne(CategoryId, updatedCategory);
+    }
 }

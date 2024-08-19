@@ -12,6 +12,9 @@ public interface ICategoryService
         public Category CreateOne(Category category);
 
 
+        public Category UpdateOne (string CategoryId, Category updatedCategory);
+
+
 
 
 }

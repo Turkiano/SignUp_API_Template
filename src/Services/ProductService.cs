@@ -29,9 +29,10 @@ class ProductService : IProductService
 
     public Product UpdateOne(string Product_Id, Product updatedProduct)
     {
-        Product product = _ProductRepository.FindOne(Product_Id);
-        if (product is not null) {
-            product.Product_Id = updatedProduct.Product_Id;
+        Product? product = _ProductRepository.FindOne(Product_Id);
+        if (product is not null) 
+        {
+            product.Product_Name = updatedProduct.Product_Name;
             return _ProductRepository.UpdateOne(product);
         }
         return null;
