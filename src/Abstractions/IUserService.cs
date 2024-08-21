@@ -8,7 +8,7 @@ public interface IUserService
 {
 
 
-    public List<User> FindAll();
+    public List<UserReadDto> FindAll();
 
     public User CreateOne(User user);
 
@@ -17,8 +17,6 @@ public interface IUserService
     public User findOneByEmail(string userEmail);
 
     public User UpdateOne(string Email, User user);
-
-
 
 
 }

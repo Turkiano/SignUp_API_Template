@@ -22,7 +22,7 @@ public class UserController : BaseController //the inheritance to get the routin
 
 
     [HttpGet] //import the ASP.NetCore package
-    public List<User>? findAll()
+    public List<UserReadDto>? findAll()
     {
         return _userService!.FindAll(); //access to users's data
     }

@@ -23,6 +23,12 @@ public class UserService : IUserService
     }
 
 
+    public List<UserReadDto> FindAll()
+    {
+        var users = _userRepository!.FindAll();//to talk to the Repo
+        var usersRead = users.Select(_mapper.Map<UserReadDto>); //to use the DTO
+        return  usersRead.ToList(); //to return data as a list
+    }
 
     public UserReadDto findOne(string userId)
     {
@@ -32,10 +38,6 @@ public class UserService : IUserService
     }
 
 
-    public List<User> FindAll()
-    {
-        return _userRepository!.FindAll(); //to talk to the Repo
-    }
 
 
 
