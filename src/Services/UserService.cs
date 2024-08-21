@@ -3,6 +3,8 @@ using System.Text;
 using Coffee_Shop_App.src.Utilities;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
+using Coffee_Shop_App.DTOs;
+using AutoMapper;
 
 namespace Coffee_Shop_App.Services;
 
@@ -10,14 +12,24 @@ public class UserService : IUserService
 {
 
     private IUserRepository? _userRepository; //to talk to the Repo
-    private IConfiguration _config;
+    private IConfiguration _config; //watch the demo (1. ASP.NET continue CRUD and Documentation)
+    private IMapper _mapper; //to map DTO file with User entities
 
-    public UserService(IUserRepository? userRepository, IConfiguration config) //constructor DI 
+    public UserService(IUserRepository? userRepository, IConfiguration config, IMapper mapper) //constructor DI 
     {
         _userRepository = userRepository;
         _config = config;
+        _mapper = mapper;
     }
 
+
+
+    public UserReadDto findOne(string userId)
+    {
+        User? user = _userRepository!.findOne(userId); //to talk to the repo
+        UserReadDto userRead = _mapper.Map<UserReadDto>(user); //to use the DTO
+        return userRead;
+    }
 
 
     public List<User> FindAll()
@@ -42,13 +54,6 @@ public class UserService : IUserService
         user.Password = hashedPassword;
 
         return _userRepository.CreateOne(user);
-    }
-
-
-    public User? findOne(string userId)
-    {
-
-        return _userRepository!.findOne(userId);
     }
 
     public User? findOneByEmail(string userEmail)

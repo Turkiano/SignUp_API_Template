@@ -8,7 +8,8 @@ using Coffee_Shop_App.src.Abstractions;
 var builder = WebApplication.CreateBuilder(args);
 
 //Should be added (1)
-builder.Services.AddControllers();
+builder.Services.AddControllers(); // to deferntiate between controllers and other classes
+builder.Services.AddAutoMapper(typeof(Program).Assembly); //to find where is the AutoMapper for DTOs
 
 //Should be added (3) to lowercase the Route
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);

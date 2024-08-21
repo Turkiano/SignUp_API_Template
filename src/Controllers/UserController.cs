@@ -1,3 +1,4 @@
+using Coffee_Shop_App.DTOs;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,7 @@ public class UserController : BaseController //the inheritance to get the routin
 
 
     [HttpGet("{userId}")]
-    public User? findOne(string userId)
+    public UserReadDto? findOne(string userId)
     {
 
         return _userService!.findOne(userId);
