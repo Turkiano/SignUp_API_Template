@@ -15,7 +15,7 @@ public class UserController : BaseController //the inheritance to get the routin
     }
 
     [HttpPatch("{Email}")]
-    public User? UpdateOne(string Email, [FromBody] User user)
+    public UserReadDto? UpdateOne(string Email, [FromBody] UserCreateDto user)
     {
         return _userService!.UpdateOne(Email, user);
     }
