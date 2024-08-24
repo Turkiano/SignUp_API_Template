@@ -31,7 +31,7 @@ public class UserController : BaseController //the inheritance to get the routin
     [HttpPost] //POST, PUT, or PATCH use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<User> CreateOne([FromBody] User user)
+    public ActionResult<UserReadDto> CreateOne([FromBody] UserCreateDto user)
     {
         if (user is not null)
         {

@@ -10,7 +10,7 @@ public interface IUserService
 
     public List<UserReadDto> FindAll();
 
-    public User CreateOne(User user);
+    public UserReadDto CreateOne(UserCreateDto user);
 
     public UserReadDto findOne(string userId);
 

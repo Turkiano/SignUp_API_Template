@@ -11,8 +11,10 @@ public class Mapper : Profile
     public Mapper() //a constructor for AutoMapper Configuration
     {
 
-    CreateMap<User, UserReadDto>();//for mapping User class into UserDTO class
-    CreateMap<UserReadDto, User>();//for mapping UserDto class into User class
+    CreateMap<User, UserReadDto>();//for mapping User class into UserReadDto class
+    CreateMap<UserReadDto, User>();//for mapping UserReadDto class into User class
+
+    CreateMap<UserCreateDto, User>();//for mapping UserCreateDto class into User class
 
     }
 

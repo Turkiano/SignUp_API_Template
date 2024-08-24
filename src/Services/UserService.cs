@@ -41,7 +41,7 @@ public class UserService : IUserService
 
 
 
-    public User CreateOne(User user)
+    public UserReadDto CreateOne(UserCreateDto user)
     {
         User? foundUser = _userRepository!.findOneByEmail(user.Email); //to avoid duplicated emails
 
@@ -54,9 +54,16 @@ public class UserService : IUserService
         PasswordUtils.HashPasswrod(user.Password, out string hashedPassword, pepper);
 
         user.Password = hashedPassword;
+        
+        User mappedUser = _mapper.Map<User>(user); //01.to map the request of create user 
+        User newUser = _userRepository.CreateOne(mappedUser);//02.to pass the newUser to the repo
+        UserReadDto userRead = _mapper.Map<UserReadDto>(newUser);//03.to covert user obj to UserReadDto
 
-        return _userRepository.CreateOne(user);
+        return userRead;//04. return the ReadDto 
     }
+
+
+
 
     public User? findOneByEmail(string userEmail)
     {
