@@ -37,7 +37,7 @@ public class ProductController : BaseController
 
 
     [HttpGet]
-    public List<Product> FindAll()
+    public List<ProductReadDto> FindAll()
     {
 
         return _productService.FindAll();

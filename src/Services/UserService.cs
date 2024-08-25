@@ -1,10 +1,10 @@
 using System.Text;
+using AutoMapper;
 
 using Coffee_Shop_App.src.Utilities;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 using Coffee_Shop_App.src.DTOs;
-using AutoMapper;
 
 namespace Coffee_Shop_App.Services;
 
@@ -30,7 +30,7 @@ public class UserService : IUserService
         return  usersRead.ToList(); //to return data as a list
     }
 
-    
+
 
     public UserReadDto findOne(string userId)
     {

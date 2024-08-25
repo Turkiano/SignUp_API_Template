@@ -8,7 +8,7 @@ public interface IProductService
 {
     public ProductReadDto FindOne(string productId);
 
-    public List<Product> FindAll();
+    public List<ProductReadDto> FindAll();
 
     public Product CreateOne(Product product);
 
