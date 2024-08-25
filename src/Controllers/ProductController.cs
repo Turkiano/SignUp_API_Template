@@ -1,6 +1,7 @@
 
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Controllers;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +28,7 @@ public class ProductController : BaseController
     [HttpGet("{productId}")]
     // [ProducesResponseType(StatusCodes.Status400BadRequest)]
     // [ProducesResponseType(StatusCodes.Status200OK)]
-    public Product? FindOne(string productId)
+    public ProductReadDto? FindOne(string productId)
     {
 
         

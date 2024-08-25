@@ -1,4 +1,6 @@
+using AutoMapper;
 using Coffee_Shop_App.src.Abstractions;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 
 namespace Coffee_Shop_App.Services;
@@ -7,9 +9,11 @@ class ProductService : IProductService
 {
     private IProductRepository _ProductRepository; //to talk to the Repo
 
-    public ProductService(IProductRepository productRepository)
+    private IMapper _mapper;
+    public ProductService(IProductRepository productRepository, IMapper mapper)
     {
         _ProductRepository = productRepository;
+        _mapper = mapper;
     }
 
     public Product CreateOne(Product product)
@@ -22,9 +26,14 @@ class ProductService : IProductService
         return _ProductRepository.FindAll();
     }
 
-    public Product FindOne(string productId)
+    public ProductReadDto FindOne(string productId)
     {
-        return _ProductRepository.FindOne(productId);
+        Product product = _ProductRepository.FindOne(productId);
+        ProductReadDto productRead = _mapper.Map<ProductReadDto>(product);
+
+        Console.WriteLine($"testing ");
+        
+        return productRead ;
     }
 
     public Product UpdateOne(string Product_Id, Product updatedProduct)

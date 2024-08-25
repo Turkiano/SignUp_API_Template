@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Coffee_Shop_App.DTOs;
+namespace Coffee_Shop_App.src.DTOs;
 
 public class UserReadDto
 {

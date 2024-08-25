@@ -1,11 +1,12 @@
 
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 
 namespace Coffee_Shop_App.src.Abstractions;
 
 public interface IProductService
 {
-    public Product FindOne(string productId);
+    public ProductReadDto FindOne(string productId);
 
     public List<Product> FindAll();
 

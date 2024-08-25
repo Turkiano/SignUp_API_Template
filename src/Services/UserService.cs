@@ -3,7 +3,7 @@ using System.Text;
 using Coffee_Shop_App.src.Utilities;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
-using Coffee_Shop_App.DTOs;
+using Coffee_Shop_App.src.DTOs;
 using AutoMapper;
 
 namespace Coffee_Shop_App.Services;
