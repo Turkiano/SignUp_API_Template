@@ -30,6 +30,8 @@ public class UserService : IUserService
         return  usersRead.ToList(); //to return data as a list
     }
 
+    
+
     public UserReadDto findOne(string userId)
     {
         User? user = _userRepository!.findOne(userId); //to talk to the repo

@@ -1,4 +1,6 @@
+using AutoMapper;
 using Coffee_Shop_App.src.Abstractions;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 
 namespace Coffee_Shop_App.Services;
@@ -8,10 +10,12 @@ public class CategoryService : ICategoryService
 
 
     public ICategoryRepository _categoryRepository;
+    private IMapper _mapper;
 
-    public CategoryService(ICategoryRepository categoryRepository)
+    public CategoryService(ICategoryRepository categoryRepository,  IMapper mapper )
     {
         _categoryRepository = categoryRepository;
+        _mapper = mapper;
     }
 
     public Category CreateOne(Category category)
@@ -26,14 +30,20 @@ public class CategoryService : ICategoryService
 
     }
 
-    public List<Category> FindAll()
+    public List<CategoryReadDto> FindAll()
     {
-        return _categoryRepository.FindAll();
+        var category =  _categoryRepository.FindAll();
+        var categoryRead = category.Select(_mapper.Map<CategoryReadDto>);
+        return categoryRead.ToList();
     }
 
-    public Category? findOne(string categoryId)
+    public CategoryReadDto? findOne(string categoryId)
     {
-        return _categoryRepository.findOne(categoryId);
+        Category category = _categoryRepository.findOne(categoryId);
+        CategoryReadDto categoryRead = _mapper.Map<CategoryReadDto>(category);
+
+
+        return categoryRead ;
     }
 
     public Category UpdateOne(string CategoryId, Category updatedCategory)

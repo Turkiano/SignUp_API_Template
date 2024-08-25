@@ -1,5 +1,6 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Controllers;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,14 +17,15 @@ public class CategoryController : BaseController
     }
 
     [HttpGet]
-    public List<Category> FindAll()
+    public List<CategoryReadDto> FindAll()
     {
+
 
         return _categoryService.FindAll();
     }
 
     [HttpGet("{categoryId}")]
-    public Category? findOne(string categoryId)
+    public CategoryReadDto? findOne(string categoryId)
     {
 
         return _categoryService.findOne(categoryId);
@@ -35,7 +37,7 @@ public class CategoryController : BaseController
     [ProducesResponseType(StatusCodes.Status201Created)]
     public ActionResult<Category> CreateOne([FromBody] Category category)
     {
-         if (category is not null)
+        if (category is not null)
         {
             var newCategory = _categoryService!.CreateOne(category); //sendin request to service
             return CreatedAtAction(nameof(CreateOne), newCategory); //return value in ActionResult
