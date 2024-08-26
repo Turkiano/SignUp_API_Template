@@ -18,14 +18,20 @@ public class CategoryService : ICategoryService
         _mapper = mapper;
     }
 
-    public Category CreateOne(Category category)
+
+    public CategoryReadDto CreateOne(CategoryCreateDto category)
     {
-        Category? foundCategory = _categoryRepository.findOne(category.CategoryId);//to avoid duplicated emails
+        Category? foundCategory = _categoryRepository.findOne(category.Name);//to avoid duplicated emails
         if (foundCategory is not null)
         {
             return null;
         }
-        return _categoryRepository.CreateOne(category);
+
+        Category mappedCategory = _mapper.Map<Category>(category);
+        Category newCategory = _categoryRepository.CreateOne(mappedCategory);
+        CategoryReadDto CategoryRead = _mapper.Map<CategoryReadDto>(newCategory);
+
+        return  CategoryRead;
 
 
     }
@@ -46,13 +52,16 @@ public class CategoryService : ICategoryService
         return categoryRead ;
     }
 
-    public Category UpdateOne(string CategoryId, Category updatedCategory)
+    public CategoryReadDto UpdateOne(string CategoryId, CategoryCreateDto updatedCategory)
     {
         Category? category = _categoryRepository.findOne(CategoryId);
         if(category is not null)
         {
             category.Name = updatedCategory.Name;
-            return _categoryRepository.UpdateOne(category);
+            Category mappedCategory = _mapper.Map<Category>(category);
+            Category newCategory = _categoryRepository.UpdateOne(mappedCategory);
+            CategoryReadDto categoryRead= _mapper.Map<CategoryReadDto>(newCategory);
+            return categoryRead;
         }
         return null;
     }

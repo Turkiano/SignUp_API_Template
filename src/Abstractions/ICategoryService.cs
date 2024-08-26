@@ -7,13 +7,13 @@ namespace Coffee_Shop_App.src.Abstractions;
 
 public interface ICategoryService
 {
-        public List<CategoryReadDto> FindAll();
+    public List<CategoryReadDto> FindAll();
     public CategoryReadDto? findOne(string categoryId);
 
-        public Category CreateOne(Category category);
+    public CategoryReadDto CreateOne(CategoryCreateDto category);
 
 
-        public Category UpdateOne(string CategoryId, Category updatedCategory);
+    public CategoryReadDto UpdateOne(string CategoryId, CategoryCreateDto updatedCategory);
 
 
 

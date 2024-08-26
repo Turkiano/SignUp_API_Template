@@ -35,7 +35,7 @@ public class CategoryController : BaseController
     [HttpPost] //POST, PUT, or PATCH use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<Category> CreateOne([FromBody] Category category)
+    public ActionResult<CategoryReadDto> CreateOne([FromBody] CategoryCreateDto category)
     {
         if (category is not null)
         {
@@ -48,7 +48,7 @@ public class CategoryController : BaseController
     }
 
     [HttpPatch("{CategoryId}")]
-    public Category? UpdateOne(string CategoryId, [FromBody] Category updatedCategory)
+    public CategoryReadDto? UpdateOne(string CategoryId, [FromBody] CategoryCreateDto updatedCategory)
     {
         return _categoryService!.UpdateOne(CategoryId, updatedCategory);
     }
