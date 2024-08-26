@@ -74,13 +74,13 @@ public class UserService : IUserService
 
     }
 
-    public UserReadDto UpdateOne(string Email, UserCreateDto newValue)
+    public UserReadDto UpdateOne(string Email, UserCreateDto updatedUser)
     {
         User? user = _userRepository!.findOneByEmail(Email);
 
         if (user is not null)
         {
-            user.FirstName = newValue.FirstName;
+            user.FirstName = updatedUser.FirstName;
             User mappedUser = _mapper.Map<User>(user);
             User newUser = _userRepository.UpdateOne(mappedUser);
             UserReadDto userRead = _mapper.Map<UserReadDto>(newUser);

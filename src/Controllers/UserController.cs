@@ -14,11 +14,19 @@ public class UserController : BaseController //the inheritance to get the routin
         _userService = userService;
     }
 
+
+
+
+
     [HttpPatch("{Email}")]
     public UserReadDto? UpdateOne(string Email, [FromBody] UserCreateDto user)
     {
         return _userService!.UpdateOne(Email, user);
     }
+
+
+
+    
 
 
     [HttpGet] //import the ASP.NetCore package

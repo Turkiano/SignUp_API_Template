@@ -16,7 +16,7 @@ public interface IUserService
 
     public User findOneByEmail(string userEmail);
 
-    public UserReadDto UpdateOne(string Email, UserCreateDto newValue);
+    public UserReadDto UpdateOne(string Email, UserCreateDto updatedUser);
 
 
 }
