@@ -12,7 +12,7 @@ public interface IProductService
 
     public Product CreateOne(Product product);
 
-    public Product UpdateOne(string Product_Id, Product updatedProduct);
+    public ProductReadDto UpdateOne(string Product_Id, ProductCreateDto updatedProduct);
 
 
 

@@ -40,13 +40,16 @@ class ProductService : IProductService
         return productRead ;
     }
 
-    public Product UpdateOne(string Product_Id, Product updatedProduct)
+    public ProductReadDto UpdateOne(string Product_Id, ProductCreateDto updatedProduct)
     {
         Product? product = _ProductRepository.FindOne(Product_Id);
         if (product is not null) 
         {
             product.Product_Name = updatedProduct.Product_Name;
-            return _ProductRepository.UpdateOne(product);
+            Product mappedProduct = _mapper.Map<Product>(product);
+            Product newProduct =  _ProductRepository.UpdateOne(mappedProduct);
+            ProductReadDto productRead = _mapper.Map<ProductReadDto>(newProduct);
+            return productRead;
         }
         return null;
     }

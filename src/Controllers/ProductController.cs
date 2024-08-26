@@ -18,11 +18,22 @@ public class ProductController : BaseController
         _productService = productService;
     }
 
+
+
+
+
+
     [HttpPatch("{Product_Id}")]
-    public Product? UpdateOne(string Product_Id, [FromBody] Product product)
+
+    public ProductReadDto? UpdateOne(string Product_Id, [FromBody] ProductCreateDto updatedProduct)
     {
-        return _productService!.UpdateOne(Product_Id, product);
+
+        return _productService!.UpdateOne(Product_Id, updatedProduct);
     }
+
+
+
+
 
 
     [HttpGet("{productId}")]
@@ -31,7 +42,7 @@ public class ProductController : BaseController
     public ProductReadDto? FindOne(string productId)
     {
 
-        
+
         return _productService!.FindOne(productId);
     }
 
@@ -50,7 +61,7 @@ public class ProductController : BaseController
     [ProducesResponseType(StatusCodes.Status201Created)]
     public ActionResult<Product> CreateOne([FromBody] Product product)
     {
-         if (product is not null)
+        if (product is not null)
         {
 
             var newProduct = _productService.CreateOne(product); //sendin request to service

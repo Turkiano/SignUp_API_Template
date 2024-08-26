@@ -1,5 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace Coffee_Shop_App.src.Entities;
 
@@ -17,7 +16,6 @@ public class Product
 
     public string? Product_Id { get; set; }
 
-    [ForeignKey("Category")]
     public string CategoryId { get; set; }
     public DateTime CreatedAt {get; set;} = DateTime.Now;
     public string? Product_Name { get; set; }
