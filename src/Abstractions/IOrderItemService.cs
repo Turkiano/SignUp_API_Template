@@ -6,7 +6,7 @@ namespace Coffee_Shop_App.src.Abstractions
 {
     public interface IOrderItemService
     {
-        public List<OrderItem> FindAll();
+    public IEnumerable<OrderItem> FindAll();
 
         public OrderItem? findOne(string orderItemId);
 

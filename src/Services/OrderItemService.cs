@@ -24,7 +24,7 @@ public class OrderItemService : IOrderItemService
         return _OrderItemRepository.CreateOne(orderItem);
     }
 
-    public List<OrderItem> FindAll()
+    public IEnumerable<OrderItem> FindAll()
     {
         return _OrderItemRepository.FindAll(); //to talk to the Repo
     }

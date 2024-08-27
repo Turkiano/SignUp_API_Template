@@ -1,53 +1,31 @@
 using Coffee_Shop_App.src.Entities;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Coffee_Shop_App.src.Databases;
-
-public class DatabaseContext
+public class DatabaseContext : DbContext //inheriting from the EF Core package
 {
-    public List<User> users; // to store User data as a list
-    public List<Product> products;
-    public List<Category> categories;
-    public List<Order> orders;
-    public List<OrderItem> orderItems;
+    private IConfiguration _config; 
 
-    public DatabaseContext() // constructor to add users values
+    public DatabaseContext(IConfiguration config)
     {
-        users = new List<User>
-            {
-                new User("01", "Khalid", "Hassan", "0594930211", "K.Hassan@gmail.com", "1234456"),
-                new User("02", "John", "Guns", "056939830122", "J.Guns@gmail.com", "3452345"),
-                new User("03", "Rafah", "Abduallah", "0594930211", "S.A@gmail.com", "463456")
-            };
-
-        products = new List<Product>
-            {
-                new Product("01", DateTime.Now, "Watch X4", "10", "SAR 200", "Watch"),
-                new Product("02", DateTime.Now, "Laptop", "16", "SAR 150", "Electronic"),
-                new Product("03", DateTime.Now, "Phone", "23", "SAR 1,500", "Electronic"),
-                new Product("04", DateTime.Now, "Watch X6", "10", "SAR 250", "Watch")
-            };
-
-        categories = new List<Category>
-            {
-                new Category("01", "Electronic", DateTime.Now),
-                new Category("02", "Watches", DateTime.Now)
-            };
-
-
-        orders = new List<Order>
-            {
-                    new Order("01", "03", "Rafah", "On Progress", 01 ),
-                    new Order("02", "01", "Khalid", "On Progress", 02 ),
-                    new Order("03", "02", "John", "On Progress", 03 )
-            };
-
-
-        orderItems = new List<OrderItem>
-        {
-            new OrderItem("01", "03", 20, DateTime.Now),
-            new OrderItem("02", "01", 33, DateTime.Now )
-        };
+        _config = config;
     }
+
+
+    // to store Entities' data as a list
+    public DbSet<User>? Users {get; set;} 
+    public DbSet<Product>? Products {get; set;}
+    public DbSet<Category>? Categories {get; set;}
+    public DbSet<Order>? Orders {get; set;}
+    public DbSet<OrderItem>? OrderItems {get; set;}
+
+
+    // The Connection String (On Configuration)
+     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]}; Database={_config["Db:Database"]}");
+      
+
+   
 }
 

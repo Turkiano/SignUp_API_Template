@@ -1,21 +1,22 @@
 using Coffee_Shop_App.src.Databases;
 using Coffee_Shop_App.src.Entities;
 using Coffee_Shop_App.src.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Coffee_Shop_App.Repositories;
  
 public class UserRepository : IUserRepository
 {
 
-    private List<User>? _users; //this to get users info as a list
-    public UserRepository() //constructor to get users data from DB
+    private DbSet<User>? _users; //this to get users info as a list
+    public UserRepository( DatabaseContext databaseContext) //constructor to get users data from DB
     {
 
-        _users = new DatabaseContext().users; // new obj database to get users' list
+        _users =  databaseContext.Users; // new obj database to get users' list
 
     }
 
-    public List<User> FindAll()
+    public IEnumerable<User> FindAll()
     {
 
         return _users!;
@@ -29,7 +30,7 @@ public class UserRepository : IUserRepository
     }
 
 
-    public User? findOne(string userId) //targeting ids in params
+    public User? findOne(Guid userId) //targeting ids in params
     {
         User? user = _users?.FirstOrDefault(user => user.Id == userId); //lambda expression to compare Ids
 
@@ -45,15 +46,15 @@ public class UserRepository : IUserRepository
 
     public User UpdateOne(User updatedUser)
     {
-        var users = _users?.Select(user =>
-        {
-            if (user.Email == updatedUser.Email)
-            {
-                return updatedUser;
-            }
-            return user;
-        });
-        _users = users!.ToList();
+        // var users = _users?.Select(user =>
+        // {
+        //     if (user.Email == updatedUser.Email)
+        //     {
+        //         return updatedUser;
+        //     }
+        //     return user;
+        // });
+        // _users = users!.ToList();
         return updatedUser;
     }
 }

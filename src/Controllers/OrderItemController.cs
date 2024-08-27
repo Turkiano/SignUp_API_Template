@@ -18,7 +18,7 @@ public class OrderItemController : BaseController
 
 
     [HttpGet] //import the ASP.NetCore package
-    public List<OrderItem>? findAll()
+    public IEnumerable<OrderItem>? findAll()
     {
         return _orderItemService!.FindAll(); //access to users's data
     }

@@ -24,7 +24,7 @@ public class OrderService : IOrderService
         return _orderRepository.CreateOne(order);
     }
 
-    public List<Order> FindAll()
+    public IEnumerable<Order> FindAll()
     {
         return _orderRepository!.FindAll();
     }

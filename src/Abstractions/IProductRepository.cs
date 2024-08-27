@@ -7,7 +7,7 @@ public interface IProductRepository
 {
     public Product FindOne(string productId);
 
-    public List<Product> FindAll();
+    public IEnumerable<Product> FindAll();
 
 
     public Product CreateOne(Product product);

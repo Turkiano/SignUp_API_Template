@@ -1,17 +1,18 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
 using Coffee_Shop_App.src.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Coffee_Shop_App.Repositories;
 
 public class OrderItemRepository : IOrderItemRepository
 {
 
-    private List<OrderItem> _orderItems; //to get orders as a list
+    private DbSet<OrderItem> _orderItems; //to get orders as a list
 
-    public OrderItemRepository()
+    public OrderItemRepository(DatabaseContext databaseContext)
     {
-        _orderItems = new DatabaseContext().orderItems;
+        _orderItems = databaseContext.OrderItems;
     }
 
     public OrderItem CreateOne(OrderItem orderItem)
@@ -20,7 +21,7 @@ public class OrderItemRepository : IOrderItemRepository
         return orderItem;
     }
 
-    public List<OrderItem> FindAll()
+    public IEnumerable<OrderItem> FindAll()
     {
         return _orderItems;
     }

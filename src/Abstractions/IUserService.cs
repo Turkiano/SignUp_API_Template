@@ -12,7 +12,7 @@ public interface IUserService
 
     public UserReadDto CreateOne(UserCreateDto user);
 
-    public UserReadDto findOne(string userId);
+    public UserReadDto findOne(Guid userId);
 
     public User findOneByEmail(string userEmail);
 

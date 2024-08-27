@@ -6,7 +6,7 @@ namespace Coffee_Shop_App.src.Abstractions;
 
 public interface ICategoryRepository
 {
-    public List<Category> FindAll();
+    public IEnumerable<Category> FindAll();
 
     public Category? findOne(string categoryId);
 

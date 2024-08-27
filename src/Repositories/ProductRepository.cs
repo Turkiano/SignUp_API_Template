@@ -1,16 +1,17 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
 using Coffee_Shop_App.src.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Coffee_Shop_App.Repositories;
 
 class ProductRepository : IProductRepository
 {
-    private List<Product> _products;
+    private DbSet<Product> _products;
 
-    public ProductRepository()
+    public ProductRepository(DatabaseContext databaseContext)
     {
-        _products = new DatabaseContext().products;
+        _products = databaseContext.Products;
     }
 
     public Product CreateOne(Product product)
@@ -20,7 +21,7 @@ class ProductRepository : IProductRepository
 
     }
 
-    public List<Product> FindAll()
+    public IEnumerable<Product> FindAll()
     {
         return _products;
     }
@@ -38,15 +39,15 @@ class ProductRepository : IProductRepository
 
     public Product UpdateOne(Product updatedProduct)
     {
-        var products = _products.Select(product =>
-        {
-            if (product.Product_Id == updatedProduct.Product_Id){
-                return updatedProduct;
-            }
+        // var products = _products.Select(product =>
+        // {
+        //     if (product.Product_Id == updatedProduct.Product_Id){
+        //         return updatedProduct;
+        //     }
 
-            return product;
-        });
-        _products = products.ToList();
+        //     return product;
+        // });
+        // _products = products.ToList();
         return updatedProduct;
     }
 }
