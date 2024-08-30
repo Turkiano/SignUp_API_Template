@@ -14,9 +14,9 @@ public class Product
         Category = category;
     }
 
-    public string? Product_Id { get; set; }
+    public Guid Product_Id { get; set; }
 
-    public string CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
     public DateTime CreatedAt {get; set;} = DateTime.Now;
     public string? Product_Name { get; set; }
 
