@@ -4,22 +4,25 @@ namespace Coffee_Shop_App.src.Entities;
 
 
 public class Order {
+    public Order(Guid id, Guid userId, DateTime orderDate, string status, User user, ICollection<OrderItem> orderItems)
+    {
+        Id = id;
+        UserId = userId;
+        OrderDate = orderDate;
+        Status = status;
+        User = user;
+        OrderItems = orderItems;
+    }
 
-    public Guid Order_Id {get; set;}
-    public Guid UserId {get; set;}
-    public DateTime CreatedAt {get; set;} = DateTime.Now;
-    public string Status {get; set;}
+    public Guid Id { get; set; }
+    public Guid UserId { get; set; }
+    public DateTime OrderDate { get; set; }
+    public string Status { get; set; }
 
-    public int Daily_Count {get; set;}
+    public User User { get; set; }
+    public ICollection<OrderItem> OrderItems { get; set; }
 
     // public IEnumerable<Order_Item> OrderItem {get; set;}
 
-    public Order(Guid order_Id, Guid userId, DateTime createdAt, string status, int daily_Count)
-    {
-        Order_Id = order_Id;
-        UserId = userId;
-        CreatedAt = createdAt;
-        Status = status;
-        Daily_Count = daily_Count;
-    }
+   
 }

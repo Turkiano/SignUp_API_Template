@@ -4,21 +4,24 @@
 namespace Coffee_Shop_App.src.Entities;
 
 public class OrderItem {
+    public OrderItem(Guid id, Guid orderId, Guid productId, short quantity, double unitPrice)
+    {
+        Id = id;
+        OrderId = orderId;
+        ProductId = productId;
+        Quantity = quantity;
+        UnitPrice = unitPrice;
+    }
 
-    public string? Order_Id {get; set;}
+    public Guid Id { get; set; }
+    public Guid OrderId { get; set; }
+    public Guid ProductId { get; set; }
+    public short Quantity { get; set; }
+    public double UnitPrice { get; set; }
 
-    public string? Product_Id {get; set;}
-
-    public int Quantity {get; set;}
-
-    public DateTime CreatedAt {get; set;}
+    public Order Order { get; set; }
+    public Product Product { get; set; }
 
     
-    public OrderItem(string? order_Id, string? product_Id, int quantity, DateTime createdAt)
-    {
-        Order_Id = order_Id;
-        Product_Id = product_Id;
-        Quantity = quantity;
-        CreatedAt = createdAt;
-    }
+   
 }

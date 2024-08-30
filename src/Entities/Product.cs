@@ -4,30 +4,32 @@ namespace Coffee_Shop_App.src.Entities;
 
 public class Product
 {
-    public Product (string? product_Id, DateTime createdAt, string? product_Name, string? quantity, string? price, string category)
+    public Product(Guid id, string name, Guid categoryId, short quantity, string description, double price, DateTime createdAt, string category, string image)
     {
-        Product_Id = product_Id;
-        CreatedAt = createdAt;
-        Product_Name = product_Name;
+        Id = id;
+        Name = name;
+        CategoryId = categoryId;
         Quantity = quantity;
+        Description = description;
         Price = price;
-        Category = category;
+        CreatedAt = createdAt;
+        this.Category = category;
+        Image = image;
     }
 
-    public Guid Product_Id { get; set; }
-
+    public Guid Id { get; set; }
+    public string Name { get; set; }
     public Guid CategoryId { get; set; }
-    public DateTime CreatedAt {get; set;} = DateTime.Now;
-    public string? Product_Name { get; set; }
-
+    public short Quantity { get; set; }
+    public string Description { get; set; }
+    public double Price { get; set; }
+    public DateTime CreatedAt { get; set; }
     public string Category { get; set; }
+    public string Image { get; set; }
 
-    public string? Image { get; set; }
-    public string? Quantity { get; set; }
-
-    public string? Description { get; set; }
-
-    public string? Price { get; set; }
+    public Category Category { get; set; }
+    public ICollection<OrderItem> OrderItems { get; set; }
+    // public ICollection<Review> Reviews { get; set; }
 
 }
 
