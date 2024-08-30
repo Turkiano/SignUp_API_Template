@@ -4,8 +4,10 @@ namespace Coffee_Shop_App.src.Entities;
 
 public class User
 {
+   
+
     [Required]
-    public Guid Id { get; set; }
+    public string? Id { get; set; }
     [Required]
     public string? FirstName { get; set; }
     [Required]

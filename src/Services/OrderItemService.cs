@@ -14,7 +14,7 @@ public class OrderItemService : IOrderItemService
 
     public OrderItem CreateOne(OrderItem orderItem)
     {
-        OrderItem? foundOrderItem = _OrderItemRepository!.findOne(orderItem.Order_Id!); //to avoid duplicated emails
+        OrderItem? foundOrderItem = _OrderItemRepository!.findOne(orderItem.OrderId!); //to avoid duplicated emails
 
         if (foundOrderItem is not null)
         {

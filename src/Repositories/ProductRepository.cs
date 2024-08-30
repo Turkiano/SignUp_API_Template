@@ -31,7 +31,7 @@ class ProductRepository : IProductRepository
         Console.WriteLine($"testing = {productId}");
 
 
-        Product? product = _products?.FirstOrDefault(p => p.Product_Id == productId); //lambda expression to compare Ids
+        Product? product = _products?.FirstOrDefault(product => product.Id == productId); //lambda expression to compare Ids
 
         return product!;
 

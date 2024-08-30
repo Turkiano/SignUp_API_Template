@@ -14,7 +14,7 @@ public class OrderService : IOrderService
 
     public Order CreateOne(Order order)
     {
-        Order? foundOrder = _orderRepository!.findOne(order.Order_Id); //to avoid duplicated orders
+        Order? foundOrder = _orderRepository!.findOne(order.Id); //to avoid duplicated orders
         
         if (foundOrder is not null)
         {

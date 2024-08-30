@@ -52,7 +52,7 @@ public class UserController : BaseController //the inheritance to get the routin
 
 
     [HttpGet("{userId}")]
-    public UserReadDto? findOne(Guid userId)
+    public UserReadDto? findOne(string userId)
     {
 
         return _userService!.findOne(userId);

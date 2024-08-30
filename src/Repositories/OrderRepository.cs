@@ -29,7 +29,7 @@ public class OrderRepository : IOrderRepository
 
     public Order? findOne(string orderId)
     {
-        Order? order = _orders?.FirstOrDefault(order => order.Order_Id == orderId); //lambda expression to compare Ids
+        Order? order = _orders?.FirstOrDefault(order => order.Id == orderId); //lambda expression to compare Ids
 
         return order;
     }

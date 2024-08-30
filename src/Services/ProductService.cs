@@ -45,7 +45,7 @@ class ProductService : IProductService
         Product? product = _ProductRepository.FindOne(Product_Id);
         if (product is not null) 
         {
-            product.Product_Name = updatedProduct.Product_Name;
+            product.Name = updatedProduct.Product_Name;
             Product mappedProduct = _mapper.Map<Product>(product);
             Product newProduct =  _ProductRepository.UpdateOne(mappedProduct);
             ProductReadDto productRead = _mapper.Map<ProductReadDto>(newProduct);
