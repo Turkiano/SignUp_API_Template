@@ -2,9 +2,7 @@
     "Logging": {
       "LogLevel": {
         "Default": "Debug",
-        "Microsoft.AspNetCore": "Warning",
-        "Microsoft.Hosting.Lifetime": "Information"
-  
+        "Microsoft.AspNetCore": "Warning"  
       }
     },
     "AllowedHosts": "*",
@@ -14,8 +12,9 @@
   
     "Db": {
       "Host": "localhost",
-      "User": "postgres",
-      "Database": "Coffee_Shop"
+      "Username": "postgres",
+      "Database": "coffeeshop",
+      "Password": "QQAAZZ12341234"
     }
   }
   

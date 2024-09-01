@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240831084357_db-init")]
-    partial class dbinit
+    [Migration("20240901074752_db-CoffeeShop-init")]
+    partial class dbCoffeeShopinit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
