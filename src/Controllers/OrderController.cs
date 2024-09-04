@@ -16,16 +16,16 @@ public class OrderController : BaseController
     }
 
     [HttpGet]
-    public IEnumerable<Order> findAll()
+    public IEnumerable<Order> FindAll()
     {
         return _orderService.FindAll();
     }
 
     [HttpGet("{orderId}")]
-    public Order? findOne(string orderId)
+    public Order? FindOne(string orderId)
     {
 
-        return _orderService.findOne(orderId);
+        return _orderService.FindOne(orderId);
     }
 
 

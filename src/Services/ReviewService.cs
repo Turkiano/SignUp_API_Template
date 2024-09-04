@@ -6,16 +6,17 @@ namespace Coffee_Shop_App.src.Services;
 public class ReviewService : IReviewService
 {
 
-    private ReviewRepository _ReviewRepository;
+    private IReviewRepository _ReviewRepository;
 
-    public ReviewService(ReviewRepository reviewRepository)
+    public ReviewService(IReviewRepository reviewRepository)
     {
         _ReviewRepository = reviewRepository;
     }
 
     public IEnumerable<Review> FindAll()
     {
-        return _ReviewRepository.FindAll();
+        var reviews = _ReviewRepository.FindAll();
+        return reviews.ToList();
     }
 
     public Review FindOne(string reviewId)

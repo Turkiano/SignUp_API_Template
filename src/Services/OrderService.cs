@@ -29,7 +29,7 @@ public class OrderService : IOrderService
         return _orderRepository!.FindAll();
     }
 
-    public Order? findOne(string orderId)
+    public Order? FindOne(string orderId)
     {
         return _orderRepository!.findOne(orderId);
     }
