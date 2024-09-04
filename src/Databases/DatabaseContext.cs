@@ -1,5 +1,4 @@
 using Coffee_Shop_App.src.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -27,10 +26,7 @@ public class DatabaseContext : DbContext //inheriting from the EF Core package
      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql(@$"Host=localhost; Username=postgres; Database=coffeeshop; Password=QQAAZZ12341234");
 
-    // configuring DB
-   
-    // var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db_Host"]};Username={_config["Db_Username"]};Database={_config["Db_Database"]};Password={_config["Db_Password"]}");
-    // dataSourceBuilder.MapEnum<Role>();
+    
    
 }
 
