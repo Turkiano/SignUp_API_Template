@@ -13,6 +13,17 @@ public class ReviewService : IReviewService
         _ReviewRepository = reviewRepository;
     }
 
+    public Review CreateOne(Review review)
+    {
+        Review foundReview = _ReviewRepository.FindOne(review.Id);
+        if (foundReview is not null)
+        {
+            return null;
+        }
+        return _ReviewRepository.CreateOne(review);
+
+    }
+
     public IEnumerable<Review> FindAll()
     {
         var reviews = _ReviewRepository.FindAll();

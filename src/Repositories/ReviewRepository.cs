@@ -14,6 +14,12 @@ public class ReviewRepository : IReviewRepository
         _reviews = databaseContext.Reviews;
     }
 
+    public Review CreateOne(Review review)
+    {
+        _reviews.Add(review);
+        return review;
+    }
+
     public IEnumerable<Review> FindAll()
     {
         return _reviews;
@@ -25,4 +31,5 @@ public class ReviewRepository : IReviewRepository
 
         return review;
     }
+
 }
