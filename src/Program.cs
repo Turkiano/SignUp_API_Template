@@ -4,6 +4,7 @@ using Coffee_Shop_App.Repositories;
 using Coffee_Shop_App.Services;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
+using Coffee_Shop_App.src.Repositories;
 using Coffee_Shop_App.src.Services;
 
 
@@ -37,6 +38,8 @@ builder.Services.AddScoped<IOrderService, OrderService>(); //built-in DI Contain
 builder.Services.AddScoped<IOrderRepository, OrderRepository>(); //built-in DI Container for OrderRepository
 builder.Services.AddScoped<IOrderItemService, OrderItemService>(); //built-in DI Container for OrderService
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>(); //built-in DI Container for OrderRepository
+builder.Services.AddScoped<IReviewService, ReviewService>(); //built-in DI Container for ReviewService
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 
 var app = builder.Build();
