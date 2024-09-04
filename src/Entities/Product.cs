@@ -4,7 +4,7 @@ namespace Coffee_Shop_App.src.Entities;
 
 public class Product
 {
-   
+
 
     public string? Id { get; set; }
     public string? Name { get; set; }
@@ -18,7 +18,7 @@ public class Product
 
     public Category? Category { get; set; }
     public ICollection<OrderItem>? OrderItems { get; set; }
-    // public ICollection<Review> Reviews { get; set; }
+    public ICollection<Review>? Reviews { get; set; }
 
 }
 

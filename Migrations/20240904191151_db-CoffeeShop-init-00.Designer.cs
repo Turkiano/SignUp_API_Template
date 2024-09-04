@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240904161938_db-CoffeeShop-init-A")]
-    partial class dbCoffeeShopinitA
+    [Migration("20240904191151_db-CoffeeShop-init-00")]
+    partial class dbCoffeeShopinit00
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,9 @@ namespace Backend.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("text");
 
+                    b.Property<string>("ProductId")
+                        .HasColumnType("text");
+
                     b.Property<string>("Rating")
                         .HasColumnType("text");
 
@@ -43,6 +46,10 @@ namespace Backend.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -182,6 +189,21 @@ namespace Backend.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Coffee_Shop_App.Review", b =>
+                {
+                    b.HasOne("Coffee_Shop_App.src.Entities.Product", "Product")
+                        .WithMany("Reviews")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("Coffee_Shop_App.src.Entities.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.Order", b =>
                 {
                     b.HasOne("Coffee_Shop_App.src.Entities.User", "User")
@@ -228,11 +250,15 @@ namespace Backend.Migrations
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.Product", b =>
                 {
                     b.Navigation("OrderItems");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.User", b =>
                 {
                     b.Navigation("Orders");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,8 +23,7 @@ public class User
     public string? Role { get; set; }
 
     public ICollection<Order>? Orders { get; set; }
-    // public ICollection<Review> Reviews { get; set; }
-    // public ICollection<Reservation> Reservations { get; set; }
+    public ICollection<Review> Reviews { get; set; }
 
 
 
