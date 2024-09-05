@@ -29,6 +29,12 @@ public class Mapper : Profile
         CreateMap<CategoryCreateDto, Category>();
 
 
+        CreateMap<Order, OrderReadDto>();
+        CreateMap<OrderReadDto, Order>();
+
+        CreateMap<OrderCreateDto, Order>();
+
+
 
 
 

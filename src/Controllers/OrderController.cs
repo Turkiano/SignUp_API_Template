@@ -33,7 +33,7 @@ public class OrderController : BaseController
     [HttpPost] //POST, PUT, or PATCH use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<Order> CreateOne([FromBody] Order order)
+    public ActionResult<OrderReadDto> CreateOne([FromBody] OrderCreateDto order)
     {
         if (order is not null)
         {

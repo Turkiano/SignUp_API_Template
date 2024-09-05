@@ -20,7 +20,7 @@ public class OrderService : IOrderService
         _mapper = mapper;
     }
 
-    public Order CreateOne(Order order)
+    public OrderReadDto CreateOne(OrderCreateDto order)
     {
         Order? foundOrder = _orderRepository!.findOne(order.Id); //to avoid duplicated orders
 
@@ -28,8 +28,10 @@ public class OrderService : IOrderService
         {
             return null;
         }
-
-        return _orderRepository.CreateOne(order);
+        Order mapperOrder = _mapper.Map<Order>(order);
+        Order newOrder = _orderRepository.CreateOne(mapperOrder);
+        OrderReadDto orderRead = _mapper.Map<OrderReadDto>(newOrder);
+        return orderRead;
     }
 
     public IEnumerable<OrderReadDto> FindAll()
