@@ -1,5 +1,6 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Controllers;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +23,7 @@ public class OrderController : BaseController
     }
 
     [HttpGet("{orderId}")]
-    public Order? FindOne(string orderId)
+    public OrderReadDto? FindOne(string orderId)
     {
 
         return _orderService.FindOne(orderId);
