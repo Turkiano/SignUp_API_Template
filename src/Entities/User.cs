@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Coffee_Shop_App.src.Enum;
 namespace Coffee_Shop_App.src.Entities;
 
 
@@ -20,10 +21,10 @@ public class User
     public string? Password { get; set; }
 
     public string? Salt { get; set; }
-    public string? Role { get; set; }
+    public Role Role { get; set; } = Role.Customer;
 
     public ICollection<Order>? Orders { get; set; }
-    public ICollection<Review> Reviews { get; set; }
+    public ICollection<Review>? Reviews { get; set; }
 
 
 
