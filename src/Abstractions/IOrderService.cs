@@ -7,7 +7,7 @@ namespace Coffee_Shop_App.src.Abstractions
 {
     public interface IOrderService
     {
-        public IEnumerable<Order> FindAll();
+        public IEnumerable<OrderReadDto> FindAll();
 
 
         public OrderReadDto? FindOne(string orderId);

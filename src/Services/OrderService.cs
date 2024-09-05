@@ -32,9 +32,12 @@ public class OrderService : IOrderService
         return _orderRepository.CreateOne(order);
     }
 
-    public IEnumerable<Order> FindAll()
+    public IEnumerable<OrderReadDto> FindAll()
     {
-        return _orderRepository!.FindAll();
+        var order = _orderRepository!.FindAll();
+        var orderRead = order.Select(_mapper.Map<OrderReadDto>);
+
+        return orderRead;
     }
 
     public OrderReadDto? FindOne(string orderId)

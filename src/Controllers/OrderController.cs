@@ -17,7 +17,7 @@ public class OrderController : BaseController
     }
 
     [HttpGet]
-    public IEnumerable<Order> FindAll()
+    public IEnumerable<OrderReadDto> FindAll()
     {
         return _orderService.FindAll();
     }
