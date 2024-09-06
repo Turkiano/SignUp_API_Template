@@ -38,7 +38,7 @@ public class ReviewController : BaseController
     }
     [HttpGet]
 
-    public IEnumerable<Review> FindAll()
+    public IEnumerable<ReviewReadDto> FindAll()
     {
         return _reviewService.FindAll();
     }
