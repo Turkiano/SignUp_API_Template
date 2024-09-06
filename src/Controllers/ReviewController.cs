@@ -1,4 +1,5 @@
 using Coffee_Shop_App.src.Abstractions;
+using Coffee_Shop_App.src.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coffee_Shop_App.src.Controllers;
@@ -30,7 +31,7 @@ public class ReviewController : BaseController
 
     [HttpGet("{reviewId}")]
 
-    public Review FindOne(string reviewId)
+    public ReviewReadDto FindOne(string reviewId)
     {
         return _reviewService.FindOne(reviewId);
 

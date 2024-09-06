@@ -1,5 +1,6 @@
 using AutoMapper;
 using Coffee_Shop_App.src.Abstractions;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Repositories;
 
 namespace Coffee_Shop_App.src.Services;
@@ -33,9 +34,11 @@ public class ReviewService : IReviewService
         return reviews.ToList();
     }
 
-    public Review FindOne(string reviewId)
+    public ReviewReadDto FindOne(string reviewId)
     {
+        Review review = _ReviewRepository.FindOne(reviewId);
+        ReviewReadDto reviewRead = _mapper.Map<ReviewReadDto>(review);
 
-        return _ReviewRepository.FindOne(reviewId);
+        return reviewRead;
     }
 }
