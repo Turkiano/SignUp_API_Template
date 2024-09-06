@@ -1,5 +1,6 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Controllers;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ public class OrderItemController : BaseController
 
 
     [HttpGet] //import the ASP.NetCore package
-    public IEnumerable<OrderItem>? findAll()
+    public IEnumerable<OrderItemReadDto>? findAll()
     {
         return _orderItemService!.FindAll(); //access to users's data
     }
