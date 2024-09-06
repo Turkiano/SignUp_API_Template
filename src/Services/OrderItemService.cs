@@ -17,7 +17,7 @@ public class OrderItemService : IOrderItemService
         _mapper = mapper;
     }
 
-    public OrderItem CreateOne(OrderItem orderItem)
+    public OrderItemReadDto CreateOne(OrderItemCreateDto orderItem)
     {
         OrderItem? foundOrderItem = _OrderItemRepository!.findOne(orderItem.OrderId!); //to avoid duplicated emails
 
@@ -26,7 +26,10 @@ public class OrderItemService : IOrderItemService
             return null;
         }
 
-        return _OrderItemRepository.CreateOne(orderItem);
+        OrderItem mapperOrderItem = _mapper.Map<OrderItem>(orderItem);
+        OrderItem newOrderItem = _OrderItemRepository.CreateOne(mapperOrderItem);
+        OrderItemReadDto orderItemRead = _mapper.Map<OrderItemReadDto>(newOrderItem);
+        return orderItemRead;
     }
 
     public IEnumerable<OrderItemReadDto> FindAll()

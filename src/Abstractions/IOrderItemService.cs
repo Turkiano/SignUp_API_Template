@@ -11,7 +11,7 @@ namespace Coffee_Shop_App.src.Abstractions
 
         public OrderItemReadDto? findOne(string orderItemId);
 
-        public OrderItem CreateOne(OrderItem orderItem);
+        public OrderItemReadDto CreateOne(OrderItemCreateDto orderItem);
 
 
 
