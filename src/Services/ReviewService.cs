@@ -1,3 +1,4 @@
+using AutoMapper;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Repositories;
 
@@ -6,11 +7,13 @@ namespace Coffee_Shop_App.src.Services;
 public class ReviewService : IReviewService
 {
 
+    private IMapper _mapper;
     private IReviewRepository _ReviewRepository;
 
-    public ReviewService(IReviewRepository reviewRepository)
+    public ReviewService(IReviewRepository reviewRepository,  IMapper mapper)
     {
         _ReviewRepository = reviewRepository;
+        _mapper = mapper;
     }
 
     public Review CreateOne(Review review)
