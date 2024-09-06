@@ -8,7 +8,7 @@ public interface IReviewService
 
     public ReviewReadDto FindOne(string reviewId);
     public IEnumerable<ReviewReadDto> FindAll();
-    public Review CreateOne(Review review);
+    public ReviewReadDto CreateOne(ReviewCreateDto review);
 
 
 

@@ -17,14 +17,17 @@ public class ReviewService : IReviewService
         _mapper = mapper;
     }
 
-    public Review CreateOne(Review review)
+    public ReviewReadDto CreateOne(ReviewCreateDto review)
     {
         Review foundReview = _ReviewRepository.FindOne(review.Id);
         if (foundReview is not null)
         {
             return null;
         }
-        return _ReviewRepository.CreateOne(review);
+        Review mapperReview = _mapper.Map<Review>(review);
+        Review newReview = _ReviewRepository.CreateOne(mapperReview);
+        ReviewReadDto reviewRead = _mapper.Map<ReviewReadDto>(newReview);
+        return reviewRead;
 
     }
 
