@@ -37,8 +37,11 @@ public class OrderItemService : IOrderItemService
         return orderItemRead;
     }
 
-    public OrderItem? findOne(string orderItemId)
+    public OrderItemReadDto? findOne(string orderItemId)
     {
-        return _OrderItemRepository.findOne(orderItemId);
+        OrderItem orderItem = _OrderItemRepository.findOne(orderItemId);
+        OrderItemReadDto orderItemRead = _mapper.Map<OrderItemReadDto>(orderItem);
+
+        return orderItemRead;
     }
 }

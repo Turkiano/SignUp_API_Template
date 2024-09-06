@@ -26,7 +26,7 @@ public class OrderItemController : BaseController
 
 
     [HttpGet("{orderItemId}")]
-    public OrderItem? findOne(string orderItemId)
+    public OrderItemReadDto? findOne(string orderItemId)
     {
 
         return _orderItemService!.findOne(orderItemId);
