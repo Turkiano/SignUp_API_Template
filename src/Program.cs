@@ -4,7 +4,6 @@ using Coffee_Shop_App.Repositories;
 using Coffee_Shop_App.Services;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
-using Coffee_Shop_App.src.Entities;
 using Coffee_Shop_App.src.Repositories;
 using Coffee_Shop_App.src.Services;
 

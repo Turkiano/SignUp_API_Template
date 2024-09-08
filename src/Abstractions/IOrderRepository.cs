@@ -8,7 +8,7 @@ namespace Coffee_Shop_App.src.Abstractions
     {
         public IEnumerable<Order> FindAll();
 
-        public Order? findOne(string orderId);
+        public Order? findOne(Guid orderId);
 
         public Order CreateOne(Order order);
 

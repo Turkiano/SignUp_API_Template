@@ -4,7 +4,7 @@ public interface IReviewRepository
 {
 
 
-    public Review FindOne(string reviewId);
+    public Review FindOne(Guid reviewId);
     public IEnumerable<Review> FindAll();
 
         public Review CreateOne(Review review);

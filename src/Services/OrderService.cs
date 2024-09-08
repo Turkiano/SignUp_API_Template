@@ -22,7 +22,7 @@ public class OrderService : IOrderService
 
     public OrderReadDto CreateOne(OrderCreateDto order)
     {
-        Order? foundOrder = _orderRepository!.findOne(order.Id); //to avoid duplicated orders
+        Order? foundOrder = _orderRepository!.findOne((Guid)order.Id); //to avoid duplicated orders
 
         if (foundOrder is not null)
         {
@@ -42,7 +42,7 @@ public class OrderService : IOrderService
         return orderRead;
     }
 
-    public OrderReadDto? FindOne(string orderId)
+    public OrderReadDto? FindOne(Guid orderId)
     {
         Order? order = _orderRepository!.findOne(orderId);
         OrderReadDto orderRead = _mapper.Map<OrderReadDto>(order);

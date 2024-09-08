@@ -4,7 +4,7 @@ public class CategoryReadDto
 {
 
 
-    public string? CategoryId { get; set; }
+    public Guid? CategoryId { get; set; }
     public string? Name { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 

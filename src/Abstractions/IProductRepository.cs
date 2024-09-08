@@ -5,7 +5,7 @@ namespace Coffee_Shop_App.src.Abstractions;
 
 public interface IProductRepository
 {
-    public Product FindOne(string productId);
+    public Product FindOne(Guid productId);
 
     public IEnumerable<Product> FindAll();
 

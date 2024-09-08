@@ -8,7 +8,7 @@ public interface ICategoryRepository
 {
     public IEnumerable<Category> FindAll();
 
-    public Category? findOne(string categoryId);
+    public Category? findOne(Guid categoryId);
 
     public Category CreateOne(Category category);
 

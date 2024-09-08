@@ -23,7 +23,7 @@ public class OrderController : BaseController
     }
 
     [HttpGet("{orderId}")]
-    public OrderReadDto? FindOne(string orderId)
+    public OrderReadDto? FindOne(Guid orderId)
     {
 
         return _orderService.FindOne(orderId);

@@ -24,23 +24,24 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Coffee_Shop_App.Review", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Comment")
                         .HasColumnType("text");
 
-                    b.Property<string>("ProductId")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Rating")
                         .HasColumnType("text");
 
-                    b.Property<string>("ReviewDate")
-                        .HasColumnType("text");
+                    b.Property<DateTime?>("ReviewDate")
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -53,8 +54,9 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.Category", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -72,17 +74,18 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.Order", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+                    b.Property<int?>("Status")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -93,14 +96,15 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.OrderItem", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("OrderId")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("ProductId")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uuid");
 
                     b.Property<short>("Quantity")
                         .HasColumnType("smallint");
@@ -119,11 +123,12 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.Product", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -152,8 +157,9 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -164,7 +170,6 @@ namespace Backend.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
@@ -175,8 +180,8 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Role")
-                        .HasColumnType("text");
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Salt")
                         .HasColumnType("text");

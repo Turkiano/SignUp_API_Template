@@ -19,7 +19,7 @@ public class ReviewService : IReviewService
 
     public ReviewReadDto CreateOne(ReviewCreateDto review)
     {
-        Review foundReview = _ReviewRepository.FindOne(review.Id);
+        Review foundReview = _ReviewRepository.FindOne((Guid)review.Id);
         if (foundReview is not null)
         {
             return null;
@@ -38,7 +38,7 @@ public class ReviewService : IReviewService
         return reviewRead;
     }
 
-    public ReviewReadDto FindOne(string reviewId)
+    public ReviewReadDto FindOne(Guid reviewId)
     {
         Review review = _ReviewRepository.FindOne(reviewId);
         ReviewReadDto reviewRead = _mapper.Map<ReviewReadDto>(review);

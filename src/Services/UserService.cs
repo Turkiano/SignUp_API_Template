@@ -32,7 +32,7 @@ public class UserService : IUserService
 
 
 
-    public UserReadDto findOne(string userId)
+    public UserReadDto findOne(Guid userId)
     {
         User? user = _userRepository!.findOne(userId); //to talk to the repo
         UserReadDto userRead = _mapper.Map<UserReadDto>(user); //to use the DTO

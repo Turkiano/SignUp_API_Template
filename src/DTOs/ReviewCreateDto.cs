@@ -4,7 +4,7 @@ public class ReviewCreateDto
 {
 
 
-    public string? Id { get; set; }
+    public Guid? Id { get; set; }
 
     public string? Rating { get; set; }
     public string? Comment { get; set; }

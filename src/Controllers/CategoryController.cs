@@ -25,7 +25,7 @@ public class CategoryController : BaseController
     }
 
     [HttpGet("{categoryId}")]
-    public CategoryReadDto? findOne(string categoryId)
+    public CategoryReadDto? findOne(Guid categoryId)
     {
 
         return _categoryService.findOne(categoryId);
@@ -51,7 +51,7 @@ public class CategoryController : BaseController
     }
 
     [HttpPatch("{CategoryId}")]
-    public CategoryReadDto? UpdateOne(string CategoryId, [FromBody] CategoryCreateDto updatedCategory)
+    public CategoryReadDto? UpdateOne(Guid CategoryId, [FromBody] CategoryCreateDto updatedCategory)
     {
         return _categoryService!.UpdateOne(CategoryId, updatedCategory);
     }

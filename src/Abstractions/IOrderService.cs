@@ -10,7 +10,7 @@ namespace Coffee_Shop_App.src.Abstractions
         public IEnumerable<OrderReadDto> FindAll();
 
 
-        public OrderReadDto? FindOne(string orderId);
+        public OrderReadDto? FindOne(Guid orderId);
 
         public OrderReadDto CreateOne(OrderCreateDto order);
 

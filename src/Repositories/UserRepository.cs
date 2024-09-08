@@ -30,7 +30,7 @@ public class UserRepository : IUserRepository
     }
 
 
-    public User? findOne(string userId) //targeting ids in params
+    public User? findOne(Guid userId) //targeting ids in params
     {
         User? user = _users?.FirstOrDefault(user => user.Id == userId); //lambda expression to compare Ids
 

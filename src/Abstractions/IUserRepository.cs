@@ -10,7 +10,7 @@ public interface IUserRepository
 
     public User CreateOne(User user);
 
-    public User? findOne(string userId);
+    public User? findOne(Guid userId);
 
     public User? findOneByEmail(string userEmail);
 

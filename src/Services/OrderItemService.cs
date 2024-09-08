@@ -19,7 +19,7 @@ public class OrderItemService : IOrderItemService
 
     public OrderItemReadDto CreateOne(OrderItemCreateDto orderItem)
     {
-        OrderItem? foundOrderItem = _OrderItemRepository!.findOne(orderItem.OrderId!); //to avoid duplicated emails
+        OrderItem? foundOrderItem = _OrderItemRepository!.findOne((Guid)orderItem.OrderId!); //to avoid duplicated emails
 
         if (foundOrderItem is not null)
         {
@@ -40,7 +40,7 @@ public class OrderItemService : IOrderItemService
         return orderItemRead;
     }
 
-    public OrderItemReadDto? findOne(string orderItemId)
+    public OrderItemReadDto? findOne(Guid orderItemId)
     {
         OrderItem orderItem = _OrderItemRepository.findOne(orderItemId);
         OrderItemReadDto orderItemRead = _mapper.Map<OrderItemReadDto>(orderItem);

@@ -31,7 +31,7 @@ public class ReviewController : BaseController
 
     [HttpGet("{reviewId}")]
 
-    public ReviewReadDto FindOne(string reviewId)
+    public ReviewReadDto FindOne(Guid reviewId)
     {
         return _reviewService.FindOne(reviewId);
 

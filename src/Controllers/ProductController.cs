@@ -25,7 +25,7 @@ public class ProductController : BaseController
 
     [HttpPatch("{Product_Id}")]
 
-    public ProductReadDto? UpdateOne(string Product_Id, [FromBody] ProductCreateDto updatedProduct)
+    public ProductReadDto? UpdateOne(Guid Product_Id, [FromBody] ProductCreateDto updatedProduct)
     {
 
         return _productService!.UpdateOne(Product_Id, updatedProduct);
@@ -39,7 +39,7 @@ public class ProductController : BaseController
     [HttpGet("{productId}")]
     // [ProducesResponseType(StatusCodes.Status400BadRequest)]
     // [ProducesResponseType(StatusCodes.Status200OK)]
-    public ProductReadDto? FindOne(string productId)
+    public ProductReadDto? FindOne(Guid productId)
     {
 
 

@@ -25,7 +25,7 @@ public class ReviewRepository : IReviewRepository
         return _reviews;
     }
 
-    public Review FindOne(string reviewId)
+    public Review FindOne(Guid reviewId)
     {
         Review? review = _reviews.FirstOrDefault(review => review.Id == reviewId);
 
