@@ -6,12 +6,10 @@ namespace Coffee_Shop_App.src.Entities;
 public class User
 {
    
-
-    [Required]
-    public string? Id { get; set; }
+    public Guid? Id { get; set; }
     [Required]
     public string? FirstName { get; set; }
-    [Required]
+   
     public string? LastName { get; set; }
     [Required]
     public string? Phone { get; set; }

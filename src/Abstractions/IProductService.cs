@@ -6,13 +6,13 @@ namespace Coffee_Shop_App.src.Abstractions;
 
 public interface IProductService
 {
-    public ProductReadDto FindOne(string productId);
+    public ProductReadDto FindOne(Guid productId);
 
     public List<ProductReadDto> FindAll();
 
     public Product CreateOne(Product product);
 
-    public ProductReadDto UpdateOne(string Product_Id, ProductCreateDto updatedProduct);
+    public ProductReadDto UpdateOne(Guid Product_Id, ProductCreateDto updatedProduct);
 
 
 

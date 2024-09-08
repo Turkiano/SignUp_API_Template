@@ -6,9 +6,9 @@ namespace Coffee_Shop_App.src.Entities;
 public class OrderItem {
    
 
-    public string? Id { get; set; }
-    public string? OrderId { get; set; }
-    public string? ProductId { get; set; }
+    public Guid? Id { get; set; }
+    public Guid? OrderId { get; set; }
+    public Guid? ProductId { get; set; }
     public short Quantity { get; set; }
     public double UnitPrice { get; set; }
 

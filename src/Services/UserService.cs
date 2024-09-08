@@ -43,7 +43,7 @@ public class UserService : IUserService
 
 
 
-    public UserReadDto CreateOne(UserCreateDto user)
+    public UserReadDto SignUp(UserCreateDto user)
     {
         User? foundUser = _userRepository!.findOneByEmail(user.Email); //to avoid duplicated emails
 

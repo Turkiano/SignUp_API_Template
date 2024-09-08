@@ -30,7 +30,7 @@ class ProductService : IProductService
         return productRead.ToList();
     }
 
-    public ProductReadDto FindOne(string productId)
+    public ProductReadDto FindOne(Guid productId)
     {
         Product product = _ProductRepository.FindOne(productId);
         ProductReadDto productRead = _mapper.Map<ProductReadDto>(product);
@@ -40,7 +40,7 @@ class ProductService : IProductService
         return productRead ;
     }
 
-    public ProductReadDto UpdateOne(string Product_Id, ProductCreateDto updatedProduct)
+    public ProductReadDto UpdateOne(Guid Product_Id, ProductCreateDto updatedProduct)
     {
         Product? product = _ProductRepository.FindOne(Product_Id);
         if (product is not null) 
