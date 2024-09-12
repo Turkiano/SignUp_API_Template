@@ -30,7 +30,7 @@ public class DatabaseContext : DbContext //inheriting from the EF Core package
     // The Connection String (On Configuration)
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {  optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}");
+     => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}");
 
 
         // // Configure EF Core with Npgsql connection
@@ -48,7 +48,7 @@ public class DatabaseContext : DbContext //inheriting from the EF Core package
 
         // // Use the data source for configuring EF Core
         // optionsBuilder.UseNpgsql(dataSource);
-    }
+    
 
 
 
