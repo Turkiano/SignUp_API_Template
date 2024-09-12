@@ -1,8 +1,13 @@
+using Npgsql;
+
 using Coffee_Shop_App.src.Entities;
 using Microsoft.EntityFrameworkCore;
+using Coffee_Shop_App.src.Enum;
 
 
 namespace Coffee_Shop_App.src.Databases;
+
+
 public class DatabaseContext : DbContext //inheriting from the EF Core package
 {
     private IConfiguration _config;
@@ -19,15 +24,36 @@ public class DatabaseContext : DbContext //inheriting from the EF Core package
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Order>? Orders { get; set; }
     public DbSet<OrderItem>? OrderItems { get; set; }
-    public DbSet<Review> Reviews{get; set;}
+    public DbSet<Review> Reviews { get; set; }
 
 
     // The Connection String (On Configuration)
-     
-     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(@$"Host=localhost; Username=postgres; Database=coffeeshop; Password=QQAAZZ12341234");
 
-    
-   
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {  optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}");
+
+
+        // // Configure EF Core with Npgsql connection
+        // var connectionString = @$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}";
+
+        // // Create the Npgsql Data Source Builder
+        // var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
+
+        // // Map each enum to PostgreSQL types
+        // dataSourceBuilder.MapEnum<Role>();
+        // dataSourceBuilder.MapEnum<Status>();
+
+        // // Build the data source
+        // var dataSource = dataSourceBuilder.Build();
+
+        // // Use the data source for configuring EF Core
+        // optionsBuilder.UseNpgsql(dataSource);
+    }
+
+
+
+
+
+
 }
 
