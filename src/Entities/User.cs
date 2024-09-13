@@ -22,6 +22,7 @@ public class User
     public string Password { get; set; }= "";
 
     public string Salt { get; set; }= "";
+    [Required]
     public Role Role { get; set; } = Role.Customer; //enum
 
     public ICollection<Order>? Orders { get; set; }

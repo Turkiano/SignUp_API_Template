@@ -33,22 +33,6 @@ public class DatabaseContext : DbContext //inheriting from the EF Core package
      => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}");
 
 
-        // // Configure EF Core with Npgsql connection
-        // var connectionString = @$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}";
-
-        // // Create the Npgsql Data Source Builder
-        // var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
-
-        // // Map each enum to PostgreSQL types
-        // dataSourceBuilder.MapEnum<Role>();
-        // dataSourceBuilder.MapEnum<Status>();
-
-        // // Build the data source
-        // var dataSource = dataSourceBuilder.Build();
-
-        // // Use the data source for configuring EF Core
-        // optionsBuilder.UseNpgsql(dataSource);
-    
 
 
 
