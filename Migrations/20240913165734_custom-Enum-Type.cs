@@ -1,4 +1,5 @@
 ﻿using System;
+using Coffee_Shop_App.src.Enum;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -6,11 +7,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class dbCoffeeShopenum : Migration
+    public partial class customEnumType : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:Enum:role", "customer,admin")
+                .Annotation("Npgsql:Enum:status", "confirmed,cancelled,paid,unpaid");
+
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -36,7 +41,7 @@ namespace Backend.Migrations
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
                     Salt = table.Column<string>(type: "text", nullable: false),
-                    Role = table.Column<int>(type: "integer", nullable: false)
+                    Role = table.Column<Role>(type: "role", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,7 +78,7 @@ namespace Backend.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: true),
                     OrderDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: true)
+                    Status = table.Column<Status>(type: "status", nullable: true)
                 },
                 constraints: table =>
                 {

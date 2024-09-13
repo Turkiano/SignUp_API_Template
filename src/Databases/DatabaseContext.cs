@@ -30,13 +30,27 @@ public class DatabaseContext : DbContext //inheriting from the EF Core package
     // The Connection String (On Configuration)
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-     => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}");
+    {
+       
+
+        //Enum Type Mapping:
+        var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}");
+        dataSourceBuilder.MapEnum<Role>();
+        dataSourceBuilder.MapEnum<Status>();
+        var dataSource = dataSourceBuilder.Build();
 
 
 
+         optionsBuilder.UseNpgsql(dataSource);
+    }
 
 
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasPostgresEnum<Role>();
+        modelBuilder.HasPostgresEnum<Status>();
+    }
 
 
 }
