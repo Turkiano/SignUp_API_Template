@@ -26,9 +26,9 @@ public class OrderItemRepository : IOrderItemRepository
         return _orderItems;
     }
 
-    public OrderItem? findOne(string orderItemId)
+    public OrderItem? findOne(Guid orderItemId)
     {
-        OrderItem? orderItem = _orderItems?.FirstOrDefault(o => o.Order_Id == orderItemId); //lambda expression to compare Ids
+        OrderItem? orderItem = _orderItems?.FirstOrDefault(order => order.Id == orderItemId); //lambda expression to compare Ids
         return orderItem; //to get the desired user
     }
 }

@@ -1,16 +1,16 @@
 
 
-using Coffee_Shop_App.src.Entities;
+using Coffee_Shop_App.src.DTOs;
 
 namespace Coffee_Shop_App.src.Abstractions
 {
     public interface IOrderItemService
     {
-    public IEnumerable<OrderItem> FindAll();
+    public IEnumerable<OrderItemReadDto> FindAll();
 
-        public OrderItem? findOne(string orderItemId);
+        public OrderItemReadDto? findOne(Guid orderItemId);
 
-        public OrderItem CreateOne(OrderItem orderItem);
+        public OrderItemReadDto CreateOne(OrderItemCreateDto orderItem);
 
 
 

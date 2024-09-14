@@ -10,7 +10,7 @@ public interface IUserService
 
     public List<UserReadDto> FindAll();
 
-    public UserReadDto CreateOne(UserCreateDto user);
+    public UserReadDto SignUp(UserCreateDto user);
 
     public UserReadDto findOne(Guid userId);
 

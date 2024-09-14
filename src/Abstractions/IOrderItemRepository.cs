@@ -8,7 +8,7 @@ namespace Coffee_Shop_App.src.Abstractions
     {
         public IEnumerable<OrderItem> FindAll();
 
-        public OrderItem? findOne(string orderItemId); //targeting ids in params
+        public OrderItem? findOne(Guid orderItemId); //targeting ids in params
 
         public OrderItem CreateOne(OrderItem orderItem);
 

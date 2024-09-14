@@ -1,5 +1,6 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Controllers;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,23 +17,23 @@ public class OrderController : BaseController
     }
 
     [HttpGet]
-    public IEnumerable<Order> findAll()
+    public IEnumerable<OrderReadDto> FindAll()
     {
         return _orderService.FindAll();
     }
 
     [HttpGet("{orderId}")]
-    public Order? findOne(string orderId)
+    public OrderReadDto? FindOne(Guid orderId)
     {
 
-        return _orderService.findOne(orderId);
+        return _orderService.FindOne(orderId);
     }
 
 
     [HttpPost] //POST, PUT, or PATCH use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<Order> CreateOne([FromBody] Order order)
+    public ActionResult<OrderReadDto> CreateOne([FromBody] OrderCreateDto order)
     {
         if (order is not null)
         {

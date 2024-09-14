@@ -29,25 +29,17 @@ public class CategoryRepository : ICategoryRepository
 
 
 
-    public Category findOne(string categoryId)
+    public Category findOne(Guid categoryId)
     {
-        Category? category = _categories?.FirstOrDefault(category => category.CategoryId == categoryId); //lambda expression to compare Ids
+        Category? category = _categories?.FirstOrDefault(category => category.Id == categoryId); //lambda expression to compare Ids
 
         return category; //to get the desired user
-        throw new NotImplementedException();
+       
     }
 
     public Category UpdateOne(Category updateCategory)
     {
-        // var category = _categories.Select(category =>
-        // {
-        //     if (category.CategoryId == updateCategory.CategoryId)
-        //     {
-        //         return updateCategory;
-        //     }
-        //     return category;
-        // });
-        // _categories = category.ToList();
+       
         return updateCategory;
     }
 

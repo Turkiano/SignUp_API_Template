@@ -27,9 +27,9 @@ public class OrderRepository : IOrderRepository
         return _orders;
     }
 
-    public Order? findOne(string orderId)
+    public Order? findOne(Guid orderId)
     {
-        Order? order = _orders?.FirstOrDefault(order => order.Order_Id == orderId); //lambda expression to compare Ids
+        Order? order = _orders?.FirstOrDefault(order => order.Id == orderId); //lambda expression to compare Ids
 
         return order;
     }

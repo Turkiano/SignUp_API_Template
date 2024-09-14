@@ -26,12 +26,12 @@ class ProductRepository : IProductRepository
         return _products;
     }
 
-    public Product FindOne(string productId)
+    public Product FindOne(Guid productId)
     {
         Console.WriteLine($"testing = {productId}");
 
 
-        Product? product = _products?.FirstOrDefault(p => p.Product_Id == productId); //lambda expression to compare Ids
+        Product? product = _products?.FirstOrDefault(product => product.Id == productId); //lambda expression to compare Ids
 
         return product!;
 
@@ -39,15 +39,7 @@ class ProductRepository : IProductRepository
 
     public Product UpdateOne(Product updatedProduct)
     {
-        // var products = _products.Select(product =>
-        // {
-        //     if (product.Product_Id == updatedProduct.Product_Id){
-        //         return updatedProduct;
-        //     }
-
-        //     return product;
-        // });
-        // _products = products.ToList();
+       
         return updatedProduct;
     }
 }

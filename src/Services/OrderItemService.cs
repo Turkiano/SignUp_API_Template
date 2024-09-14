@@ -1,36 +1,50 @@
+using AutoMapper;
 using Coffee_Shop_App.src.Abstractions;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 
 namespace Coffee_Shop_App.Services;
 
 public class OrderItemService : IOrderItemService
 {
+
+    private IMapper _mapper;
     private IOrderItemRepository _OrderItemRepository;//access to the Repo
 
-    public OrderItemService(IOrderItemRepository orderItemRepository)
+    public OrderItemService(IOrderItemRepository orderItemRepository, IMapper mapper)
     {
         _OrderItemRepository = orderItemRepository;
+        _mapper = mapper;
     }
 
-    public OrderItem CreateOne(OrderItem orderItem)
+    public OrderItemReadDto CreateOne(OrderItemCreateDto orderItem)
     {
-        OrderItem? foundOrderItem = _OrderItemRepository!.findOne(orderItem.Order_Id!); //to avoid duplicated emails
+        OrderItem? foundOrderItem = _OrderItemRepository!.findOne((Guid)orderItem.OrderId!); //to avoid duplicated emails
 
         if (foundOrderItem is not null)
         {
             return null;
         }
 
-        return _OrderItemRepository.CreateOne(orderItem);
+        OrderItem mapperOrderItem = _mapper.Map<OrderItem>(orderItem);
+        OrderItem newOrderItem = _OrderItemRepository.CreateOne(mapperOrderItem);
+        OrderItemReadDto orderItemRead = _mapper.Map<OrderItemReadDto>(newOrderItem);
+        return orderItemRead;
     }
 
-    public IEnumerable<OrderItem> FindAll()
+    public IEnumerable<OrderItemReadDto> FindAll()
     {
-        return _OrderItemRepository.FindAll(); //to talk to the Repo
+        var orderItem = _OrderItemRepository.FindAll(); //to talk to the Repo
+        var orderItemRead = orderItem.Select(_mapper.Map<OrderItemReadDto>);
+        
+        return orderItemRead;
     }
 
-    public OrderItem? findOne(string orderItemId)
+    public OrderItemReadDto? findOne(Guid orderItemId)
     {
-        return _OrderItemRepository.findOne(orderItemId);
+        OrderItem orderItem = _OrderItemRepository.findOne(orderItemId);
+        OrderItemReadDto orderItemRead = _mapper.Map<OrderItemReadDto>(orderItem);
+
+        return orderItemRead;
     }
 }
