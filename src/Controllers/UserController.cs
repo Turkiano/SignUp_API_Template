@@ -36,19 +36,41 @@ public class UserController : BaseController //the inheritance to get the routin
     }
 
 
-    [HttpPost] //POST, PUT, or PATCH use fromBody
+    [HttpPost("signUp")] //POST, PUT, or PATCH use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<UserReadDto> CreateOne([FromBody] UserCreateDto user)
+    public ActionResult<UserReadDto> SignUp([FromBody] UserCreateDto user)
     {
         if (user is not null)
         {
             var newUser = _userService!.SignUp(user); //sendin request to service
-            return CreatedAtAction(nameof(CreateOne), newUser); //return value in ActionResult
+            return CreatedAtAction(nameof(SignUp), newUser); //return value in ActionResult
 
         }
         return BadRequest(); //built-in method for validation
     }
+
+
+     [HttpPost("login")] //POST, PUT, or PATCH use fromBody
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<UserReadDto> Login([FromBody] UserLoginDto user)
+    {
+        if (user is not null)
+        {
+            UserReadDto? newUserRead  = _userService!.Login(user); //sendin request to service
+            if(newUserRead is null) //checking if the request is null
+            {
+                return BadRequest(); //the return for wrong login
+            }
+
+            return Ok(newUserRead); //return user login details as shaped in UserReadDto
+
+        }
+        return BadRequest(); //built-in method for validation
+    }
+
+
 
 
     [HttpGet("{userId}")]

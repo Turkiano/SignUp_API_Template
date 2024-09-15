@@ -5,6 +5,7 @@ using Coffee_Shop_App.src.Utilities;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 using Coffee_Shop_App.src.DTOs;
+using Coffee_Shop_App.Repositories;
 
 namespace Coffee_Shop_App.Services;
 
@@ -27,7 +28,7 @@ public class UserService : IUserService
     {
         var users = _userRepository!.FindAll();//to talk to the Repo
         var usersRead = users.Select(_mapper.Map<UserReadDto>); //to use the DTO
-        return  usersRead.ToList(); //to return data as a list
+        return usersRead.ToList(); //to return data as a list
     }
 
 
@@ -56,12 +57,27 @@ public class UserService : IUserService
         PasswordUtils.HashPasswrod(user.Password, out string hashedPassword, pepper); //hashing pepper + password
 
         user.Password = hashedPassword; //assigning passwords with hashed password
-        
+
         User mappedUser = _mapper.Map<User>(user); //01.to map the request of create user 
         User newUser = _userRepository.CreateOne(mappedUser);//02.to pass the newUser to the repo
         UserReadDto userRead = _mapper.Map<UserReadDto>(newUser);//03.to covert user obj to UserReadDto
 
         return userRead;//04. return the ReadDto 
+
+    }
+
+
+
+    public UserReadDto Login(UserLoginDto userLogin)
+    {
+
+        User user = _userRepository.findOneByEmail(userLogin.Email); //1.find the user
+        if (user is not null) return null; //2.the early return concept
+        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);//3.A. Declare the pepper
+        bool CorrectPassword = PasswordUtils.VerifyPassword(userLogin.Password, user.Password, pepper); //3.B. Compare passwords
+        if (!CorrectPassword) return null; //4.Early return (2) checking if wrong, return null.
+        UserReadDto userRead = _mapper.Map<UserReadDto>(user); //5. Mapping user to UserReadDto
+        return userRead;
     }
 
 
