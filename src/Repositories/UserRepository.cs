@@ -7,12 +7,13 @@ namespace Coffee_Shop_App.Repositories;
  
 public class UserRepository : IUserRepository
 {
-
+    private DatabaseContext _dbContext;
     private DbSet<User>? _users; //this to get users info as a list
-    public UserRepository( DatabaseContext databaseContext) //constructor to get users data from DB
+    public UserRepository(DatabaseContext dbContext) //constructor to get users data from DB
     {
 
-        _users =  databaseContext.Users; // new obj database to get users' list
+        _users =  dbContext.Users; // new obj database to get users' list
+        _dbContext = dbContext;
 
     }
 

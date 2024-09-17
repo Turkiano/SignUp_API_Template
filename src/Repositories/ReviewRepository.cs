@@ -6,7 +6,7 @@ namespace Coffee_Shop_App.src.Repositories;
 
 public class ReviewRepository : IReviewRepository
 {
-
+    
     private DbSet<Review> _reviews;
 
     public ReviewRepository(DatabaseContext databaseContext)

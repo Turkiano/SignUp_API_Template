@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Controllers;
 using Coffee_Shop_App.src.DTOs;
@@ -20,6 +21,14 @@ public class ProductController : BaseController
 
 
 
+
+
+    [HttpGet]
+    public ActionResult<IEnumerable<ProductReadDto>> FindAll()
+    {
+
+        return Ok(_productService!.FindAll());
+    }
 
 
 
@@ -47,12 +56,6 @@ public class ProductController : BaseController
     }
 
 
-    [HttpGet]
-    public List<ProductReadDto> FindAll()
-    {
-
-        return _productService.FindAll();
-    }
 
 
 

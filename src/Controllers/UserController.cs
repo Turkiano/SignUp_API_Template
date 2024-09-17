@@ -30,9 +30,10 @@ public class UserController : BaseController //the inheritance to get the routin
 
 
     [HttpGet] //import the ASP.NetCore package
-    public List<UserReadDto>? findAll()
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<IEnumerable<UserReadDto>>? findAll()
     {
-        return _userService!.FindAll(); //access to users's data
+        return Ok(_userService!.FindAll()); //to send data to Service using Ok() method.
     }
 
 

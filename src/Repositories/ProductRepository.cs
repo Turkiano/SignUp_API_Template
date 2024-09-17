@@ -7,12 +7,34 @@ namespace Coffee_Shop_App.Repositories;
 
 class ProductRepository : IProductRepository
 {
+    private DatabaseContext _dbContext;
     private DbSet<Product> _products;
 
-    public ProductRepository(DatabaseContext databaseContext)
+
+
+    public ProductRepository(DatabaseContext? dbContext)
     {
-        _products = databaseContext.Products;
+        _dbContext = dbContext!;
+        _products = _dbContext.Products!;
     }
+
+
+
+    public IEnumerable<Product> FindAll()
+    {
+        return _products;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     public Product CreateOne(Product product)
     {
@@ -21,10 +43,6 @@ class ProductRepository : IProductRepository
 
     }
 
-    public IEnumerable<Product> FindAll()
-    {
-        return _products;
-    }
 
     public Product FindOne(Guid productId)
     {
