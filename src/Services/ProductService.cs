@@ -10,13 +10,25 @@ class ProductService : IProductService
 {
     private IProductRepository _ProductRepository; //to talk to the Repo
 
-    
-    public ProductService(IProductRepository productRepository)
+    private IMapper _mapper;
+    public ProductService(IProductRepository productRepository, IMapper mapper)
     {
         _ProductRepository = productRepository;
+        _mapper = mapper;
     }
 
-    
+    public ProductReadDto CreateOne(ProductCreateDto product)
+    {
+        Product foundProduct = _ProductRepository.FindOne((Guid)product.productId);
+        if(foundProduct is not null)
+        {
+            return null;
+        }
+        Product mapperProduct = _mapper.Map<Product>(product);
+        Product newProduct = _ProductRepository.CreateOne(mapperProduct);
+        ProductReadDto productRead = _mapper.Map<ProductReadDto>(newProduct);
+         return productRead;
+    }
 
     public IEnumerable<Product> FindAll()
     {
@@ -28,27 +40,27 @@ class ProductService : IProductService
 
 
 
-    // public ProductReadDto FindOne(Guid productId)
-    // {
-    //     Product product = _ProductRepository.FindOne(productId);
-    //     ProductReadDto productRead = _mapper.Map<ProductReadDto>(product);
+    public ProductReadDto FindOne(Guid productId)
+    {
+        Product product = _ProductRepository.FindOne(productId);
+        ProductReadDto productRead = _mapper.Map<ProductReadDto>(product);
 
-    //     Console.WriteLine($"testing ");
+        Console.WriteLine($"testing ");
         
-    //     return productRead ;
-    // }
+        return productRead ;
+    }
 
-    // public ProductReadDto UpdateOne(Guid Product_Id, ProductCreateDto updatedProduct)
-    // {
-    //     Product? product = _ProductRepository.FindOne(Product_Id);
-    //     if (product is not null) 
-    //     {
-    //         product.Name = updatedProduct.Product_Name;
-    //         Product mappedProduct = _mapper.Map<Product>(product);
-    //         Product newProduct =  _ProductRepository.UpdateOne(mappedProduct);
-    //         ProductReadDto productRead = _mapper.Map<ProductReadDto>(newProduct);
-    //         return productRead;
-    //     }
-    //     return null;
-    // }
+    public ProductReadDto UpdateOne(Guid Product_Id, ProductCreateDto updatedProduct)
+    {
+        Product? product = _ProductRepository.FindOne(Product_Id);
+        if (product is not null) 
+        {
+            product.Name = updatedProduct.Product_Name;
+            Product mappedProduct = _mapper.Map<Product>(product);
+            Product newProduct =  _ProductRepository.UpdateOne(mappedProduct);
+            ProductReadDto productRead = _mapper.Map<ProductReadDto>(newProduct);
+            return productRead;
+        }
+        return null;
+    }
 }

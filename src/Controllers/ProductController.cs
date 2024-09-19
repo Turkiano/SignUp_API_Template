@@ -62,7 +62,7 @@ public class ProductController : BaseController
     [HttpPost] //POST, PUT, or PATCH use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<Product> CreateOne([FromBody] Product product)
+    public ActionResult<ProductReadDto> CreateOne([FromBody] ProductCreateDto product)
     {
         if (product is not null)
         {
