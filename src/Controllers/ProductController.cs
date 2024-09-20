@@ -64,14 +64,12 @@ public class ProductController : BaseController
     [ProducesResponseType(StatusCodes.Status201Created)]
     public ActionResult<ProductReadDto> CreateOne([FromBody] ProductCreateDto product)
     {
-        if (product is not null)
+        if(User is not null)
         {
-
-            var newProduct = _productService.CreateOne(product); //sendin request to service
-            return CreatedAtAction(nameof(CreateOne), newProduct); //return value in ActionResult
-
+            var newProduct = _productService.CreateOne(product);
+            return CreatedAtAction(nameof(CreateOne), newProduct);
         }
-        return BadRequest(); //built-in method for validation
+       return BadRequest();
     }
 
 }

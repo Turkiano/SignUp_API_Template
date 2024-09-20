@@ -19,16 +19,14 @@ class ProductService : IProductService
 
     public ProductReadDto CreateOne(ProductCreateDto product)
     {
-        Product foundProduct = _ProductRepository.FindOne((Guid)product.productId);
-        if(foundProduct is not null)
-        {
-            return null;
-        }
-        Product mapperProduct = _mapper.Map<Product>(product);
-        Product newProduct = _ProductRepository.CreateOne(mapperProduct);
-        ProductReadDto productRead = _mapper.Map<ProductReadDto>(newProduct);
-         return productRead;
+        Product mappedProduct = _mapper.Map<Product>(product);
+        Product newProduct = _ProductRepository.CreateOne(mappedProduct);
+        ProductReadDto readProduct = _mapper.Map<ProductReadDto>(newProduct);
+
+       return readProduct;
     }
+
+    
 
     public IEnumerable<Product> FindAll()
     {

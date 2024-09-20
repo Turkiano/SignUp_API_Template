@@ -9,22 +9,25 @@ namespace Coffee_Shop_App.Repositories;
 
 public class CategoryRepository : ICategoryRepository
 {
+    private DatabaseContext _dbContext;
     private DbSet<Category> _categories;
 
-    public CategoryRepository(DatabaseContext databaseContext)
+    public CategoryRepository(DatabaseContext databaseContext, DatabaseContext dbContext)
     {
         _categories = databaseContext.Categories;
+        _dbContext = dbContext;
     }
 
     public Category CreateOne(Category category)
     {
-        _categories.Add(category);
+        _dbContext.Add(category);
+        _dbContext.SaveChanges();
         return category;
     }
 
     public IEnumerable<Category> FindAll()
     {
-        return _categories;
+        return _dbContext.Categories!;
     }
 
 

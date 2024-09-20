@@ -11,37 +11,31 @@ class ProductRepository : IProductRepository
     private DbSet<Product> _products;
 
 
-
     public ProductRepository(DatabaseContext? dbContext)
     {
         _dbContext = dbContext!;
-        _products = _dbContext.Products!;
+        // _products = _dbContext.Products!;
     }
 
 
 
     public IEnumerable<Product> FindAll()
     {
-        return _products;
+        return _dbContext.Products!;
     }
-
-
-
-
-
-
-
-
 
 
 
 
     public Product CreateOne(Product product)
     {
-        _products.Add(product);
-        return (product);
+        _dbContext.Add(product); //add into databas
+        _dbContext.SaveChanges();//save into databas
+        return product; //retun the new product details.
 
     }
+
+
 
 
     public Product FindOne(Guid productId)

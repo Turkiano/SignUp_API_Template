@@ -1,6 +1,6 @@
 using AutoMapper;
 using Coffee_Shop_App.src.DTOs;
-using Coffee_Shop_App.src.Entities; //02. Import the AutoMapper package.
+using Coffee_Shop_App.src.Entities;
 
 namespace Coffee_Shop_App.src.Mapper;
 
@@ -18,8 +18,6 @@ public class Mapper : Profile
 
 
         CreateMap<Product, ProductReadDto>();
-        CreateMap<ProductReadDto, Product>();
-
         CreateMap<ProductCreateDto, Product>();
 
 
