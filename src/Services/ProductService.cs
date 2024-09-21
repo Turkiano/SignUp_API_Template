@@ -19,18 +19,26 @@ class ProductService : IProductService
 
     public ProductReadDto CreateOne(ProductCreateDto product)
     {
+        Product foundProduct = _ProductRepository.FindOne(product.productId);
+        if (foundProduct is not null)
+        {
+            return null;
+        }
         Product mappedProduct = _mapper.Map<Product>(product);
         Product newProduct = _ProductRepository.CreateOne(mappedProduct);
         ProductReadDto readProduct = _mapper.Map<ProductReadDto>(newProduct);
 
        return readProduct;
+
     }
 
     
 
-    public IEnumerable<Product> FindAll()
+    public IEnumerable<ProductReadDto> FindAll()
     {
-        return _ProductRepository.FindAll();
+        IEnumerable<Product> products =  _ProductRepository.FindAll();
+
+        return products.Select(_mapper.Map<ProductReadDto>);
     }
 
 
@@ -53,7 +61,7 @@ class ProductService : IProductService
         Product? product = _ProductRepository.FindOne(Product_Id);
         if (product is not null) 
         {
-            product.Name = updatedProduct.Product_Name;
+            product.Name = updatedProduct.Name;
             Product mappedProduct = _mapper.Map<Product>(product);
             Product newProduct =  _ProductRepository.UpdateOne(mappedProduct);
             ProductReadDto productRead = _mapper.Map<ProductReadDto>(newProduct);

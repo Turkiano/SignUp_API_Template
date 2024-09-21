@@ -34,7 +34,7 @@ public class DatabaseContext : DbContext //inheriting from the EF Core package
        
 
         //Enum Type Mapping:
-        var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}");
+        var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db:Host"]}; Username={_config["Db:Username"]}; Database={_config["Db:Database"]}; Password={_config["Db:Password"]}; Include Error Detail=true");
         dataSourceBuilder.MapEnum<Role>();
         dataSourceBuilder.MapEnum<Status>();
         var dataSource = dataSourceBuilder.Build();

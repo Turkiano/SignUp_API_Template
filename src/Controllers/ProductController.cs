@@ -24,11 +24,32 @@ public class ProductController : BaseController
 
 
     [HttpGet]
-    public ActionResult<IEnumerable<ProductReadDto>> FindAll()
+    public ActionResult<IEnumerable<ProductReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
-
+        Console.WriteLine($"LIMIT = {limit} OFFSET = {offset}"); //to test pagination
         return Ok(_productService!.FindAll());
     }
+
+
+
+
+
+    [HttpPost] //POST, PUT, or PATCH use fromBody
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public ActionResult<ProductReadDto> CreateOne([FromBody] ProductCreateDto product)
+    {
+        if(User is not null)
+        {
+            var newProduct = _productService!.CreateOne(product);
+            return CreatedAtAction(nameof(CreateOne), newProduct);
+        }
+       return BadRequest();
+    }
+
+
+
+
 
 
 
@@ -58,18 +79,5 @@ public class ProductController : BaseController
 
 
 
-
-    [HttpPost] //POST, PUT, or PATCH use fromBody
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<ProductReadDto> CreateOne([FromBody] ProductCreateDto product)
-    {
-        if(User is not null)
-        {
-            var newProduct = _productService.CreateOne(product);
-            return CreatedAtAction(nameof(CreateOne), newProduct);
-        }
-       return BadRequest();
-    }
 
 }
