@@ -30,14 +30,13 @@ class ProductRepository : IProductRepository
 
 
 
-
-    public Product CreateOne(Product product)
+    public Product UpdateOne(Product updatedProduct)
     {
-        _dbContext.Add(product); //add into databas
-        _dbContext.SaveChanges();//save into databas
-        return product; //retun the new product details.
-
+       
+        return updatedProduct;
     }
+
+
 
 
 
@@ -53,9 +52,21 @@ class ProductRepository : IProductRepository
 
     }
 
-    public Product UpdateOne(Product updatedProduct)
+
+    
+    public Product CreateOne(Product product)
     {
-       
-        return updatedProduct;
+        _dbContext.Add(product); //add into databas
+        _dbContext.SaveChanges();//save into databas
+        return product; //retun the new product details.
+
+    }
+
+
+    
+
+    public bool DeleteOne(Guid id)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -34,12 +34,12 @@ public class ProductController : BaseController
 
 
 
-    [HttpPost] //POST, PUT, or PATCH use fromBody
+    [HttpPost] // (POST, PUT, or PATCH, Delete) use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public ActionResult<ProductReadDto> CreateOne([FromBody] ProductCreateDto product)
     {
-        if(User is not null)
+        if(product is not null)
         {
             var newProduct = _productService!.CreateOne(product);
             return CreatedAtAction(nameof(CreateOne), newProduct);
@@ -49,6 +49,16 @@ public class ProductController : BaseController
 
 
 
+
+    [HttpDelete(":productId")] // (POST, PUT, or PATCH, Delete) use fromBody
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<ProductReadDto> DeleteOne(Guid productId)
+    {
+            _productService.DeleteOne.(productId);
+            return NoContent(); //when its delete, show (No Content)
+       
+    }
 
 
 

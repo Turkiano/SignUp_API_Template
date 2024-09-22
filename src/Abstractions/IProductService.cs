@@ -15,6 +15,8 @@ public interface IProductService
 
     public ProductReadDto UpdateOne(Guid Product_Id, ProductCreateDto updatedProduct);
 
+    public bool DeleteOne(Guid id);
+
 
 
 

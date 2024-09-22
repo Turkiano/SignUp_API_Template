@@ -32,7 +32,13 @@ class ProductService : IProductService
 
     }
 
-    
+    public bool DeleteOne(Guid id)
+    {
+        Product product = _ProductRepository.FindOne(id);
+        return _ProductRepository.DeleteOne(product.Id);
+    }
+
+
 
     public IEnumerable<ProductReadDto> FindAll(int limit, int offset)
     {
