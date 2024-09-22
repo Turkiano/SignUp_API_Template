@@ -6,7 +6,7 @@ namespace Coffee_Shop_App.src.Abstractions;
 
 public interface IProductService
 {
-        public IEnumerable<ProductReadDto> FindAll();
+        public IEnumerable<ProductReadDto> FindAll(int limit, int offset);
 
     public ProductReadDto FindOne(Guid productId);
 

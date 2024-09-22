@@ -7,7 +7,7 @@ public interface IProductRepository
 {
     public Product FindOne(Guid productId);
 
-    public IEnumerable<Product> FindAll();
+    public IEnumerable<Product> FindAll(int limit, int offset);
 
 
     public Product CreateOne(Product product);

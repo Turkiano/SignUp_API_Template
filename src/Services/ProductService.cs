@@ -34,9 +34,9 @@ class ProductService : IProductService
 
     
 
-    public IEnumerable<ProductReadDto> FindAll()
+    public IEnumerable<ProductReadDto> FindAll(int limit, int offset)
     {
-        IEnumerable<Product> products =  _ProductRepository.FindAll();
+        IEnumerable<Product> products =  _ProductRepository.FindAll(limit, offset);
 
         return products.Select(_mapper.Map<ProductReadDto>);
     }
