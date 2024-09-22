@@ -15,7 +15,7 @@ public interface IProductRepository
     public Product UpdateOne(Product updatedProduct);
 
 
-    public bool DeleteOne(Guid id);
+    public bool DeleteOne(Product product);
 
 
 

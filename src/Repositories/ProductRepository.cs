@@ -65,8 +65,10 @@ class ProductRepository : IProductRepository
 
     
 
-    public bool DeleteOne(Guid id)
+    public bool DeleteOne(Product product)
     {
-        throw new NotImplementedException();
+        _dbContext.Products!.Remove(product); //to remove the desired product
+        _dbContext.SaveChanges(); //to save the changes into the server
+        return true; //because the method data type is Boolean
     }
 }

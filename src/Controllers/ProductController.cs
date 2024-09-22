@@ -55,7 +55,7 @@ public class ProductController : BaseController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<ProductReadDto> DeleteOne(Guid productId)
     {
-            _productService.DeleteOne.(productId);
+            _productService!.DeleteOne(productId);
             return NoContent(); //when its delete, show (No Content)
        
     }
