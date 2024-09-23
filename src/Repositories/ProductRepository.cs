@@ -30,25 +30,13 @@ class ProductRepository : IProductRepository
 
 
 
-    public Product UpdateOne(Product updatedProduct)
-    {
-       
-        return updatedProduct;
-    }
-
-
-
 
 
 
     public Product FindOne(Guid productId)
     {
-        Console.WriteLine($"testing = {productId}");
-
-
-        Product? product = _products?.FirstOrDefault(product => product.Id == productId); //lambda expression to compare Ids
-
-        return product!;
+        // Product? product = _products?.FirstOrDefault(product => product.ProductId == productId); //lambda expression to compare Ids
+        return _dbContext.Products.Find(productId);
 
     }
 
@@ -67,8 +55,19 @@ class ProductRepository : IProductRepository
 
     public bool DeleteOne(Product product)
     {
-        _dbContext.Products!.Remove(product); //to remove the desired product
+        _dbContext.Products.Remove(product); //to remove the desired product
+        Console.WriteLine($"deleted product is {product.Name}");
+        
         _dbContext.SaveChanges(); //to save the changes into the server
         return true; //because the method data type is Boolean
+
+    }
+
+
+    
+    public Product UpdateOne(Product updatedProduct)
+    {
+       
+        return updatedProduct;
     }
 }

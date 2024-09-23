@@ -10,8 +10,10 @@ public class ProductReadDto
 
     [Required]
     public string? Name { get; set; }
-    public Guid Product_Id { get; set; }
-    public string? Category { get; set; }
+    [Required]
+    public Guid ProductId { get; set; }
+    [Required]
+    public Guid CategoryId { get; set; }
 
 
 

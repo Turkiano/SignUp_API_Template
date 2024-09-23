@@ -36,7 +36,7 @@ class ProductService : IProductService
     {
         Product product = _ProductRepository.FindOne(id); //to find the desired product
         if(product is null) return false; //to check if the product is found or not
-        _ProductRepository.DeleteOne(product); //to send the request to the repo
+         _ProductRepository.DeleteOne(product); //to send the request to the repo
         return true;
     }
 
@@ -53,16 +53,20 @@ class ProductService : IProductService
 
 
 
-
     public ProductReadDto FindOne(Guid productId)
     {
         Product product = _ProductRepository.FindOne(productId);
+        
         ProductReadDto productRead = _mapper.Map<ProductReadDto>(product);
 
-        Console.WriteLine($"testing ");
         
         return productRead ;
     }
+
+
+
+
+
 
     public ProductReadDto UpdateOne(Guid Product_Id, ProductCreateDto updatedProduct)
     {

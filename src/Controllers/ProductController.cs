@@ -37,7 +37,7 @@ public class ProductController : BaseController
     [HttpPost] // (POST, PUT, or PATCH, Delete) use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<ProductReadDto> CreateOne([FromBody] ProductCreateDto product)
+    public ActionResult CreateOne([FromBody] ProductCreateDto product)
     {
         if(product is not null)
         {
@@ -53,10 +53,12 @@ public class ProductController : BaseController
     [HttpDelete(":productId")] // (POST, PUT, or PATCH, Delete) use fromBody
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<ProductReadDto> DeleteOne(Guid productId)
+    public ActionResult DeleteOne(Guid productId)
     {
-            _productService!.DeleteOne(productId);
-            return NoContent(); //when its delete, show (No Content)
+            bool deletedProduct =_productService!.DeleteOne(productId);//to delete through the repo
+            if(deletedProduct)  return NoContent(); //when its delete, show (No Content)
+            return NotFound();
+           
        
     }
 
@@ -83,7 +85,7 @@ public class ProductController : BaseController
     {
 
 
-        return _productService!.FindOne(productId);
+        return _productService.FindOne(productId);
     }
 
 
