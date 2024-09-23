@@ -1,5 +1,6 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -65,9 +66,10 @@ class ProductRepository : IProductRepository
 
 
     
-    public Product UpdateOne(Product updatedProduct)
+    public Product UpdateOne(Product product)
     {
-       
-        return updatedProduct;
+       _dbContext.Products.Update(product);
+       _dbContext.SaveChanges();
+        return product;
     }
 }

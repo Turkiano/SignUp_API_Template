@@ -39,53 +39,56 @@ public class ProductController : BaseController
     [ProducesResponseType(StatusCodes.Status201Created)]
     public ActionResult CreateOne([FromBody] ProductCreateDto product)
     {
-        if(product is not null)
+        if (product is not null)
         {
             var newProduct = _productService!.CreateOne(product);
             return CreatedAtAction(nameof(CreateOne), newProduct);
         }
-       return BadRequest();
+        return BadRequest();
     }
 
 
 
 
-    [HttpDelete(":productId")] // (POST, PUT, or PATCH, Delete) use fromBody
+    [HttpDelete(":productId")] // (POST, PUT, or PATCH) use fromBody
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult DeleteOne(Guid productId)
     {
-            bool deletedProduct =_productService!.DeleteOne(productId);//to delete through the repo
-            if(deletedProduct)  return NoContent(); //when its delete, show (No Content)
-            return NotFound();
-           
-       
+        bool deletedProduct = _productService!.DeleteOne(productId);//to delete through the repo
+        if (deletedProduct) return NoContent(); //when its delete, show (No Content)
+        return NotFound();
+
+
     }
 
 
 
 
-    [HttpPatch("{Product_Id}")]
-
-    public ProductReadDto? UpdateOne(Guid Product_Id, [FromBody] ProductCreateDto updatedProduct)
+    [HttpPatch(":productId")] // (POST, PUT, or PATCH) use fromBody
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    public ActionResult<ProductReadDto> UpdateOne(Guid productId, [FromBody] ProductUpdateDto updatedProduct)
     {
+        ProductReadDto product = _productService!.UpdateOne(productId, updatedProduct);//to update through the service
+        return Accepted(product);
 
-        return _productService!.UpdateOne(Product_Id, updatedProduct);
+
     }
-
 
 
 
 
 
     [HttpGet("{productId}")]
-    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    // [ProducesResponseType(StatusCodes.Status200OK)]
-    public ProductReadDto? FindOne(Guid productId)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<ProductReadDto> FindOne(Guid productId)
     {
 
+        ProductReadDto product = _productService!.FindOne(productId);//to pass request the service
+        if(product is null) return NotFound();
 
-        return _productService.FindOne(productId);
+        return Ok(product);
     }
 
 

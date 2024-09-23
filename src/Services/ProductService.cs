@@ -56,7 +56,7 @@ class ProductService : IProductService
     public ProductReadDto FindOne(Guid productId)
     {
         Product product = _ProductRepository.FindOne(productId);
-        
+        if(product is null) return null; // to show null, if product was not found
         ProductReadDto productRead = _mapper.Map<ProductReadDto>(product);
 
         
@@ -68,17 +68,17 @@ class ProductService : IProductService
 
 
 
-    public ProductReadDto UpdateOne(Guid Product_Id, ProductCreateDto updatedProduct)
+    public ProductReadDto UpdateOne(Guid productId, ProductUpdateDto updatedProduct)
     {
-        Product? product = _ProductRepository.FindOne(Product_Id);
-        if (product is not null) 
-        {
-            product.Name = updatedProduct.Name;
-            Product mappedProduct = _mapper.Map<Product>(product);
-            Product newProduct =  _ProductRepository.UpdateOne(mappedProduct);
-            ProductReadDto productRead = _mapper.Map<ProductReadDto>(newProduct);
-            return productRead;
-        }
-        return null;
+        Product? product = _ProductRepository.FindOne(productId); // 1)To find the desired product
+        if(product is null) return null; // 2)To stop if product is not found
+
+        //3)this to pass the desired properties to be updated:
+        product.Name = updatedProduct.Name;
+        product.CategoryId = updatedProduct.CategoryId;
+        
+         _ProductRepository.UpdateOne(product);//4) Send the request to the repository.
+
+        return _mapper.Map<ProductReadDto>(product);//5) Map the request to the productReadDTO.
     }
 }

@@ -20,6 +20,9 @@ public class Mapper : Profile
         CreateMap<Product, ProductReadDto>();
         CreateMap<ProductCreateDto, Product>();
 
+        CreateMap<ProductUpdateDto, Product>();
+
+
 
         CreateMap<Category, CategoryReadDto>();
         CreateMap<CategoryReadDto, Category>();

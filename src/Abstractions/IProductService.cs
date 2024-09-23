@@ -13,7 +13,7 @@ public interface IProductService
 
     public ProductReadDto CreateOne(ProductCreateDto product);
 
-    public ProductReadDto UpdateOne(Guid Product_Id, ProductCreateDto updatedProduct);
+    public ProductReadDto UpdateOne(Guid productId, ProductUpdateDto updatedProduct);
 
     public bool DeleteOne(Guid id);
 
