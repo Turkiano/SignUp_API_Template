@@ -1,4 +1,5 @@
 
+using System.Text;
 using Coffee_Shop_App.Controllers;
 using Coffee_Shop_App.Repositories;
 using Coffee_Shop_App.Services;
@@ -6,7 +7,9 @@ using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
 using Coffee_Shop_App.src.Repositories;
 using Coffee_Shop_App.src.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,6 +46,23 @@ builder.Services.AddScoped<IOrderItemService, OrderItemService>(); //built-in DI
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>(); //built-in DI Container for OrderRepository
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+
+
+//Authentication Builder
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SIgningKey"]!))
+    };
+}
+);
 
 var app = builder.Build();
 
