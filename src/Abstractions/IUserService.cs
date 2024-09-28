@@ -12,7 +12,7 @@ public interface IUserService
 
     public UserReadDto SignUp(UserCreateDto user);
 
-    public UserReadDto Login(UserLoginDto userLogin);
+    public string Login(UserLoginDto userLogin);
 
     public UserReadDto findOne(Guid userId);
 

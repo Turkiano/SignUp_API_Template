@@ -6,6 +6,9 @@ using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.Repositories;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Coffee_Shop_App.Services;
 
@@ -23,6 +26,37 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
+
+    public string Login(UserLoginDto userLogin)
+    {
+
+        User user = _userRepository.findOneByEmail(userLogin.Email); //1.find the user
+        if (user is not null) return null; //2.the early return concept
+
+
+        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);//3.A. Declare the pepper
+        bool CorrectPassword = PasswordUtils.VerifyPassword(userLogin.Password, user.Password, pepper); //3.B. Compare passwords
+        if (!CorrectPassword) return null; //4.Early return (2) checking if wrong, return null.
+
+        var claims = new[]{
+            new Claim(ClaimTypes.Name, user.FirstName),
+            new Claim(ClaimTypes.Role, user.Role.ToString()),
+            new Claim(ClaimTypes.Email, user.Email)
+       };
+
+       var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]!));
+       var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+       var token = new JwtSecurityToken(
+        issuer: _config["JWT:Issure"], //Replace with your own back-end
+        audience: _config["JWT:Audience"], //Replace your own front-end
+        claims: claims,
+        expires: DateTime.Now.AddDays(7), //Token epiration time
+        signingCredentials: creds
+       );
+
+       var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+       return tokenString;
+    }
 
     public List<UserReadDto> FindAll()
     {
@@ -67,18 +101,6 @@ public class UserService : IUserService
     }
 
 
-
-    public UserReadDto Login(UserLoginDto userLogin)
-    {
-
-        User user = _userRepository.findOneByEmail(userLogin.Email); //1.find the user
-        if (user is not null) return null; //2.the early return concept
-        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);//3.A. Declare the pepper
-        bool CorrectPassword = PasswordUtils.VerifyPassword(userLogin.Password, user.Password, pepper); //3.B. Compare passwords
-        if (!CorrectPassword) return null; //4.Early return (2) checking if wrong, return null.
-        UserReadDto userRead = _mapper.Map<UserReadDto>(user); //5. Mapping user to UserReadDto
-        return userRead;
-    }
 
 
 

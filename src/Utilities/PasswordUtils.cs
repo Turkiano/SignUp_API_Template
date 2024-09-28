@@ -19,7 +19,7 @@ public class PasswordUtils
     public static bool VerifyPassword(string plainPassword, string hashedPassword, byte[] pepper)
     {
         HashPasswrod(plainPassword, out string hashToCompare, pepper);
-        return hashToCompare == hashedPassword;
+        return hashToCompare == hashedPassword; //time-attack
 
     }
 }
