@@ -26,7 +26,8 @@ public class UserRepository : IUserRepository
     
     public User CreateOne(User user)
     {
-        _users?.Add(user); // temporary saving data
+        _dbContext.Add(user); // temporary saving data
+        _dbContext.SaveChanges();
         return user; //to show new user only
     }
 

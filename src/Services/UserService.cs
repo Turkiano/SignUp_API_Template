@@ -36,19 +36,22 @@ public class UserService : IUserService
 
         byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);//3.A. Declare the pepper
         bool CorrectPassword = PasswordUtils.VerifyPassword(userLogin.Password, user.Password, pepper); //3.B. Compare passwords
-        if (!CorrectPassword) return null; //4.Early return (2) checking if wrong, return null.
+        if (!CorrectPassword) return null; //4.Early return (2) checking if wrong pass, return null.
 
-        var claims = new[]{
+
+//to generate a Token, require the following
+
+        var claims = new[]{//1. The claims
             new Claim(ClaimTypes.Name, user.FirstName),
             new Claim(ClaimTypes.Role, user.Role.ToString()),
             new Claim(ClaimTypes.Email, user.Email)
        };
 
-       var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]!));
+       var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]!));
        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
        var token = new JwtSecurityToken(
-        issuer: _config["JWT:Issure"], //Replace with your own back-end
-        audience: _config["JWT:Audience"], //Replace your own front-end
+        issuer: _config["Jwt:Issuer"], //Replace with your own back-end
+        audience: _config["Jwt:Audience"], //Replace your own front-end
         claims: claims,
         expires: DateTime.Now.AddDays(7), //Token epiration time
         signingCredentials: creds

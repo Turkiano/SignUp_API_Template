@@ -2,6 +2,8 @@ using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Coffee_Shop_App.src.Enum;
 
 namespace Coffee_Shop_App.src.Controllers;
 
@@ -30,6 +32,7 @@ public class UserController : BaseController //the inheritance to get the routin
 
 
     [HttpGet] //import the ASP.NetCore package
+    [Authorize(Roles = "Admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<IEnumerable<UserReadDto>>? findAll()
     {
@@ -55,17 +58,17 @@ public class UserController : BaseController //the inheritance to get the routin
      [HttpPost("login")] //POST, PUT, or PATCH use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public ActionResult<UserReadDto> Login([FromBody] UserLoginDto user)
+    public ActionResult<string> Login([FromBody] UserLoginDto user)
     {
         if (user is not null)
         {
-            UserReadDto? newUserRead  = _userService!.Login(user); //sendin request to service
-            if(newUserRead is null) //checking if the request is null
+            string token  = _userService.Login(user); //sendin request to service
+            if(token is null) //checking if the request is null
             {
                 return BadRequest(); //the return for wrong login
             }
 
-            return Ok(newUserRead); //return user login details as shaped in UserReadDto
+            return Ok(token); //return user login details as shaped in UserReadDto
 
         }
         return BadRequest(); //built-in method for validation
