@@ -31,10 +31,11 @@ public class ReviewService : IReviewService
 
     }
 
-    public IEnumerable<ReviewReadDto> FindAll()
+    public IEnumerable<ReviewReadDto> FindAll(int limit, int offset)
     {
-        var review = _ReviewRepository.FindAll();
-        var reviewRead = review.Select(_mapper.Map<ReviewReadDto>);
+        IEnumerable<Review> reviews = _ReviewRepository.FindAll(limit, offset);
+       
+        var reviewRead = reviews.Select(_mapper.Map<ReviewReadDto>);
         return reviewRead;
     }
 

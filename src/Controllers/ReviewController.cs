@@ -37,12 +37,11 @@ public class ReviewController : BaseController
 
     }
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
 
-    public IEnumerable<ReviewReadDto> FindAll()
+    public ActionResult<IEnumerable<ReviewReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
-        return _reviewService.FindAll();
+        return Ok(_reviewService.FindAll(limit, offset));
     }
-
-
 
 }

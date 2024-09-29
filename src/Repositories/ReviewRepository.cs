@@ -8,10 +8,11 @@ public class ReviewRepository : IReviewRepository
 {
     
     private DbSet<Review> _reviews;
+    private DatabaseContext _dbContext;
 
-    public ReviewRepository(DatabaseContext databaseContext)
+    public ReviewRepository(DatabaseContext dbContext)
     {
-        _reviews = databaseContext.Reviews;
+        _dbContext = dbContext;
     }
 
     public Review CreateOne(Review review)
@@ -20,9 +21,13 @@ public class ReviewRepository : IReviewRepository
         return review;
     }
 
-    public IEnumerable<Review> FindAll()
+    public IEnumerable<Review> FindAll(int limit, int offset)
     {
-        return _reviews;
+         if(limit == 0 && offset ==0){ // 1.if pagination has empty values
+            return _dbContext.Reviews!; // 2.show all produts
+        }
+        // 3.else show the values of pagination
+        return  _dbContext.Reviews!.Skip(offset).Take(limit);
     }
 
     public Review FindOne(Guid reviewId)

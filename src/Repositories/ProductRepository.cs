@@ -9,7 +9,7 @@ namespace Coffee_Shop_App.Repositories;
 class ProductRepository : IProductRepository
 {
     private DatabaseContext _dbContext;
-    private DbSet<Product> _products;
+    // private DbSet<Product> _products;
 
 
     public ProductRepository(DatabaseContext? dbContext)
