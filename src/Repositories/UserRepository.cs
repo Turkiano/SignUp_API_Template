@@ -4,7 +4,7 @@ using Coffee_Shop_App.src.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Coffee_Shop_App.Repositories;
- 
+
 public class UserRepository : IUserRepository
 {
     private DatabaseContext _dbContext;
@@ -12,18 +12,22 @@ public class UserRepository : IUserRepository
     public UserRepository(DatabaseContext dbContext) //constructor to get users data from DB
     {
 
-        _users =  dbContext.Users; // new obj database to get users' list
+        _users = dbContext.Users; // new obj database to get users' list
         _dbContext = dbContext;
 
     }
 
-    public IEnumerable<User> FindAll()
+    public IEnumerable<User> FindAll(int limit, int offset)
     {
-
-        return _users!;
+        if (limit == 0 && offset == 0)
+        { // 1.if pagination has empty values
+            return _dbContext.Users!; // 2.show all produts
+        }
+        // 3.else show the values of pagination
+        return _dbContext.Users!.Skip(offset).Take(limit);
 
     }
-    
+
     public User CreateOne(User user)
     {
         _dbContext.Add(user); // temporary saving data

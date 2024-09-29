@@ -32,11 +32,11 @@ public class UserController : BaseController //the inheritance to get the routin
 
 
     [HttpGet] //import the ASP.NetCore package
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public ActionResult<IEnumerable<UserReadDto>>? findAll()
+    public ActionResult<IEnumerable<UserReadDto>>? findAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
-        return Ok(_userService!.FindAll()); //to send data to Service using Ok() method.
+        return Ok(_userService!.FindAll(limit, offset)); //to send data to Service using Ok() method.
     }
 
 

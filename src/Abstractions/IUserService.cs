@@ -8,7 +8,7 @@ public interface IUserService
 {
 
 
-    public List<UserReadDto> FindAll();
+    public List<UserReadDto> FindAll(int limit, int offset);
 
     public UserReadDto SignUp(UserCreateDto user);
 

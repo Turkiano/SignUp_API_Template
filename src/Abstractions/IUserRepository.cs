@@ -6,7 +6,7 @@ namespace Coffee_Shop_App.src.Abstractions;
 public interface IUserRepository
 {
 
-    public IEnumerable<User> FindAll();
+    public IEnumerable<User> FindAll(int limit, int offset);
 
     public User CreateOne(User user);
 

@@ -61,9 +61,9 @@ public class UserService : IUserService
        return tokenString;
     }
 
-    public List<UserReadDto> FindAll()
+    public List<UserReadDto> FindAll(int limit, int offset)
     {
-        var users = _userRepository!.FindAll();//to talk to the Repo
+        var users = _userRepository!.FindAll( limit, offset);//to talk to the Repo
         var usersRead = users.Select(_mapper.Map<UserReadDto>); //to use the DTO
         return usersRead.ToList(); //to return data as a list
     }

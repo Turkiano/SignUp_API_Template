@@ -24,6 +24,7 @@ public class ProductController : BaseController
 
 
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<IEnumerable<ProductReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
         Console.WriteLine($"LIMIT = {limit} OFFSET = {offset}"); //to test pagination
@@ -86,7 +87,7 @@ public class ProductController : BaseController
     {
 
         ProductReadDto product = _productService!.FindOne(productId);//to pass request the service
-        if(product is null) return NotFound();
+        if (product is null) return NotFound();
 
         return Ok(product);
     }
