@@ -4,6 +4,7 @@ using Coffee_Shop_App.src.Databases;
 using Coffee_Shop_App.src.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240929112915_ReviewError")]
+    partial class ReviewError
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,26 +34,26 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("comment")
+                    b.Property<string>("Comment")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("productId")
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("rating")
+                    b.Property<string>("Rating")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("reviewDate")
+                    b.Property<DateTime?>("ReviewDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("userId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("reviewId");
 
-                    b.HasIndex("productId");
+                    b.HasIndex("ProductId");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -190,21 +193,19 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Coffee_Shop_App.Review", b =>
                 {
-                    b.HasOne("Coffee_Shop_App.src.Entities.Product", "product")
+                    b.HasOne("Coffee_Shop_App.src.Entities.Product", "Product")
                         .WithMany("Reviews")
-                        .HasForeignKey("productId")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("Coffee_Shop_App.src.Entities.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Coffee_Shop_App.src.Entities.User", "user")
-                        .WithMany("Reviews")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Product");
 
-                    b.Navigation("product");
-
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.Order", b =>

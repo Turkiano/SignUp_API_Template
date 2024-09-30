@@ -1,6 +1,7 @@
 using AutoMapper;
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.DTOs;
+using Coffee_Shop_App.src.Entities;
 using Coffee_Shop_App.src.Repositories;
 
 namespace Coffee_Shop_App.src.Services;
@@ -11,7 +12,7 @@ public class ReviewService : IReviewService
     private IMapper _mapper;
     private IReviewRepository _ReviewRepository;
 
-    public ReviewService(IReviewRepository reviewRepository,  IMapper mapper)
+    public ReviewService(IReviewRepository reviewRepository, IMapper mapper)
     {
         _ReviewRepository = reviewRepository;
         _mapper = mapper;
@@ -19,22 +20,21 @@ public class ReviewService : IReviewService
 
     public ReviewReadDto CreateOne(ReviewCreateDto review)
     {
-        Review foundReview = _ReviewRepository.FindOne((Guid)review.Id);
+        Review foundReview = _ReviewRepository.FindOne(review.reviewId);
         if (foundReview is not null)
         {
             return null;
         }
-        Review mapperReview = _mapper.Map<Review>(review);
-        Review newReview = _ReviewRepository.CreateOne(mapperReview);
-        ReviewReadDto reviewRead = _mapper.Map<ReviewReadDto>(newReview);
-        return reviewRead;
-
+        Review mappedRReview = _mapper.Map<Review>(review);
+        Review newReview = _ReviewRepository.CreateOne(mappedRReview);
+        ReviewReadDto readReview = _mapper.Map<ReviewReadDto>(newReview);
+        return readReview;
     }
 
     public IEnumerable<ReviewReadDto> FindAll(int limit, int offset)
     {
         IEnumerable<Review> reviews = _ReviewRepository.FindAll(limit, offset);
-       
+
         var reviewRead = reviews.Select(_mapper.Map<ReviewReadDto>);
         return reviewRead;
     }

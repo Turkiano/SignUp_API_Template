@@ -1,5 +1,6 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
+using Coffee_Shop_App.src.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Coffee_Shop_App.src.Repositories;
@@ -17,7 +18,8 @@ public class ReviewRepository : IReviewRepository
 
     public Review CreateOne(Review review)
     {
-        _reviews.Add(review);
+        _dbContext.Add(review);
+        _dbContext.SaveChanges();
         return review;
     }
 
@@ -32,7 +34,7 @@ public class ReviewRepository : IReviewRepository
 
     public Review FindOne(Guid reviewId)
     {
-        Review? review = _reviews.FirstOrDefault(review => review.Id == reviewId);
+        Review? review = _dbContext.Reviews.Find(reviewId);
 
         return review;
     }

@@ -42,6 +42,16 @@ public class Mapper : Profile
         CreateMap<OrderItem, OrderItemCreateDto>();
 
 
+        CreateMap<Review, ReviewReadDto>();
+        CreateMap<ReviewReadDto, Review>();
+
+        CreateMap<ReviewCreateDto, Review>();
+
+
+
+
+
+
 
 
 

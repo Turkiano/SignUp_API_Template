@@ -18,11 +18,11 @@ public class ReviewController : BaseController
     [HttpPost] //POST, PUT, or PATCH use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public ActionResult<ReviewReadDto> CreateOne([FromBody] ReviewCreateDto review)
+    public ActionResult CreateOne([FromBody] ReviewCreateDto review)
     {
         if (review is not null)
         {
-            var newReview = _reviewService.CreateOne(review);
+            var newReview = _reviewService!.CreateOne(review);
             return CreatedAtAction(nameof(CreateOne), newReview);
         }
         return BadRequest();
