@@ -36,9 +36,9 @@ public class CategoryService : ICategoryService
 
     }
 
-    public List<CategoryReadDto> FindAll()
+    public IEnumerable<CategoryReadDto> FindAll(int limit, int offset)
     {
-        var category =  _categoryRepository.FindAll();
+        IEnumerable<Category> category =  _categoryRepository.FindAll( limit,  offset);
         var categoryRead = category.Select(_mapper.Map<CategoryReadDto>);
         return categoryRead.ToList();
     }

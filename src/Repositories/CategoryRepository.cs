@@ -25,9 +25,14 @@ public class CategoryRepository : ICategoryRepository
         return category;
     }
 
-    public IEnumerable<Category> FindAll()
+    public IEnumerable<Category> FindAll(int limit, int offset)
     {
-        return _dbContext.Categories!;
+        if (limit == 0 && offset == 0)
+        { // 1.if pagination has empty values
+            return _dbContext.Categories!; // 2.show all produts
+        }
+        // 3.else show the values of pagination
+        return  _dbContext.Categories!.Skip(offset).Take(limit);;
     }
 
 
@@ -37,15 +42,15 @@ public class CategoryRepository : ICategoryRepository
         Category? category = _categories?.FirstOrDefault(category => category.CategoryId == categoryId); //lambda expression to compare Ids
 
         return category; //to get the desired user
-       
+
     }
 
     public Category UpdateOne(Category updateCategory)
     {
-       
+
         return updateCategory;
     }
 
-   
+
 }
 

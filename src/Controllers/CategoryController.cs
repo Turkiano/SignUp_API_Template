@@ -17,12 +17,15 @@ public class CategoryController : BaseController
     }
 
     [HttpGet]
-    public List<CategoryReadDto> FindAll()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<IEnumerable<CategoryReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
 
 
-        return _categoryService.FindAll();
+        return Ok(_categoryService!.FindAll(limit, offset));
     }
+
+
 
     [HttpGet("{categoryId}")]
     public CategoryReadDto? findOne(Guid categoryId)
