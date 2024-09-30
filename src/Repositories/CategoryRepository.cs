@@ -32,21 +32,23 @@ public class CategoryRepository : ICategoryRepository
             return _dbContext.Categories!; // 2.show all produts
         }
         // 3.else show the values of pagination
-        return  _dbContext.Categories!.Skip(offset).Take(limit);;
+        return _dbContext.Categories!.Skip(offset).Take(limit); ;
     }
 
 
 
     public Category findOne(Guid categoryId)
     {
-        Category? category = _categories?.FirstOrDefault(category => category.CategoryId == categoryId); //lambda expression to compare Ids
+        // Category? category = _categories?.FirstOrDefault(category => category.CategoryId == categoryId); //lambda expression to compare Ids
 
-        return category; //to get the desired user
+        return _dbContext.Categories.Find(categoryId); //to get the desired user
 
     }
 
     public Category UpdateOne(Category updateCategory)
     {
+        _dbContext.Categories.Update(updateCategory);
+        _dbContext.SaveChanges();
 
         return updateCategory;
     }

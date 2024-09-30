@@ -25,13 +25,13 @@ public class Mapper : Profile
 
 
         CreateMap<Category, CategoryReadDto>();
-        CreateMap<CategoryReadDto, Category>();
+        CreateMap<CategoryCreateDto, Category>();
 
         CreateMap<CategoryCreateDto, Category>();
 
 
         CreateMap<Order, OrderReadDto>();
-        CreateMap<OrderReadDto, Order>();
+        CreateMap<OrderCreateDto, Order>();
 
         CreateMap<OrderCreateDto, Order>();
 
@@ -39,7 +39,7 @@ public class Mapper : Profile
         CreateMap<OrderItem, OrderItemReadDto>();
         CreateMap<OrderItemReadDto, OrderItem>();
 
-        CreateMap<OrderItem, OrderItemCreateDto>();
+        CreateMap<OrderItemCreateDto, OrderItem>();
 
 
         CreateMap<Review, ReviewReadDto>();

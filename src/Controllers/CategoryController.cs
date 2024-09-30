@@ -2,6 +2,7 @@ using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Controllers;
 using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coffee_Shop_App.Controllers;
@@ -17,7 +18,7 @@ public class CategoryController : BaseController
     }
 
     [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<IEnumerable<CategoryReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
 
@@ -28,10 +29,13 @@ public class CategoryController : BaseController
 
 
     [HttpGet("{categoryId}")]
-    public CategoryReadDto? findOne(Guid categoryId)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<CategoryReadDto?> findOne(Guid categoryId)
     {
-
-        return _categoryService.findOne(categoryId);
+        CategoryReadDto category = _categoryService.findOne(categoryId);
+        if (category is null) return NotFound();
+        return Ok(category);
     }
 
 
@@ -54,8 +58,10 @@ public class CategoryController : BaseController
     }
 
     [HttpPatch("{CategoryId}")]
-    public CategoryReadDto? UpdateOne(Guid CategoryId, [FromBody] CategoryCreateDto updatedCategory)
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    public ActionResult<CategoryReadDto?> UpdateOne(Guid CategoryId, [FromBody] CategoryCreateDto updatedCategory)
     {
-        return _categoryService!.UpdateOne(CategoryId, updatedCategory);
+        CategoryReadDto category =  _categoryService!.UpdateOne(CategoryId, updatedCategory);
+        return Accepted(category);
     }
 }

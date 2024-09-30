@@ -48,6 +48,8 @@ public class CategoryService : ICategoryService
     public CategoryReadDto findOne(Guid categoryId)
     {
         Category category = _categoryRepository.findOne(categoryId);
+                if(category is null) return null; // to show null, if category was not found
+
         CategoryReadDto categoryRead = _mapper.Map<CategoryReadDto>(category);
 
 
