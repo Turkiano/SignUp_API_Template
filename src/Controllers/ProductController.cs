@@ -68,9 +68,13 @@ public class ProductController : BaseController
 
     [HttpPatch(":productId")] // (POST, PUT, or PATCH) use fromBody
     [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
     public ActionResult<ProductReadDto> UpdateOne(Guid productId, [FromBody] ProductUpdateDto updatedProduct)
     {
         ProductReadDto product = _productService!.UpdateOne(productId, updatedProduct);//to update through the service
+        if (product is null) return NotFound();
+
         return Accepted(product);
 
 

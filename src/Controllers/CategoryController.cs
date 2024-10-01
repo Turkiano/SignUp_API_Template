@@ -59,9 +59,13 @@ public class CategoryController : BaseController
 
     [HttpPatch("{CategoryId}")]
     [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
     public ActionResult<CategoryReadDto?> UpdateOne(Guid CategoryId, [FromBody] CategoryCreateDto updatedCategory)
     {
-        CategoryReadDto category =  _categoryService!.UpdateOne(CategoryId, updatedCategory);
+        CategoryReadDto category = _categoryService!.UpdateOne(CategoryId, updatedCategory);
+        if (category is null) return NotFound();
+
         return Accepted(category);
     }
 }

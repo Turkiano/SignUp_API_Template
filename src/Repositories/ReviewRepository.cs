@@ -39,4 +39,10 @@ public class ReviewRepository : IReviewRepository
         return review;
     }
 
+    public Review UpdateOne(Review reivew)
+    {
+        _dbContext.Reviews.Update(reivew);
+        _dbContext.SaveChanges();
+        return reivew;
+    }
 }

@@ -10,6 +10,9 @@ public interface IReviewService
     public IEnumerable<ReviewReadDto> FindAll(int limit, int offset);
     public ReviewReadDto CreateOne(ReviewCreateDto review);
 
+        public ReviewReadDto UpdateOne(Guid productId, ProductUpdateDto updatedProduct)
+
+
 
 
 

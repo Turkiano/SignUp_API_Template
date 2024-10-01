@@ -30,10 +30,13 @@ public class ReviewController : BaseController
 
 
     [HttpGet("{reviewId}")]
-
-    public ReviewReadDto FindOne(Guid reviewId)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<ReviewReadDto> FindOne(Guid reviewId)
     {
-        return _reviewService.FindOne(reviewId);
+        ReviewReadDto review = _reviewService.FindOne(reviewId);
+        if(review is null) return NotFound();
+        return Ok(review);
 
     }
     [HttpGet]
@@ -44,4 +47,15 @@ public class ReviewController : BaseController
         return Ok(_reviewService.FindAll(limit, offset));
     }
 
-}
+
+    [HttpPatch(":reviewId")] // (POST, PUT, or PATCH) use fromBody
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<ReviewReadDto> UpdateOne(Guid reviewId, [FromBody] ReviewCreateDto updatedReview)
+    {
+        ReviewReadDto review = _reviewService.UpdateOne(reviewId, updatedReview);
+        if (review is null) return NotFound();
+
+        return Accepted(review);
+    }
+}   
