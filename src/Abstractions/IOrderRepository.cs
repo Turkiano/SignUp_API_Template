@@ -6,7 +6,7 @@ namespace Coffee_Shop_App.src.Abstractions
 {
     public interface IOrderRepository
     {
-        public IEnumerable<Order> FindAll();
+    public IEnumerable<Order> FindAll(int limit, int offset);
 
         public Order? findOne(Guid orderId);
 

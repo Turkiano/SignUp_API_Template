@@ -51,7 +51,7 @@ public class ReviewController : BaseController
     [HttpPatch(":reviewId")] // (POST, PUT, or PATCH) use fromBody
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<ReviewReadDto> UpdateOne(Guid reviewId, [FromBody] ReviewCreateDto updatedReview)
+    public ActionResult<ReviewReadDto> UpdateOne(Guid reviewId, [FromBody] ReviewUpdateDto updatedReview)
     {
         ReviewReadDto review = _reviewService.UpdateOne(reviewId, updatedReview);
         if (review is null) return NotFound();

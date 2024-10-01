@@ -3,6 +3,7 @@ using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 using Coffee_Shop_App.src.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Coffee_Shop_App.src.Services;
 
@@ -45,5 +46,17 @@ public class ReviewService : IReviewService
         ReviewReadDto reviewRead = _mapper.Map<ReviewReadDto>(review);
 
         return reviewRead;
+    }
+
+    public ReviewReadDto UpdateOne(Guid reviewId, ReviewUpdateDto updatedReview)
+    {
+        Review review = _ReviewRepository.FindOne(reviewId);
+        if (review is null) return null;
+
+        review.comment = updatedReview.comment;
+        review.rating = updatedReview.rating;
+
+        _ReviewRepository.UpdateOne(review);
+        return _mapper.Map<ReviewReadDto>(review);
     }
 }

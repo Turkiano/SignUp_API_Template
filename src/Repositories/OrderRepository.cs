@@ -8,23 +8,27 @@ namespace Coffee_Shop_App.Controllers;
 public class OrderRepository : IOrderRepository
 {
 
+    private DatabaseContext _dbContext;
+    // private DbSet<Order> _orders; //this to get orders info as a list//this to get users info as a list
 
-    private DbSet<Order> _orders; //this to get orders info as a list//this to get users info as a list
-
-    public OrderRepository(DatabaseContext databaseContext) //constructor to get orders data from DB
+    public OrderRepository(DatabaseContext dbContext) //constructor to get orders data from DB
     {
-        _orders = databaseContext.Orders; // new obj database to get users' list
+        _dbContext = dbContext; // new obj database to get Orders' list
     }
 
     public Order CreateOne(Order order)
     {
-        _orders?.Add(order);
+        _dbContext?.Add(order);
+        _dbContext.SaveChanges();
         return order;
     }
 
-    public IEnumerable<Order> FindAll()
-    {
-        return _orders;
+    public IEnumerable<Order> FindAll(int limit, int offset)
+    {if(limit == 0 && offset ==0){ // 1.if pagination has empty values
+            return _dbContext.Orders!; // 2.show all produts
+        }
+        // 3.else show the values of pagination
+        return _dbContext.Orders.Skip(offset).Take(limit);
     }
 
     public Order? findOne(Guid orderId)
