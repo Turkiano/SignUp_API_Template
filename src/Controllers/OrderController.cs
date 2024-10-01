@@ -17,16 +17,20 @@ public class OrderController : BaseController
     }
 
     [HttpGet]
-    public IEnumerable<OrderReadDto> FindAll()
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<IEnumerable<OrderReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
-        return _orderService.FindAll();
+        return Ok(_orderService!.FindAll(limit, offset));
     }
 
     [HttpGet("{orderId}")]
-    public OrderReadDto? FindOne(Guid orderId)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<OrderReadDto?> FindOne(Guid orderId)
     {
-
-        return _orderService.FindOne(orderId);
+        OrderReadDto order = _orderService.FindOne(orderId);
+        if (order is null) return NotFound();
+        return Ok(order);
     }
 
 
@@ -45,8 +49,17 @@ public class OrderController : BaseController
     }
 
 
-    
 
+    [HttpPatch(":orderId")] // (POST, PUT, or PATCH) use fromBody
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<OrderReadDto> UpdateOne(Guid orderId, [FromBody] OrderUpdateDto updatedOrder)
+    {
+        OrderReadDto order = _orderService.UpdateOne(orderId, updatedOrder);
+        if (order is null) return NotFound();
+
+        return Accepted(order);
+    }
 
 
 }

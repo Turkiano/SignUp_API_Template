@@ -33,7 +33,7 @@ public class Mapper : Profile
         CreateMap<Order, OrderReadDto>();
         CreateMap<OrderCreateDto, Order>();
 
-        CreateMap<OrderCreateDto, Order>();
+        CreateMap<OrderUpdateDto, Order>();
 
 
         CreateMap<OrderItem, OrderItemReadDto>();

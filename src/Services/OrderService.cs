@@ -34,10 +34,10 @@ public class OrderService : IOrderService
         return orderRead;
     }
 
-    public IEnumerable<OrderReadDto> FindAll()
+    public IEnumerable<OrderReadDto> FindAll(int limit, int offset)
     {
-        var order = _orderRepository!.FindAll();
-        var orderRead = order.Select(_mapper.Map<OrderReadDto>);
+        IEnumerable<Order> order = _orderRepository!.FindAll(limit, offset);
+        IEnumerable<OrderReadDto> orderRead = order.Select(_mapper.Map<OrderReadDto>);
 
         return orderRead;
     }
@@ -45,9 +45,22 @@ public class OrderService : IOrderService
     public OrderReadDto? FindOne(Guid orderId)
     {
         Order? order = _orderRepository!.findOne(orderId);
+        if (order is null) return null; // to show null, if product was not found
+
         OrderReadDto orderRead = _mapper.Map<OrderReadDto>(order);
 
 
         return orderRead;
+    }
+
+    public OrderReadDto UpdateOne(Guid orderId, OrderUpdateDto updatedOrder)
+    {
+        Order? order = _orderRepository.findOne(orderId);
+        if (order is null) return null; // 2)To stop if order is not found
+
+        //3)this to pass the desired properties to be updated:
+        order.Status = updatedOrder.Status;
+        _orderRepository.UpdateOne(order);
+        return _mapper.Map<OrderReadDto>(order);
     }
 }
