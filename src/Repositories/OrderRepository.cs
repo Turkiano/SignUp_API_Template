@@ -36,7 +36,7 @@ public class OrderRepository : IOrderRepository
     public Order? findOne(Guid orderId)
     {
         // Order? order = _orders?.FirstOrDefault(order => order.Id == orderId); //lambda expression to compare Ids
-        var order = _dbContext.Orders.Find(orderId);
+        Order order = _dbContext.Orders.Find(orderId);
 
         return order;
 

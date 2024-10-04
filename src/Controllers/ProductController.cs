@@ -27,7 +27,7 @@ public class ProductController : BaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<IEnumerable<ProductReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
-        Console.WriteLine($"LIMIT = {limit} OFFSET = {offset}"); //to test pagination
+        // Console.WriteLine($"LIMIT = {limit} OFFSET = {offset}"); //to test pagination
         return Ok(_productService!.FindAll(limit, offset));
     }
 

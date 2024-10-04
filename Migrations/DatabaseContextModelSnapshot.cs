@@ -22,38 +22,8 @@ namespace Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "customer", "admin" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "status", new[] { "confirmed", "cancelled", "paid", "unpaid" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "status", new[] { "processing", "completed", "pending", "cancelled" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Coffee_Shop_App.Review", b =>
-                {
-                    b.Property<Guid>("reviewId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("comment")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("productId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("rating")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("reviewDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("userId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("reviewId");
-
-                    b.HasIndex("productId");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("Reviews");
-                });
 
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.Category", b =>
                 {
@@ -147,6 +117,36 @@ namespace Backend.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("Coffee_Shop_App.src.Entities.Review", b =>
+                {
+                    b.Property<Guid>("reviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("comment")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("productId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("rating")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("reviewDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("userId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("reviewId");
+
+                    b.HasIndex("productId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -188,25 +188,6 @@ namespace Backend.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Coffee_Shop_App.Review", b =>
-                {
-                    b.HasOne("Coffee_Shop_App.src.Entities.Product", "product")
-                        .WithMany("Reviews")
-                        .HasForeignKey("productId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Coffee_Shop_App.src.Entities.User", "user")
-                        .WithMany("Reviews")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("product");
-
-                    b.Navigation("user");
-                });
-
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.Order", b =>
                 {
                     b.HasOne("Coffee_Shop_App.src.Entities.User", "User")
@@ -240,6 +221,25 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Coffee_Shop_App.src.Entities.Review", b =>
+                {
+                    b.HasOne("Coffee_Shop_App.src.Entities.Product", "product")
+                        .WithMany("Reviews")
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Coffee_Shop_App.src.Entities.User", "user")
+                        .WithMany("Reviews")
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("product");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Coffee_Shop_App.src.Entities.Category", b =>

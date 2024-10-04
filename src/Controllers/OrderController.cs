@@ -20,6 +20,7 @@ public class OrderController : BaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<IEnumerable<OrderReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
+        
         return Ok(_orderService!.FindAll(limit, offset));
     }
 
@@ -42,6 +43,8 @@ public class OrderController : BaseController
         if (order is not null)
         {
             var newOrder = _orderService!.CreateOne(order); //sendin request to service
+            Console.WriteLine($"testing new order = {newOrder.UserId}");
+            
             return CreatedAtAction(nameof(CreateOne), newOrder); //return value in ActionResult
 
         }
