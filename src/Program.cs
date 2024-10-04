@@ -1,5 +1,6 @@
 
 using System.Text;
+using System.Text.Json.Serialization;
 using Coffee_Shop_App.Controllers;
 using Coffee_Shop_App.Repositories;
 using Coffee_Shop_App.Services;
@@ -15,7 +16,10 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 
 //Should be added (1)
-builder.Services.AddControllers(); // to deferntiate between controllers and other classes
+builder.Services.AddControllers().AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });; // to deferntiate between controllers and other classes
 builder.Services.AddAutoMapper(typeof(Program).Assembly); //to find where is the AutoMapper for DTOs
 builder.Services.AddDbContext<DatabaseContext>(); //to configure DbSet for EF Core (Postgres)
 // builder.Services.AddDbContext<DatabaseContext>(options => options.UseNpgsql()); //for creating custom enum type 
