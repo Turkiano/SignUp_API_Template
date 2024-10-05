@@ -162,7 +162,6 @@ namespace Backend.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
@@ -177,7 +176,6 @@ namespace Backend.Migrations
                         .HasColumnType("role");
 
                     b.Property<string>("Salt")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

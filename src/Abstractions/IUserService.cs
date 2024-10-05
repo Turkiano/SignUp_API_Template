@@ -8,7 +8,7 @@ public interface IUserService
 {
 
 
-    public List<UserReadDto> FindAll(int limit, int offset);
+    public IEnumerable<UserReadDto> FindAll(int limit, int offset);
 
     public UserReadDto SignUp(UserCreateDto user);
 
@@ -16,7 +16,7 @@ public interface IUserService
 
     public UserReadDto findOne(Guid userId);
 
-    public User findOneByEmail(string userEmail);
+    public UserReadDto findOneByEmail(string userEmail);
 
     public UserReadDto UpdateOne(string Email, UserCreateDto updatedUser);
 

@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20241003081240_db_init")]
+    [Migration("20241005100027_db_init")]
     partial class db_init
     {
         /// <inheritdoc />
@@ -165,7 +165,6 @@ namespace Backend.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
@@ -180,7 +179,6 @@ namespace Backend.Migrations
                         .HasColumnType("role");
 
                     b.Property<string>("Salt")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

@@ -9,8 +9,8 @@ public class OrderCreateDto
     public Guid? Id { get; set; }
     public Guid? UserId { get; set; }
 
-    [EnumDataType(typeof(Status), ErrorMessage = "Invalid status value.")]
 
+    [EnumDataType(typeof(Status), ErrorMessage = "Invalid status value.")]
     public Status Status { get; set; }
 
 }

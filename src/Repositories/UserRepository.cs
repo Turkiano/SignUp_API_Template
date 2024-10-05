@@ -38,29 +38,25 @@ public class UserRepository : IUserRepository
 
     public User? findOne(Guid userId) //targeting ids in params
     {
-        User? user = _users?.FirstOrDefault(user => user.Id == userId); //lambda expression to compare Ids
+        // User? user = _users?.FirstOrDefault(user => user.Id == userId); //lambda expression to compare Ids
 
-        return user; //to get the desired user
+        return _dbContext.Users.Find(userId); //to get the desired user
     }
 
     public User? findOneByEmail(string userEmail)
     {
-        User? foundEmail = _users?.FirstOrDefault(user => user.Email == userEmail); //lambda expression to compare Emails
+        // User? foundEmail = _users?.FirstOrDefault(user => user.Email == userEmail); //lambda expression to compare Emails
+        User? foundUser = _dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
+        return foundUser;
 
-        return foundEmail;
     }
 
     public User UpdateOne(User updatedUser)
     {
-        // var users = _users?.Select(user =>
-        // {
-        //     if (user.Email == updatedUser.Email)
-        //     {
-        //         return updatedUser;
-        //     }
-        //     return user;
-        // });
-        // _users = users!.ToList();
+        _dbContext.Users.Update(updatedUser);
+        _dbContext.SaveChanges();
+
+
         return updatedUser;
     }
 }

@@ -37,7 +37,7 @@ public class Mapper : Profile
 
 
         CreateMap<OrderItem, OrderItemReadDto>();
-        CreateMap<OrderItemReadDto, OrderItem>();
+        CreateMap<OrderItemCreateDto, OrderItem>();
 
         CreateMap<OrderItemCreateDto, OrderItem>();
 

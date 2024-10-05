@@ -39,7 +39,7 @@ public class UserService : IUserService
         if (!CorrectPassword) return null; //4.Early return (2) checking if wrong pass, return null.
 
 
-//to generate a Token, require the following
+        //to generate a Token, require the following
 
         var claims = new[]{//1. The claims
             new Claim(ClaimTypes.Name, user.FirstName),
@@ -47,24 +47,24 @@ public class UserService : IUserService
             new Claim(ClaimTypes.Email, user.Email)
        };
 
-       var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]!));
-       var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-       var token = new JwtSecurityToken(
-        issuer: _config["Jwt:Issuer"], //Replace with your own back-end
-        audience: _config["Jwt:Audience"], //Replace your own front-end
-        claims: claims,
-        expires: DateTime.Now.AddDays(7), //Token epiration time
-        signingCredentials: creds
-       );
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]!));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var token = new JwtSecurityToken(
+         issuer: _config["Jwt:Issuer"], //Replace with your own back-end
+         audience: _config["Jwt:Audience"], //Replace your own front-end
+         claims: claims,
+         expires: DateTime.Now.AddDays(7), //Token epiration time
+         signingCredentials: creds
+        );
 
-       var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-       return tokenString;
+        string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+        return tokenString;
     }
 
-    public List<UserReadDto> FindAll(int limit, int offset)
+    public IEnumerable<UserReadDto> FindAll(int limit, int offset)
     {
-        var users = _userRepository!.FindAll( limit, offset);//to talk to the Repo
-        var usersRead = users.Select(_mapper.Map<UserReadDto>); //to use the DTO
+        IEnumerable<User> users = _userRepository!.FindAll(limit, offset);//to talk to the Repo
+        IEnumerable<UserReadDto> usersRead = users.Select(_mapper.Map<UserReadDto>); //to use the DTO
         return usersRead.ToList(); //to return data as a list
     }
 
@@ -73,6 +73,7 @@ public class UserService : IUserService
     public UserReadDto findOne(Guid userId)
     {
         User? user = _userRepository!.findOne(userId); //to talk to the repo
+        if (user is null) return null;
         UserReadDto userRead = _mapper.Map<UserReadDto>(user); //to use the DTO
         return userRead;
     }
@@ -108,25 +109,51 @@ public class UserService : IUserService
 
 
 
-    public User? findOneByEmail(string userEmail)
+    public UserReadDto? findOneByEmail(string userEmail)
     {
+        User user = _userRepository.findOneByEmail(userEmail);//call the method in the Repo
+        if (user is null) return null;
+        UserReadDto userRead = _mapper.Map<UserReadDto>(user);
 
-        return _userRepository!.findOneByEmail(userEmail);//call the method in the Repo
+        return userRead;
 
     }
 
-    public UserReadDto UpdateOne(string Email, UserCreateDto updatedUser)
-    {
-        User? user = _userRepository!.findOneByEmail(Email);
+public UserReadDto UpdateOne(string email, UserCreateDto updatedUser)
+{
+    User? user = _userRepository!.findOneByEmail(email);
 
-        if (user is not null)
-        {
-            user.FirstName = updatedUser.FirstName;
-            User mappedUser = _mapper.Map<User>(user);
-            User newUser = _userRepository.UpdateOne(mappedUser);
-            UserReadDto userRead = _mapper.Map<UserReadDto>(newUser);
-            return userRead;
-        }
-        return null;
+    if (user is not null)
+    {
+        user.FirstName = updatedUser.FirstName;
+        user.LastName = updatedUser.LastName;
+        user.Phone = updatedUser.Phone;
+
+        // Consider if email updates are truly needed:
+       if (user.Email != updatedUser.Email)
+{
+    // Check if the new email already exists in the database
+    var existingUser = _userRepository.findOneByEmail(updatedUser.Email);
+    
+    if (existingUser is not null)
+    {
+        throw new InvalidOperationException("This email address is already in use by another user.");
     }
+
+    // Proceed with updating the email
+    user.Email = updatedUser.Email;
+}
+
+
+        user.Password = updatedUser.Password;
+
+        // No need for re-mapping here
+        User newUser = _userRepository.UpdateOne(user);
+        UserReadDto userRead = _mapper.Map<UserReadDto>(newUser);
+        return userRead;
+    }
+
+    return null;
+}
+
 }

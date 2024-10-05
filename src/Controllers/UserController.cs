@@ -20,15 +20,20 @@ public class UserController : BaseController //the inheritance to get the routin
 
 
 
-    [HttpPatch("{Email}")]
-    public UserReadDto? UpdateOne(string Email, [FromBody] UserCreateDto user)
+    [HttpPatch("{email}")]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<UserReadDto?> UpdateOne(string email, [FromBody] UserCreateDto user)
     {
-        return _userService!.UpdateOne(Email, user);
+        UserReadDto theUser = _userService.UpdateOne(email, user);
+        if (theUser is null) return NotFound();
+
+        return Accepted(theUser);
     }
 
 
 
-    
+
 
 
     [HttpGet] //import the ASP.NetCore package
@@ -55,15 +60,15 @@ public class UserController : BaseController //the inheritance to get the routin
     }
 
 
-     [HttpPost("login")] //POST, PUT, or PATCH use fromBody
+    [HttpPost("login")] //POST, PUT, or PATCH use fromBody
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<string> Login([FromBody] UserLoginDto user)
     {
         if (user is not null)
         {
-            string token  = _userService.Login(user); //sendin request to service
-            if(token is null) //checking if the request is null
+            string token = _userService.Login(user); //sendin request to service
+            if (token is null) //checking if the request is null
             {
                 return BadRequest(); //the return for wrong login
             }
@@ -78,18 +83,26 @@ public class UserController : BaseController //the inheritance to get the routin
 
 
     [HttpGet("{userId}")]
-    public UserReadDto? findOne(Guid userId)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<UserReadDto?> findOne(Guid userId)
     {
+        UserReadDto user = _userService!.findOne(userId);
+        if (user is null) return NotFound();
 
-        return _userService!.findOne(userId);
+        return Ok(user);
     }
 
 
-    [HttpGet("userEmail")] //rename the route since we have duplicated endpoints
-    public User? findOneByEmail(string userEmail)
+    [HttpGet("email")] //rename the route since we have duplicated endpoints
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<UserReadDto?> findOneByEmail(string email)
     {
+        UserReadDto user = _userService.findOneByEmail(email); //call the method in the service
+        if (user is null) return NotFound();
 
-        return _userService!.findOneByEmail(userEmail); //call the method in the service
+        return Ok(user);
     }
 
 }
