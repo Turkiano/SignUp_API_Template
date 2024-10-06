@@ -1,5 +1,6 @@
 using Coffee_Shop_App.src.Abstractions;
 using Coffee_Shop_App.src.Databases;
+using Coffee_Shop_App.src.DTOs;
 using Coffee_Shop_App.src.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,27 +9,38 @@ namespace Coffee_Shop_App.Repositories;
 public class OrderItemRepository : IOrderItemRepository
 {
 
-    private DbSet<OrderItem> _orderItems; //to get orders as a list
+    private DatabaseContext _dbContext; //to get orders from the database
 
-    public OrderItemRepository(DatabaseContext databaseContext)
+    // private DbSet<OrderItem> _orderItems; //to get orders as a list
+
+    public OrderItemRepository(DatabaseContext dbcontext)
     {
-        _orderItems = databaseContext.OrderItems;
+        // _orderItems = databaseContext.OrderItems;
+        _dbContext = dbcontext;
     }
 
     public OrderItem CreateOne(OrderItem orderItem)
     {
-        _orderItems.Add(orderItem);
+        _dbContext.Add(orderItem);
+        _dbContext.SaveChanges();
         return orderItem;
     }
 
-    public IEnumerable<OrderItem> FindAll()
+    public IEnumerable<OrderItem> FindAll(int limit, int offset)
     {
-        return _orderItems;
+        if (limit == 0 && offset == 0)
+        { // 1.if pagination has empty values
+            return _dbContext.OrderItems!; // 2.show all produts
+        }
+        // 3.else show the values of pagination
+        return _dbContext.OrderItems!.Skip(offset).Take(limit);
+
     }
 
-    public OrderItem? findOne(Guid orderItemId)
+    public OrderItem? findOne(OrderItemCreateDto orderItemDto)
     {
-        OrderItem? orderItem = _orderItems?.FirstOrDefault(order => order.Id == orderItemId); //lambda expression to compare Ids
-        return orderItem; //to get the desired user
+        return _dbContext.OrderItems
+            .FirstOrDefault(oi => oi.OrderId == orderItemDto.OrderId && oi.ProductId == orderItemDto.ProductId);
     }
+
 }

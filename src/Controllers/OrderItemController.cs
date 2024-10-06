@@ -18,18 +18,24 @@ public class OrderItemController : BaseController
 
 
 
+
     [HttpGet] //import the ASP.NetCore package
-    public IEnumerable<OrderItemReadDto>? findAll()
+    // [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<IEnumerable<OrderItemReadDto>>? findAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
     {
-        return _orderItemService!.FindAll(); //access to users's data
+        return Ok(_orderItemService!.FindAll(limit, offset)); //access to users's data
     }
 
 
     [HttpGet("{orderItemId}")]
-    public OrderItemReadDto? findOne(Guid orderItemId)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<OrderItemReadDto?> findOne(OrderItemCreateDto orderItemId)
     {
-
-        return _orderItemService!.findOne(orderItemId);
+        var orderItem = _orderItemService!.findOne(orderItemId);
+        if (orderItem is null) return NotFound();
+        return Ok(orderItem);
     }
 
 

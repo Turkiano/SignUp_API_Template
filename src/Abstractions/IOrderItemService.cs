@@ -6,9 +6,9 @@ namespace Coffee_Shop_App.src.Abstractions
 {
     public interface IOrderItemService
     {
-    public IEnumerable<OrderItemReadDto> FindAll();
+        public IEnumerable<OrderItemReadDto> FindAll(int limit, int offset);
 
-        public OrderItemReadDto? findOne(Guid orderItemId);
+        public OrderItemReadDto? findOne(OrderItemCreateDto orderItemId);
 
         public OrderItemReadDto CreateOne(OrderItemCreateDto orderItem);
 
