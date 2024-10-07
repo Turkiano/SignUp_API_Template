@@ -20,5 +20,8 @@ public interface IUserService
 
     public UserReadDto UpdateOne(string Email, UserCreateDto updatedUser);
 
+    public Task<bool> DeleteOneAsync(Guid userId);
+
+
 
 }

@@ -59,4 +59,15 @@ public class UserRepository : IUserRepository
 
         return updatedUser;
     }
+
+
+    public async Task<bool> DeleteOneAsync(Guid userId)
+    {
+        var user = await _dbContext.Users.FindAsync(userId);
+        if (user is null) return false;
+        _dbContext.Users.Remove(user);
+        await _dbContext.SaveChangesAsync();
+        return true;
+
+    }
 }

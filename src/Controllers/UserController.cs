@@ -105,6 +105,38 @@ public class UserController : BaseController //the inheritance to get the routin
         return Ok(user);
     }
 
+
+    [HttpDelete(":userId")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteOne(Guid userId)
+    {
+        try
+        {
+            bool result = await _userService.DeleteOneAsync(userId);
+            if (result)
+            {
+                return Ok(new { message = "User successfully deleted." });
+            }
+            else
+            {
+                return NotFound(new { messae = $"User with ID {userId} not found." });
+            }
+
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { message = "error occurred while deleteing the User." });
+        }
+    }
+
+
+
 }
 
 

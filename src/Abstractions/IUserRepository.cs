@@ -16,6 +16,9 @@ public interface IUserRepository
 
     public User UpdateOne(User updatedUser);
 
+    public Task<bool> DeleteOneAsync(Guid userId);
+
+
 
 
 
