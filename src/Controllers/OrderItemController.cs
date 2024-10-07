@@ -31,9 +31,9 @@ public class OrderItemController : BaseController
     [HttpGet("{orderItemId}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<OrderItemReadDto?> findOne(OrderItemCreateDto orderItemId)
+    public ActionResult<OrderItemReadDto?> findOne(Guid orderItemId)
     {
-        var orderItem = _orderItemService!.findOne(orderItemId);
+        var orderItem = _orderItemService.findOne(orderItemId);
         if (orderItem is null) return NotFound();
         return Ok(orderItem);
     }

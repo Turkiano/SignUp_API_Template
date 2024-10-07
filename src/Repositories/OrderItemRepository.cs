@@ -37,10 +37,16 @@ public class OrderItemRepository : IOrderItemRepository
 
     }
 
-    public OrderItem? findOne(OrderItemCreateDto orderItemDto)
+    public OrderItem? findOne(Guid orderId, Guid productId)
     {
         return _dbContext.OrderItems
-            .FirstOrDefault(oi => oi.OrderId == orderItemDto.OrderId && oi.ProductId == orderItemDto.ProductId);
+        .FirstOrDefault(oi => oi.OrderId == orderId && oi.ProductId == productId);
     }
+
+    public OrderItem? findById(Guid orderItemId)
+{
+    return _dbContext.OrderItems
+        .FirstOrDefault(oi => oi.Id == orderItemId);
+}
 
 }

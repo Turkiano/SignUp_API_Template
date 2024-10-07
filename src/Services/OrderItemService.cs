@@ -19,7 +19,7 @@ public class OrderItemService : IOrderItemService
 
     public OrderItemReadDto CreateOne(OrderItemCreateDto orderItem)
     {
-        OrderItem? foundOrderItem = _OrderItemRepository!.findOne(orderItem); //to avoid duplicated emails
+        var foundOrderItem = _OrderItemRepository!.findOne(orderItem.OrderId, orderItem.ProductId); //to avoid duplicated emails
 
         if (foundOrderItem is not null)
         {
@@ -35,14 +35,19 @@ public class OrderItemService : IOrderItemService
     public IEnumerable<OrderItemReadDto> FindAll(int limit, int offset)
     {
         IEnumerable<OrderItem> orderItem = _OrderItemRepository.FindAll(limit, offset); //to talk to the Repo
-         IEnumerable<OrderItemReadDto> orderItemRead = orderItem.Select(_mapper.Map<OrderItemReadDto>);
-        
+        IEnumerable<OrderItemReadDto> orderItemRead = orderItem.Select(_mapper.Map<OrderItemReadDto>);
+
         return orderItemRead;
     }
 
-    public OrderItemReadDto? findOne(OrderItemCreateDto orderItemId)
+    public OrderItemReadDto? findOne(Guid orderItemId)
     {
-        OrderItem orderItem = _OrderItemRepository.findOne(orderItemId);
+        OrderItem orderItem = _OrderItemRepository.findById(orderItemId);
+        // Return null if the item was not found
+        if (orderItem == null)
+        {
+            return null;
+        }
         OrderItemReadDto orderItemRead = _mapper.Map<OrderItemReadDto>(orderItem);
 
         return orderItemRead;
