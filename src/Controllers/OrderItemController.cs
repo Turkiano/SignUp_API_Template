@@ -66,4 +66,34 @@ public class OrderItemController : BaseController
 
         return Accepted(orderItem);
     }
+
+
+
+
+    [HttpDelete(":orderItemId")] // (POST, PUT, or PATCH) use fromBody
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+     public async Task<IActionResult> DeleteOne(Guid orderItemId)
+    {
+        try
+        {
+            var result = await _orderItemService.DeleteOneAsync(orderItemId);
+            if (result)
+            {
+                return Ok(new { message = "OrderItem successfully deleted." });
+            }
+            else
+            {
+                return NotFound(new { message = $"OrderItem with ID {orderItemId} not found." });
+            }
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { message = "An error occurred while deleting the OrderItem." });
+        }
+    }
 }

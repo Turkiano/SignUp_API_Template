@@ -16,6 +16,9 @@ namespace Coffee_Shop_App.src.Abstractions
         public OrderItem? findById(Guid orderItemId);
         public OrderItem UpdateOne(OrderItem orderItem);
 
+        public Task<bool> DeleteOneAsync(Guid orderItemId);
+
+
 
 
 

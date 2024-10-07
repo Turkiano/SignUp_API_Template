@@ -67,4 +67,16 @@ public class OrderItemService : IOrderItemService
         return _mapper.Map<OrderItemReadDto>(updatedOrderItem);
     }
 
+     public async Task<bool> DeleteOneAsync(Guid orderItemId)
+    {
+        // Add any additional validation or business rules here if necessary
+        var isDeleted = await _OrderItemRepository.DeleteOneAsync(orderItemId);
+        if (!isDeleted)
+        {
+            throw new KeyNotFoundException($"OrderItem with ID {orderItemId} not found.");
+        }
+
+        return isDeleted;
+    }
+
 }

@@ -56,4 +56,17 @@ public OrderItem UpdateOne(OrderItem orderItem)
         return orderItem;
     }
 
+      public async Task<bool> DeleteOneAsync(Guid orderItemId)
+    {
+        var orderItem = await _dbContext.OrderItems.FindAsync(orderItemId);
+        if (orderItem == null)
+        {
+            return false; // Item not found
+        }
+
+        _dbContext.OrderItems.Remove(orderItem);
+        await _dbContext.SaveChangesAsync();
+        return true; // Item successfully deleted
+    }
+
 }
