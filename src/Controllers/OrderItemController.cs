@@ -70,14 +70,14 @@ public class OrderItemController : BaseController
 
 
 
-    [HttpDelete(":orderItemId")] // (POST, PUT, or PATCH) use fromBody
+    [HttpDelete(":orderItemId")] 
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
      public async Task<IActionResult> DeleteOne(Guid orderItemId)
     {
         try
         {
-            var result = await _orderItemService.DeleteOneAsync(orderItemId);
+            bool result = await _orderItemService.DeleteOneAsync(orderItemId);
             if (result)
             {
                 return Ok(new { message = "OrderItem successfully deleted." });

@@ -15,6 +15,9 @@ public interface ICategoryService
 
     public CategoryReadDto UpdateOne(Guid CategoryId, CategoryCreateDto updatedCategory);
 
+    public  Task<bool> DeleteOneAsync(Guid categoryId);
+
+
 
 
 

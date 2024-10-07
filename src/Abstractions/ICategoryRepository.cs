@@ -14,6 +14,9 @@ public interface ICategoryRepository
 
     public Category UpdateOne(Category updateCategory);
 
+    public  Task<bool> DeleteOneAsync(Guid categoryId);
+
+
 
 
 }

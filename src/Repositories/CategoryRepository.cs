@@ -54,5 +54,16 @@ public class CategoryRepository : ICategoryRepository
     }
 
 
+    public async Task<bool> DeleteOneAsync(Guid categoryId)
+    {
+        var category = await _dbContext.Categories.FindAsync(categoryId);
+        if(category is null) return false;
+        _dbContext.Categories.Remove(category);
+        await _dbContext.SaveChangesAsync();
+        return true;
+
+    }
+
+
 }
 

@@ -68,4 +68,36 @@ public class CategoryController : BaseController
 
         return Accepted(category);
     }
+
+
+    [HttpDelete(":categoryId")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<IActionResult> DeleteOne(Guid categoryId)
+    {
+
+        try
+        {
+            bool result = await _categoryService.DeleteOneAsync(categoryId);
+            if (result)
+            {
+                return Ok(new { message = "Category is successfully deleted." });
+            }
+            else
+            {
+                return NotFound(new { message = $"Category with ID {categoryId} not found." });
+            }
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { message = "An error occurred while deleting the Category" });
+        }
+
+    }
+
 }

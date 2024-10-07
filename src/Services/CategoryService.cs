@@ -12,7 +12,7 @@ public class CategoryService : ICategoryService
     public ICategoryRepository _categoryRepository;
     private IMapper _mapper;
 
-    public CategoryService(ICategoryRepository categoryRepository,  IMapper mapper )
+    public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
     {
         _categoryRepository = categoryRepository;
         _mapper = mapper;
@@ -31,14 +31,14 @@ public class CategoryService : ICategoryService
         Category newCategory = _categoryRepository.CreateOne(mappedCategory);
         CategoryReadDto CategoryRead = _mapper.Map<CategoryReadDto>(newCategory);
 
-        return  CategoryRead;
+        return CategoryRead;
 
 
     }
 
     public IEnumerable<CategoryReadDto> FindAll(int limit, int offset)
     {
-        IEnumerable<Category> category =  _categoryRepository.FindAll( limit,  offset);
+        IEnumerable<Category> category = _categoryRepository.FindAll(limit, offset);
         var categoryRead = category.Select(_mapper.Map<CategoryReadDto>);
         return categoryRead.ToList();
     }
@@ -48,12 +48,12 @@ public class CategoryService : ICategoryService
     public CategoryReadDto findOne(Guid categoryId)
     {
         Category category = _categoryRepository.findOne(categoryId);
-                if(category is null) return null; // to show null, if category was not found
+        if (category is null) return null; // to show null, if category was not found
 
         CategoryReadDto categoryRead = _mapper.Map<CategoryReadDto>(category);
 
 
-        return categoryRead ;
+        return categoryRead;
     }
 
 
@@ -62,14 +62,26 @@ public class CategoryService : ICategoryService
     public CategoryReadDto UpdateOne(Guid CategoryId, CategoryCreateDto updatedCategory)
     {
         Category? category = _categoryRepository.findOne(CategoryId);
-        if(category is not null)
+        if (category is not null)
         {
             category.Name = updatedCategory.Name;
             Category mappedCategory = _mapper.Map<Category>(category);
             Category newCategory = _categoryRepository.UpdateOne(mappedCategory);
-            CategoryReadDto categoryRead= _mapper.Map<CategoryReadDto>(newCategory);
+            CategoryReadDto categoryRead = _mapper.Map<CategoryReadDto>(newCategory);
             return categoryRead;
         }
         return null;
+    }
+
+    public async Task<bool> DeleteOneAsync(Guid categoryId)
+
+    {
+        var isDeleted = await _categoryRepository.DeleteOneAsync(categoryId);
+        if (!isDeleted)
+        {
+            throw new KeyNotFoundException($"OrderItem with ID{categoryId} not found.");
+        }
+
+        return isDeleted;
     }
 }
