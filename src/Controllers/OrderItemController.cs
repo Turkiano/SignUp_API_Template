@@ -55,4 +55,15 @@ public class OrderItemController : BaseController
     }
 
 
+    [HttpPatch(":orderItemId")] // (POST, PUT, or PATCH) use fromBody
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public ActionResult<OrderItemReadDto> UpdateOne(Guid orderItemId, [FromBody] OrderItemUpdateDto updatedOrderItem)
+    {
+        var orderItem = _orderItemService!.UpdateOne(orderItemId, updatedOrderItem);//to update through the service
+        if (orderItem is null) return NotFound();
+
+        return Accepted(orderItem);
+    }
 }

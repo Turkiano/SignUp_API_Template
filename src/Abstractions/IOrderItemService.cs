@@ -12,6 +12,9 @@ namespace Coffee_Shop_App.src.Abstractions
 
         public OrderItemReadDto CreateOne(OrderItemCreateDto orderItem);
 
+        public OrderItemReadDto? UpdateOne(Guid orderItemId, OrderItemUpdateDto orderItemUpdateDto);
+
+
 
 
 

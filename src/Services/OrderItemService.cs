@@ -52,4 +52,19 @@ public class OrderItemService : IOrderItemService
 
         return orderItemRead;
     }
+
+    public OrderItemReadDto? UpdateOne(Guid orderItemId, OrderItemUpdateDto orderItemUpdateDto)
+    {
+        var existingOrderItem = _OrderItemRepository.findById(orderItemId);
+        if (existingOrderItem == null)
+        {
+            return null; // Return null if the item does not exist
+        }
+
+        _mapper.Map(orderItemUpdateDto, existingOrderItem); // Map updates to the existing entity
+        OrderItem updatedOrderItem = _OrderItemRepository.UpdateOne(existingOrderItem);
+
+        return _mapper.Map<OrderItemReadDto>(updatedOrderItem);
+    }
+
 }

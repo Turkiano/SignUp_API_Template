@@ -49,4 +49,11 @@ public class OrderItemRepository : IOrderItemRepository
         .FirstOrDefault(oi => oi.Id == orderItemId);
 }
 
+public OrderItem UpdateOne(OrderItem orderItem)
+    {
+       _dbContext.OrderItems.Update(orderItem);
+       _dbContext.SaveChanges();
+        return orderItem;
+    }
+
 }
