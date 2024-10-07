@@ -59,4 +59,15 @@ public class ReviewService : IReviewService
         _ReviewRepository.UpdateOne(review);
         return _mapper.Map<ReviewReadDto>(review);
     }
+
+    public async Task<bool> DeleteOneAsync(Guid reviewId)
+    {
+        var isDeleted = await _ReviewRepository.DeleteOneAsync(reviewId);
+        if (isDeleted)
+        {
+            throw new KeyNotFoundException($"Review with ID {reviewId} not found.");
+        }
+        return isDeleted;
+    }
+
 }

@@ -13,6 +13,9 @@ public interface IReviewRepository
 
     public Review UpdateOne(Review reivew);
 
+    public  Task<bool> DeleteOneAsync(Guid reviewId);
+
+
 
 
 

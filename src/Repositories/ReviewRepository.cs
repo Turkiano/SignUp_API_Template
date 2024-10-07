@@ -7,7 +7,7 @@ namespace Coffee_Shop_App.src.Repositories;
 
 public class ReviewRepository : IReviewRepository
 {
-    
+
     private DbSet<Review> _reviews;
     private DatabaseContext _dbContext;
 
@@ -25,11 +25,12 @@ public class ReviewRepository : IReviewRepository
 
     public IEnumerable<Review> FindAll(int limit, int offset)
     {
-         if(limit == 0 && offset ==0){ // 1.if pagination has empty values
+        if (limit == 0 && offset == 0)
+        { // 1.if pagination has empty values
             return _dbContext.Reviews!; // 2.show all produts
         }
         // 3.else show the values of pagination
-        return  _dbContext.Reviews!.Skip(offset).Take(limit);
+        return _dbContext.Reviews!.Skip(offset).Take(limit);
     }
 
     public Review FindOne(Guid reviewId)
@@ -44,5 +45,15 @@ public class ReviewRepository : IReviewRepository
         _dbContext.Reviews.Update(reivew);
         _dbContext.SaveChanges();
         return reivew;
+    }
+
+
+    public async Task<bool> DeleteOneAsync(Guid reviewId)
+    {
+        var review = await _dbContext.Reviews.FindAsync(reviewId);
+        if (review == null) return false;
+        _dbContext.Reviews.Remove(review);
+        await _dbContext.SaveChangesAsync();
+        return true;
     }
 }

@@ -35,7 +35,7 @@ public class ReviewController : BaseController
     public ActionResult<ReviewReadDto> FindOne(Guid reviewId)
     {
         ReviewReadDto review = _reviewService.FindOne(reviewId);
-        if(review is null) return NotFound();
+        if (review is null) return NotFound();
         return Ok(review);
 
     }
@@ -58,4 +58,33 @@ public class ReviewController : BaseController
 
         return Accepted(review);
     }
-}   
+
+
+    [HttpDelete(":reviewId")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteOne(Guid reviewId)
+    {
+        try
+        {
+            bool result = await _reviewService.DeleteOneAsync(reviewId);
+            if (result)
+            {
+                return Ok(new { message = $"Review successfully deleted." });
+            }
+            else
+            {
+                return NotFound(new { message = $"Review wiht ID {reviewId} not found." });
+            }
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { message = "An error orccurred while deleteing the Review." });
+        }
+    }
+
+}

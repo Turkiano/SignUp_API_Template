@@ -12,6 +12,9 @@ public interface IReviewService
 
     public ReviewReadDto UpdateOne(Guid reviewId, ReviewUpdateDto updatedReview);
 
+    public Task<bool> DeleteOneAsync(Guid reviewId);
+
+
 
 
 
