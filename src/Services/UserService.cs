@@ -31,7 +31,7 @@ public class UserService : IUserService
     {
 
         User user = _userRepository.findOneByEmail(userLogin.Email); //1.find the user
-        if (user is not null) return null; //2.the early return concept
+        if (user is null) return null; //2.the early return concept
 
 
         byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);//3.A. Declare the pepper
@@ -39,7 +39,7 @@ public class UserService : IUserService
         if (!CorrectPassword) return null; //4.Early return (2) checking if wrong pass, return null.
 
 
-        //to generate a Token, require the following
+        //to generate a Token, requires the following five variables
 
         var claims = new[]{//1. The claims
             new Claim(ClaimTypes.Name, user.FirstName),
@@ -47,16 +47,19 @@ public class UserService : IUserService
             new Claim(ClaimTypes.Email, user.Email)
        };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]!));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]!)); // 2.sign key
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256); // 3.type of signing Credentials
+
+        //4.The JwtSecurity object
         var token = new JwtSecurityToken(
          issuer: _config["Jwt:Issuer"], //Replace with your own back-end
          audience: _config["Jwt:Audience"], //Replace your own front-end
          claims: claims,
-         expires: DateTime.Now.AddDays(7), //Token epiration time
+         expires: DateTime.Now.AddDays(7), //Token expiration time
          signingCredentials: creds
         );
 
+        //5. The return  value as a token string
         string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
         return tokenString;
     }

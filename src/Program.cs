@@ -63,7 +63,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SIgningKey"]!))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"]!))
     };
 }
 );
@@ -83,6 +83,9 @@ if (app.Environment.IsDevelopment())
 
 //to let the Server know that we are using the following: 
 app.UseHttpsRedirection();
+//keep them in the exact order
+// 1.(authentication) then
+// 2.(authorization)
 app.UseAuthentication();
 app.UseAuthorization();
 
