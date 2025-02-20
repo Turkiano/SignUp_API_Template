@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(options =>
     {   // Status enum is returned as a string/its Enum value
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });; 
+    }); ;
 builder.Services.AddAutoMapper(typeof(Program).Assembly); //to find where is the AutoMapper for DTOs
 builder.Services.AddDbContext<DatabaseContext>(); //to configure DbSet for EF Core (Postgres)
 
@@ -68,6 +68,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 }
 );
 
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins(builder.Configuration["Cors_Origin"]!)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .SetIsOriginAllowed((host) => true)
+            .AllowCredentials();
+        });
+});
+
+
 var app = builder.Build();
 
 //Should be added (2)
@@ -86,6 +102,7 @@ app.UseHttpsRedirection();
 //keep them in the exact order
 // 1.(authentication) then
 // 2.(authorization)
+app.UseCors(MyAllowSpecificOrigins);  //this is to invoke the Cors to access between back-end & front-end
 app.UseAuthentication();
 app.UseAuthorization();
 
