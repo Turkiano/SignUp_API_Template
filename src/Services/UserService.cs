@@ -34,7 +34,7 @@ public class UserService : IUserService
         if (user is null) return null; //2.the early return concept
 
 
-        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);//3.A. Declare the pepper
+        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt_Pepper"]!);//3.A. Declare the pepper
         bool CorrectPassword = PasswordUtils.VerifyPassword(userLogin.Password, user.Password, pepper); //3.B. Compare passwords
         if (!CorrectPassword) return null; //4.Early return (2) checking if wrong pass, return null.
 
@@ -47,13 +47,13 @@ public class UserService : IUserService
             new Claim(ClaimTypes.Email, user.Email)
        };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]!)); // 2.sign key
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt_SigningKey"]!)); // 2.sign key
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256); // 3.type of signing Credentials
 
         //4.The JwtSecurity object
         var token = new JwtSecurityToken(
-         issuer: _config["Jwt:Issuer"], //Replace with your own back-end
-         audience: _config["Jwt:Audience"], //Replace your own front-end
+         issuer: _config["Jwt_Issuer"], //Replace with your own back-end
+         audience: _config["Jwt_Audience"], //Replace your own front-end
          claims: claims,
          expires: DateTime.Now.AddDays(7), //Token expiration time
          signingCredentials: creds
@@ -94,7 +94,7 @@ public class UserService : IUserService
             return null;
         }
 
-        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!); //configure the pepper from appsettings
+        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt_Pepper"]!); //configure the pepper from appsettings
         PasswordUtils.HashPasswrod(user.Password, out string hashedPassword, pepper); //hashing pepper + password
 
         user.Password = hashedPassword; //assigning passwords with hashed password
